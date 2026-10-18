@@ -42,7 +42,10 @@ export type IssueCode =
   | "CORRECTION_WITHOUT_REFERENCE"
   | "REFERENCED_REQUISITION"
   | "REFERENCED_REQUISITION_NOT_FOUND"
-  | "TOTALS_RECALCULATED";
+  | "TOTALS_RECALCULATED"
+  | "UNIT_ASSUMED"
+  | "ERP_REJECTED"
+  | "ERP_WARNING";
 
 export interface Issue {
   code: IssueCode;

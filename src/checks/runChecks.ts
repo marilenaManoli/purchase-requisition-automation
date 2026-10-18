@@ -93,11 +93,17 @@ export function runChecks(
     // `!== undefined` (not `??`): a clerk may deliberately set null or 0.
     const pick = <T>(clerk: T | undefined, field: string, extracted: T | null | undefined): T | null =>
       clerk !== undefined ? clerk : t(`${p}.${field}`, extracted ?? null);
+    const quantity = pick(o.quantity, "quantity", base?.quantity);
+    const statedUnit = pick(o.unit, "unit", base?.unit);
+    // Assumption 8: a bare count ("3 office chairs") means counted items. The ERP needs a
+    // unit, so "pcs" is used, visibly flagged. A stated unit always wins; an unverified one isn't replaced.
+    const unitAssumed = statedUnit === null && quantity !== null && !bad(`${p}.unit`);
     return {
       description: o.description ?? base?.description ?? "",
       itemCode: pick(o.itemCode, "item_code", base?.item_code),
-      quantity: pick(o.quantity, "quantity", base?.quantity),
-      unit: pick(o.unit, "unit", base?.unit),
+      quantity,
+      unit: unitAssumed ? "pcs" : statedUnit,
+      unitAssumed,
       unitPrice: pick(o.unitPrice, "unit_price", base?.unit_price),
       pricePer: pick(o.pricePer, "price_per", base?.price_per),
       lineTotal: editsFigures(o) ? null : t(`${p}.line_total`, base?.line_total ?? null),
@@ -141,6 +147,10 @@ export function runChecks(
           "Line figures were changed by the clerk; the total is recalculated from the lines and the document's totals are not used.")]
       : []),
     ...amounts.issues,
+    ...lines.flatMap((l, i) => (l.unitAssumed
+      ? [issue("UNIT_ASSUMED", "warning", `line_items[${i}].unit`,
+          `Line ${i + 1} states a quantity but no unit; it is treated as pieces (assumption 8). Correct it if that's wrong.`)]
+      : [])),
     ...fx.issues,
     ...delivery.issues,
     ...checkQuoteValidity(t("quote_valid_until.iso", x.quote_valid_until.iso), doc.sentAt),

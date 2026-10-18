@@ -1,6 +1,6 @@
 // Brief §7: the states a requisition moves through, and the only allowed moves.
 //
-//   inbox ─▶ extracted ─▶ pending_approval ─▶ approved ─▶ ordered
+//   inbox ─▶ extracted ─▶ pending_approval ─▶ approved ─▶ ordered   (approved ─▶ needs_review if the ERP rejects)
 //     │          │              │   ▲
 //     └──────────┴─▶ needs_review ──┘
 //                       │   ▲   │
@@ -16,7 +16,7 @@ export const ALLOWED_TRANSITIONS: Record<State, readonly State[]> = {
   extracted: ["pending_approval", "needs_review"], // a clean requisition skips review
   needs_review: ["pending_approval", "rejected"],
   pending_approval: ["approved", "rejected", "needs_review"], // back to review if a clerk must fix something
-  approved: ["ordered"],
+  approved: ["ordered", "needs_review"], // back to review if the ERP rejects the order: re-approval needed
   ordered: [], // final
   rejected: ["needs_review"], // a corrected rejection comes back and restarts the chain (6b)
 };

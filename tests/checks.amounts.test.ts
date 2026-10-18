@@ -239,3 +239,31 @@ describe("whole pipeline of checks", () => {
     expect(issuesForFailedExtraction({ ok: false, kind: "llm_unavailable", message: "", attempts: 1, rawOutput: null })).toEqual([]);
   });
 });
+
+describe("unit (assumption 8)", () => {
+  let ref: ReferenceData;
+  let doc25: SourceDocument;
+  beforeAll(async () => {
+    const db = openDb(":memory:");
+    applySchema(db);
+    seedMasterData(db, parseMasterData(JSON.parse(readFileSync("data/master_data.json", "utf8"))));
+    ref = loadReferenceData(db);
+    doc25 = await parseEmail(readFileSync("data/emails/email_25.eml"));
+  });
+
+  it("treats a bare count as pieces, with a warning that doesn't block", () => {
+    const x = email25();
+    x.line_items[0]!.unit = null;
+    const r = runChecks(doc25, x, [], ref);
+    expect(r.lines[0]?.unit).toBe("pcs");
+    expect(r.issues.find((i) => i.code === "UNIT_ASSUMED")?.severity).toBe("warning");
+    expect(blocksApproval(r.issues)).toBe(false);
+  });
+
+  it("always keeps a stated unit, and never replaces an unverified one", () => {
+    expect(runChecks(doc25, email25(), [], ref).lines[0]?.unit).toBe("Stk");
+    const r = runChecks(doc25, email25(), [{ field: "line_items[0].unit", reason: "value_not_in_quote" }], ref);
+    expect(r.lines[0]?.unit).toBeNull();
+    expect(r.issues.some((i) => i.code === "UNIT_ASSUMED")).toBe(false);
+  });
+});

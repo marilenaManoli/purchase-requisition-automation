@@ -78,6 +78,10 @@ Where the brief was ambiguous:
    VAT" → net; "inkl. MwSt", "brutto" → gross), not taken from the model's choice
    of field. A total that matches neither net nor net + VAT blocks approval.
 
+8. **A quantity without a unit means pieces.** "3 office chairs" states a count but no
+   unit, and the ERP requires one. Such a line gets the unit "pcs" and the clerk sees a
+   "unit assumed" warning. A unit the document states (kg, m, Satz) is always used.
+
 The `rules` block in `master_data.json` (self-approval forbidden, duplicate roles
 collapse, approvals sequential) is not stored in the database. These rules are
 mandated by the brief and enforced in code; a stored flag that the code ignored

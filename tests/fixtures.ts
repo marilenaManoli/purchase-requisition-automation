@@ -1,3 +1,4 @@
+import type { ErpClient, ErpResult, PurchaseOrderRequest } from "../src/erp/poClient.ts";
 import type { ChatMessage, LlmClient } from "../src/extract/llm.ts";
 import type { Extraction } from "../src/extract/schema.ts";
 
@@ -90,3 +91,18 @@ export function email23(): Extraction {
 
 // Re-exported so tests keep one import line.
 export { emptyExtraction } from "../src/extract/schema.ts";
+
+/** Records every order and answers with scripted results (default: booked, no warnings). */
+export class FakeErp implements ErpClient {
+  orders: { order: PurchaseOrderRequest; key: string }[] = [];
+  private results: (ErpResult | Error)[];
+  constructor(...results: (ErpResult | Error)[]) {
+    this.results = results;
+  }
+  async createPurchaseOrder(order: PurchaseOrderRequest, key: string): Promise<ErpResult> {
+    this.orders.push({ order, key });
+    const next = this.results.shift() ?? { kind: "booked", poNumber: `PO-TEST-${this.orders.length}`, warnings: [], alreadyBooked: false };
+    if (next instanceof Error) throw next;
+    return next;
+  }
+}

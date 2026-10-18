@@ -42,6 +42,35 @@
   <div class="card muted">This requisition is not waiting for you<%= actor === r.requesterId ? " (you are the requester and can never approve it)" : "" %>.</div>
 <% } %>
 
+
+<% if (r.poNumber) { %>
+  <div class="card msg">Ordered: purchase order <strong><%= r.poNumber %></strong>
+    <% if (r.erpWarnings.length > 0) { %><ul class="small"><% for (const w of r.erpWarnings) { %><li>ERP warning: <%= w %></li><% } %></ul><% } %>
+  </div>
+<% } %>
+
+<% if (isClerk && (r.state === "approved" || r.state === "pending_approval")) { %>
+  <div class="card actions">
+    <form method="post" action="/requisitions/<%= r.id %>/delivery-date">
+      <h3>Requested delivery date <%= r.requestedDeliveryDate ? "(" + r.requestedDeliveryDate + ")" : "(missing: required by the ERP)" %></h3>
+      <input type="date" name="date" value="<%= r.requestedDeliveryDate ?? "" %>" required> <button>Save date</button>
+      <p class="muted small">The only value that can change after approval: it doesn't change what is bought or for how much.</p>
+    </form>
+    <% if (r.state === "approved") { %>
+      <form method="post" action="/requisitions/<%= r.id %>/order">
+        <h3>Order</h3>
+        <button <%= r.requestedDeliveryDate ? "" : "disabled" %>>Send to ERP</button>
+        <% if (!r.requestedDeliveryDate) { %><span class="muted small">Enter the delivery date first.</span><% } %>
+      </form>
+      <form method="post" action="/requisitions/<%= r.id %>/pull-back">
+        <h3>Correct after approval</h3>
+        <input type="text" name="reason" placeholder="Why, e.g. the ERP rejected it (required)" required> <button>Pull back</button>
+        <p class="muted small">Any correction must be approved again from step 1.</p>
+      </form>
+    <% } %>
+  </div>
+<% } %>
+
 <% if (isClerk && r.state === "pending_approval") { %>
   <div class="card actions">
     <form method="post" action="/requisitions/<%= r.id %>/pull-back">

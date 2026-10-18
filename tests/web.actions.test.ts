@@ -9,7 +9,7 @@ import { createApp } from "../src/web/app.ts";
 import { parseAssignments, parseEditForm } from "../src/web/forms.ts";
 import { processEmail } from "../src/workflow/processEmail.ts";
 import { getState } from "../src/workflow/transitions.ts";
-import { email23, email25, FakeLlm } from "./fixtures.ts";
+import { email23, email25, FakeErp, FakeLlm } from "./fixtures.ts";
 
 describe("form parsing", () => {
   it("keeps only filled fields and turns line numbers into numbers", () => {
@@ -41,7 +41,7 @@ async function start(llm = new FakeLlm()) {
   applySchema(db);
   seedMasterData(db, parseMasterData(JSON.parse(readFileSync("data/master_data.json", "utf8"))));
   ref = loadReferenceData(db);
-  app = createApp({ db, ref, llm });
+  app = createApp({ db, ref, llm, erp: new FakeErp() });
   server = app.listen(0);
   base = `http://127.0.0.1:${(server.address() as AddressInfo).port}`;
 }
@@ -159,5 +159,27 @@ describe("clerk review through the UI", () => {
     const issueOfA = (db.prepare(`SELECT id FROM issues WHERE requisition_id = ?`).get(a) as { id: number }).id;
     const res = await post(`/requisitions/${b}/issues/${issueOfA}/resolve`, "clerk", { note: "x" });
     expect(res.page).toContain("belong to this requisition"); // the apostrophe is HTML-escaped on the page
+  });
+});
+
+describe("ordering through the UI", () => {
+  it("sets the delivery date after approval, then books the order and shows the PO number", async () => {
+    const id = await processEmail(db, raw25, null, new FakeLlm(JSON.stringify(email25())), ref);
+    await post(`/requisitions/${id}/approve`, "EMP-103");
+    await post(`/requisitions/${id}/approve`, "EMP-501");
+
+    const noDate = await post(`/requisitions/${id}/order`, "clerk");
+    expect(noDate.page).toContain("needs a requested delivery date");
+
+    await post(`/requisitions/${id}/delivery-date`, "clerk", { date: "2026-05-29" });
+    const booked = await post(`/requisitions/${id}/order`, "clerk");
+    expect(booked.page).toContain("Booked in the ERP.");
+    expect(booked.page).toContain("PO-TEST-1");
+    expect(getState(db, id)).toBe("ordered");
+  });
+
+  it("is a clerk action only", async () => {
+    const id = await processEmail(db, raw25, null, new FakeLlm(JSON.stringify(email25())), ref);
+    expect((await post(`/requisitions/${id}/order`, "EMP-501")).status).toBe(403);
   });
 });

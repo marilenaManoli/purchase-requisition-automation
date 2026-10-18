@@ -7,7 +7,7 @@ import { parseMasterData, seedMasterData } from "../src/db/masterData.ts";
 import { loadReferenceData, type ReferenceData } from "../src/db/queries.ts";
 import { createApp } from "../src/web/app.ts";
 import { processEmail } from "../src/workflow/processEmail.ts";
-import { email25, FakeLlm } from "./fixtures.ts";
+import { email25, FakeErp, FakeLlm } from "./fixtures.ts";
 
 // The real app on a random free port (listen(0)), an in-memory database, a fake LLM.
 let db: Db;
@@ -32,7 +32,7 @@ beforeAll(async () => {
   const evil = Buffer.from("From: a@customer.com\r\nSubject: <script>alert(1)</script>\r\n\r\nBitte bestellen.");
   hostile = await processEmail(db, evil, null, new FakeLlm("x", "y"), ref);
 
-  server = createApp({ db, ref, llm: new FakeLlm() }).listen(0);
+  server = createApp({ db, ref, llm: new FakeLlm(), erp: new FakeErp() }).listen(0);
   base = `http://127.0.0.1:${(server.address() as AddressInfo).port}`;
 });
 afterAll(() => server.close());

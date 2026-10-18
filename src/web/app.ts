@@ -2,10 +2,12 @@ import express, { type NextFunction, type Request, type Response } from "express
 import { fileURLToPath } from "node:url";
 import type { Db } from "../db/db.ts";
 import type { ReferenceData } from "../db/queries.ts";
+import type { ErpClient } from "../erp/poClient.ts";
 import type { LlmClient } from "../extract/llm.ts";
 import { ApprovalError, approve, reject } from "../workflow/approvals.ts";
 import { reopenRejected, resolveIssue, submitForApproval } from "../workflow/clerk.ts";
 import { editRequisition, pullBackForCorrection } from "../workflow/edits.ts";
+import { sendToErp, setDeliveryDate } from "../workflow/ordering.ts";
 import { extractAndRoute, ingestEmail } from "../workflow/processEmail.ts";
 import { STATES } from "../workflow/states.ts";
 import { InvalidTransitionError } from "../workflow/transitions.ts";
@@ -25,13 +27,14 @@ export interface AppDeps {
   db: Db;
   ref: ReferenceData;
   llm: LlmClient;
+  erp: ErpClient;
 }
 
 const ACT_AS_COOKIE = "actAs";
 const MAX_EML_BYTES = 10 * 1024 * 1024;
 
 export function createApp(deps: AppDeps): express.Express & { extractionsRunning: Set<number> } {
-  const { db, ref, llm } = deps;
+  const { db, ref, llm, erp } = deps;
   const app = express();
   app.set("view engine", "ejs");
   app.set("views", fileURLToPath(new URL("./views", import.meta.url)));
@@ -165,6 +168,14 @@ export function createApp(deps: AppDeps): express.Express & { extractionsRunning
 
   app.post("/requisitions/:id/reopen", clerkOnly, (req, res) =>
     act(req, res, (id, actor) => reopenRejected(db, id, actor, field(req, "note")), "Reopened for correction."));
+
+  app.post("/requisitions/:id/delivery-date", clerkOnly, (req, res) =>
+    act(req, res, (id, actor) => setDeliveryDate(db, id, actor, field(req, "date")), "Delivery date saved."));
+
+  app.post("/requisitions/:id/order", clerkOnly, (req, res) =>
+    act(req, res, async (id, actor) => {
+      await sendToErp(db, id, actor, erp);
+    }, "Booked in the ERP."));
 
   // --- Approver actions (the workflow functions check who may act) ---------
 

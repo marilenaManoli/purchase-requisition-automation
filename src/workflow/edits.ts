@@ -77,7 +77,7 @@ export async function recheck(db: Db, id: number, ref: ReferenceData): Promise<v
   })();
 }
 
-/** Takes a requisition out of approval so a clerk can correct it; the next submit restarts the chain. */
+/** Takes a requisition out of approval (or back from `approved`, e.g. after an ERP rejection) so a clerk can correct it; the next submit restarts the chain at step 1. */
 export function pullBackForCorrection(db: Db, id: number, actor: Actor, reason: string): void {
   if (reason.trim() === "") throw new ApprovalError("Pulling back needs a reason.");
   transition(db, id, "needs_review", actor, `Pulled back for correction: ${reason}`);

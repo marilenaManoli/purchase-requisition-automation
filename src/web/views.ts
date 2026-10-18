@@ -133,6 +133,9 @@ export interface Detail {
   sourceText: string;
   extractionFailed: boolean;
   currentApproverId: string | null; // who may approve/reject right now
+  requestedDeliveryDate: string | null;
+  poNumber: string | null;
+  erpWarnings: string[];
   requesterId: string | null;
   /** For needs_review: the chain a submit would build; a null approver must be assigned. */
   proposedChain: { position: number; roles: string; approverId: string | null; approver: string }[] | null;
@@ -253,6 +256,9 @@ export function requisitionDetail(db: Db, ref: ReferenceData, id: number): Detai
     sourceText,
     extractionFailed: x === null,
     currentApproverId: r.state === "pending_approval" ? current?.approver_employee_id ?? null : null,
+    requestedDeliveryDate: str("requested_delivery_date"),
+    poNumber: str("erp_po_number"),
+    erpWarnings: r.erp_warnings_json ? (JSON.parse(r.erp_warnings_json as string) as string[]) : [],
     requesterId: str("requester_employee_id"),
     proposedChain: r.state === "needs_review" && num("net_total_chf") !== null && str("cost_center_code") !== null
       ? buildChain(num("net_total_chf")!, str("cost_center_code")!, str("requester_employee_id"), ref).steps.map((s) => ({
