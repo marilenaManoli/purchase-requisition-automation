@@ -3,6 +3,7 @@ import type { ReferenceData } from "../db/queries.ts";
 import { ClerkOverridesSchema, overriddenFields, type ClerkOverrides } from "../checks/overrides.ts";
 import { findUnverifiedValues } from "../extract/evidence.ts";
 import { ExtractionSchema, type Extraction } from "../extract/schema.ts";
+import { buildChain } from "../approval/chain.ts";
 import { currentStep } from "../workflow/approvals.ts";
 import { auditTrail, type AuditEvent } from "../workflow/audit.ts";
 import { requisitionNumber } from "../workflow/duplicates.ts";
@@ -131,6 +132,10 @@ export interface Detail {
   audit: AuditEvent[];
   sourceText: string;
   extractionFailed: boolean;
+  currentApproverId: string | null; // who may approve/reject right now
+  requesterId: string | null;
+  /** For needs_review: the chain a submit would build; a null approver must be assigned. */
+  proposedChain: { position: number; roles: string; approverId: string | null; approver: string }[] | null;
 }
 
 export function requisitionDetail(db: Db, ref: ReferenceData, id: number): Detail | null {
@@ -247,6 +252,16 @@ export function requisitionDetail(db: Db, ref: ReferenceData, id: number): Detai
     audit: auditTrail(db, id),
     sourceText,
     extractionFailed: x === null,
+    currentApproverId: r.state === "pending_approval" ? current?.approver_employee_id ?? null : null,
+    requesterId: str("requester_employee_id"),
+    proposedChain: r.state === "needs_review" && num("net_total_chf") !== null && str("cost_center_code") !== null
+      ? buildChain(num("net_total_chf")!, str("cost_center_code")!, str("requester_employee_id"), ref).steps.map((s) => ({
+          position: s.position,
+          roles: s.roles.join(" + "),
+          approverId: s.approverEmployeeId,
+          approver: s.approverEmployeeId ? employeeName(ref, s.approverEmployeeId) : "— must be assigned",
+        }))
+      : null,
   };
 }
 

@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <% if (typeof refresh !== "undefined" && refresh) { %><meta http-equiv="refresh" content="4"><% } %>
   <title><%= typeof title !== "undefined" ? title + " · " : "" %>Purchase requisitions</title>
   <style>
     :root { --fg: #1d2330; --muted: #667085; --line: #d9dde5; --bg: #f6f7f9; --card: #fff;
@@ -37,6 +38,10 @@
     pre.source { white-space: pre-wrap; font-size: 12px; background: var(--bg); padding: 12px; border-radius: 6px; max-height: 480px; overflow: auto; }
     a { color: var(--blue); }
     select, input, button, textarea { font: inherit; }
+    .actions form { margin: 0 0 12px; } .actions h3 { font-size: 14px; margin: 12px 0 6px; }
+    .actions input[type=text], .actions textarea { width: 100%; max-width: 520px; }
+    .actions table input { width: 100%; min-width: 70px; }
+    .msg { background: var(--green-bg); color: var(--green); }
   </style>
 </head>
 <body>

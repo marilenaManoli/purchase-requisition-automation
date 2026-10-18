@@ -1,4 +1,4 @@
-<%- include("partials/head", { title: r.number }) %>
+<%- include("partials/head", { title: r.number, refresh: r.state === "inbox" && extracting }) %>
 <p class="small"><a href="/">← Inbox</a></p>
 <h1><%= r.number %> <span class="badge s-<%= r.state %>"><%= r.state.replace("_", " ") %></span></h1>
 <p class="muted">
@@ -7,6 +7,54 @@
   <% if (r.filename) { %>· <%= r.filename %><% } %>
 </p>
 <p>Requester: <strong><%= r.requester ?? "not in the employee master data" %></strong></p>
+
+<% if (msg) { %><div class="card msg"><%= msg %></div><% } %>
+<% if (error) { %><div class="card sev-blocks_approval"><%= error %></div><% } %>
+
+<% const isClerk = actor === "clerk"; %>
+<% if (r.state === "inbox") { %>
+  <div class="card">
+    <% if (extracting) { %>
+      <p>Extracting with the LLM… this page refreshes by itself (usually 30–60 seconds).</p>
+    <% } else { %>
+      <p>Waiting in the inbox: extraction hasn't run or the LLM was unreachable (see History).</p>
+      <% if (isClerk) { %><form method="post" action="/requisitions/<%= r.id %>/retry"><button>Retry extraction</button></form><% } %>
+    <% } %>
+  </div>
+<% } %>
+
+<% if (r.state === "pending_approval" && actor === r.currentApproverId) { %>
+  <div class="card actions">
+    <h3>Your decision (step waiting for you)</h3>
+    <form method="post" action="/requisitions/<%= r.id %>/approve">
+      <input type="text" name="comment" placeholder="Comment (optional)"> <button>Approve</button>
+    </form>
+    <form method="post" action="/requisitions/<%= r.id %>/reject">
+      <input type="text" name="reason" placeholder="Reason (required)" required> <button>Reject</button>
+    </form>
+  </div>
+<% } else if (r.state === "pending_approval" && actor !== r.currentApproverId && !isClerk) { %>
+  <div class="card muted">This requisition is not waiting for you<%= actor === r.requesterId ? " (you are the requester and can never approve it)" : "" %>.</div>
+<% } %>
+
+<% if (isClerk && r.state === "pending_approval") { %>
+  <div class="card actions">
+    <form method="post" action="/requisitions/<%= r.id %>/pull-back">
+      <h3>Pull back for correction</h3>
+      <input type="text" name="reason" placeholder="Why (required)" required> <button>Pull back</button>
+      <p class="muted small">Approval restarts at step 1 after the next submit.</p>
+    </form>
+  </div>
+<% } %>
+
+<% if (isClerk && r.state === "rejected") { %>
+  <div class="card actions">
+    <form method="post" action="/requisitions/<%= r.id %>/reopen">
+      <h3>Reopen after correction</h3>
+      <input type="text" name="note" placeholder="What was corrected (required)" required> <button>Reopen</button>
+    </form>
+  </div>
+<% } %>
 
 <% if (r.rejectionReason && r.state === "rejected") { %>
   <div class="card sev-blocks_approval">Rejected: <%= r.rejectionReason %></div>
@@ -28,7 +76,14 @@
       <td class="small"><%= i.code %></td>
       <td class="small"><%= i.field ?? "" %></td>
       <td><%= i.message %></td>
-      <td class="small"><% if (i.resolvedAt) { %><%= i.resolvedBy %>: <%= i.resolution %><% } %></td>
+      <td class="small">
+        <% if (i.resolvedAt) { %><%= i.resolvedBy %>: <%= i.resolution %>
+        <% } else if (isClerk && r.state === "needs_review") { %>
+          <form method="post" action="/requisitions/<%= r.id %>/issues/<%= i.id %>/resolve" style="display:flex; gap:4px;">
+            <input type="text" name="note" placeholder="Note (required)" required> <button>Resolve</button>
+          </form>
+        <% } %>
+      </td>
     </tr>
   <% } %>
   </tbody>
@@ -80,6 +135,90 @@
 </table>
 <% } %>
 </div>
+
+<% if (isClerk && r.state === "needs_review") { %>
+<h2>Clerk review</h2>
+<div class="card actions">
+  <form method="post" action="/requisitions/<%= r.id %>/edit">
+    <h3>Enter or correct values</h3>
+    <p class="muted small">Empty fields keep their current value. Your values replace the model's, are recorded in the history, and all checks run again.</p>
+    <table>
+      <tr><td>Supplier</td><td><select name="supplierId"><option value="">— keep —</option>
+        <% for (const s of ref.suppliers) { %><option value="<%= s.id %>"><%= s.id %> <%= s.name %><%= s.status === "blocked" ? " (BLOCKED)" : "" %></option><% } %></select></td></tr>
+      <tr><td>Cost centre</td><td><select name="costCenterCode"><option value="">— keep —</option>
+        <% for (const c of ref.costCenters) { %><option value="<%= c.code %>"><%= c.code %> <%= c.name %></option><% } %></select></td></tr>
+      <tr><td>Currency</td><td><select name="currency"><option value="">— keep —</option>
+        <% for (const cur of ref.fxRatesToChf.keys()) { %><option value="<%= cur %>"><%= cur %></option><% } %></select></td></tr>
+      <tr><td>Requested delivery date</td><td><input type="date" name="requestedDeliveryDate"></td></tr>
+    </table>
+    <h3>Lines</h3>
+    <table>
+      <thead><tr><th>#</th><th>Description</th><th>Item code</th><th>Qty</th><th>Unit</th><th>Unit price</th><th>Per</th></tr></thead>
+      <tbody>
+      <% for (const l of r.lines) { const i = l.position - 1; %>
+        <tr>
+          <td><%= l.position %></td>
+          <td><input name="line.<%= i %>.description" placeholder="<%= l.description %>"></td>
+          <td><input name="line.<%= i %>.itemCode" placeholder="<%= l.itemCode ?? "" %>"></td>
+          <td><input name="line.<%= i %>.quantity" inputmode="decimal" placeholder="<%= l.quantity ?? "missing" %>"></td>
+          <td><input name="line.<%= i %>.unit" placeholder="<%= l.unit ?? "missing" %>"></td>
+          <td><input name="line.<%= i %>.unitPrice" inputmode="decimal" placeholder="<%= l.unitPrice ?? "missing" %>"></td>
+          <td><input name="line.<%= i %>.pricePer" inputmode="decimal" placeholder="<%= l.pricePer ?? 1 %>"></td>
+        </tr>
+      <% } %>
+      <% const n = r.lines.length; %>
+        <tr>
+          <td class="muted">new</td>
+          <td><input name="line.<%= n %>.description" placeholder="Add a line…"></td>
+          <td><input name="line.<%= n %>.itemCode"></td>
+          <td><input name="line.<%= n %>.quantity" inputmode="decimal"></td>
+          <td><input name="line.<%= n %>.unit"></td>
+          <td><input name="line.<%= n %>.unitPrice" inputmode="decimal"></td>
+          <td><input name="line.<%= n %>.pricePer" inputmode="decimal"></td>
+        </tr>
+      </tbody>
+    </table>
+    <p><button>Save and re-check</button></p>
+  </form>
+
+  <form method="post" action="/requisitions/<%= r.id %>/submit">
+    <h3>Send for approval</h3>
+    <% if (r.proposedChain === null) { %>
+      <p class="muted">Not possible yet: the amount and the cost centre must be established first.</p>
+    <% } else { %>
+      <table>
+        <thead><tr><th>Step</th><th>Roles</th><th>Approver</th></tr></thead>
+        <tbody>
+        <% for (const s of r.proposedChain) { %>
+          <tr>
+            <td><%= s.position %></td>
+            <td class="small"><%= s.roles %></td>
+            <td>
+              <% if (s.approverId) { %><%= s.approver %>
+              <% } else { %>
+                <select name="assign.<%= s.position %>" required>
+                  <option value="">— assign an approver —</option>
+                  <% for (const p of people) { if (p.id === r.requesterId) continue; %>
+                    <option value="<%= p.id %>"><%= p.name %> · <%= p.role.replace("_", " ") %></option>
+                  <% } %>
+                </select>
+              <% } %>
+            </td>
+          </tr>
+        <% } %>
+        </tbody>
+      </table>
+      <p class="muted small">All blocking issues must be resolved first. The requester can't be assigned.</p>
+      <button>Send for approval</button>
+    <% } %>
+  </form>
+
+  <form method="post" action="/requisitions/<%= r.id %>/reject">
+    <h3>Reject</h3>
+    <input type="text" name="reason" placeholder="Reason, e.g. 'duplicate of PR-…' (required)" required> <button>Reject</button>
+  </form>
+</div>
+<% } %>
 
 <h2>Approval chain</h2>
 <div class="card">

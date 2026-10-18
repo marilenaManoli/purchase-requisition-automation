@@ -2,6 +2,32 @@
 <%# The "=" tag escapes HTML and is used for all email content; the "-" tag (raw HTML) only includes our own partials. %>
 <h1><%= mine ? "Waiting for me" : "Inbox" %></h1>
 <p class="muted"><%= rows.length %> requisition<%= rows.length === 1 ? "" : "s" %></p>
+<% if (error) { %><div class="card sev-blocks_approval"><%= error %></div><% } %>
+
+<% if (actor === "clerk") { %>
+<form id="upload" class="card" style="display:flex; gap:8px; align-items:center;">
+  <label for="eml" class="muted small">New email</label>
+  <input id="eml" type="file" accept=".eml,message/rfc822" required>
+  <button>Upload and process</button>
+  <span id="upload-status" class="muted small"></span>
+</form>
+<script>
+  // Sends the file's raw bytes; the server stores it and redirects to its page.
+  document.getElementById("upload").addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const file = document.getElementById("eml").files[0];
+    const status = document.getElementById("upload-status");
+    status.textContent = "Uploading…";
+    const res = await fetch("/upload", {
+      method: "POST",
+      headers: { "content-type": "message/rfc822", "x-filename": encodeURIComponent(file.name) },
+      body: file,
+    });
+    if (res.ok && res.redirected) location.href = res.url;
+    else status.textContent = "Upload failed (" + res.status + ").";
+  });
+</script>
+<% } %>
 
 <form method="get" action="/" class="card" style="display:flex; gap:8px; align-items:center;">
   <label for="state" class="muted small">State</label>
