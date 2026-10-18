@@ -21,7 +21,11 @@ const HTML_TO_TEXT_OPTIONS = {
 export async function parseEmail(raw: Buffer): Promise<SourceDocument> {
   const mail = await simpleParser(raw);
 
-  const { body, bodyFormat } = extractBody(mail.text, mail.html);
+  // For an HTML-only email, mailparser invents its own crude `text` (table cells
+  // glued together: "Multimeter10Stk300.00"). Only a real text/plain part counts.
+  const contentType = mail.headers.get("content-type") as { value?: string } | undefined;
+  const htmlOnly = contentType?.value?.toLowerCase() === "text/html";
+  const { body, bodyFormat } = extractBody(htmlOnly ? undefined : mail.text, mail.html);
   // `Promise.all` runs the PDF extractions in parallel and waits for all of them.
   const attachments = await Promise.all(mail.attachments.map(readAttachment));
 

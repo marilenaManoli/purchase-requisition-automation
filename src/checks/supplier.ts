@@ -22,9 +22,9 @@ export function normaliseVatId(vat: string): string {
 // Legal-form words removed from the END of a name: "Acme Bearings GmbH" → "acme bearings".
 const LEGAL_FORMS = new Set(["gmbh", "ag", "kg", "co", "ltd", "limited", "inc", "llc", "plc", "bv", "as", "ou", "srl", "sa", "se"]);
 
-/** Comparable form of a company name: case, umlauts (ü ↔ ue), punctuation and legal form ignored. */
-export function normaliseCompanyName(name: string): string {
-  const tokens = name
+/** Lower-case words with umlauts written out: "Müller Industriebedarf AG" → ["mueller", "industriebedarf", "ag"]. */
+function words(text: string): string[] {
+  return text
     .toLowerCase()
     // Estonian "OÜ" is a legal form, not an umlaut to expand. (A lookahead, not \b:
     // in JS regex \b only knows ASCII letters, so "oü\b" never matches.)
@@ -33,6 +33,11 @@ export function normaliseCompanyName(name: string): string {
     .replace(/[^a-z0-9]+/g, " ")
     .trim()
     .split(" ");
+}
+
+/** Comparable form of a company name: case, umlauts (ü ↔ ue), punctuation and legal form ignored. */
+export function normaliseCompanyName(name: string): string {
+  const tokens = words(name);
   while (tokens.length > 1 && LEGAL_FORMS.has(tokens.at(-1) ?? "")) tokens.pop();
   return tokens.join(" ");
 }
@@ -108,6 +113,27 @@ function withStatusCheck(s: SupplierRow, matchedBy: "vat" | "name", issues: Issu
 }
 
 // Rest parameter: none() or none(issueA) both work.
+/**
+ * Step 9 fallback, used only when the model gave no usable supplier: code looks for
+ * master-data supplier names in the email itself. Exactly one found → a name-only
+ * match with a warning. Several found, or the model claimed a different supplier →
+ * nothing (the clerk decides). A match against master data by code, never a guess.
+ */
+export function matchSupplierInText(text: string, modelClaim: string | null, suppliers: SupplierRow[]): SupplierMatch | null {
+  const haystack = ` ${words(text).join(" ")} `;
+  const found = suppliers.filter((s) => haystack.includes(` ${normaliseCompanyName(s.name)} `));
+  if (found.length !== 1) return null;
+  const [only] = found as [SupplierRow];
+  if (modelClaim !== null) {
+    const claimed = suppliersByName(modelClaim, suppliers);
+    if (claimed.length > 0 && !claimed.some((s) => s.id === only.id)) return null; // contradicts the model: clerk decides
+  }
+  return withStatusCheck(only, "name", [
+    issue("SUPPLIER_FOUND_IN_TEXT", "warning", "supplier_name",
+      `The model gave no verifiable supplier; ${only.id} ${only.name} was found by name in the email text. Less certain: please confirm.`),
+  ]);
+}
+
 function none(...issues: Issue[]): SupplierMatch {
   return { supplierId: null, matchedBy: null, issues };
 }

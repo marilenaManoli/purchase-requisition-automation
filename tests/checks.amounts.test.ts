@@ -11,7 +11,7 @@ import { parseMasterData, seedMasterData } from "../src/db/masterData.ts";
 import { loadReferenceData, type ReferenceData } from "../src/db/queries.ts";
 import { parseEmail } from "../src/ingest/parseEmail.ts";
 import type { SourceDocument } from "../src/ingest/sourceDocument.ts";
-import { email25 } from "./fixtures.ts";
+import { email25, emptyExtraction } from "./fixtures.ts";
 
 const codes = (issues: { code: string }[]) => issues.map((i) => i.code);
 const line = (quantity: number | null, unitPrice: number | null, lineTotal: number | null = null, pricePer: number | null = null): LineInput =>
@@ -265,5 +265,109 @@ describe("unit (assumption 8)", () => {
     const r = runChecks(doc25, email25(), [{ field: "line_items[0].unit", reason: "value_not_in_quote" }], ref);
     expect(r.lines[0]?.unit).toBeNull();
     expect(r.issues.some((i) => i.code === "UNIT_ASSUMED")).toBe(false);
+  });
+});
+
+describe("step 9 fallbacks: code reads labelled patterns the model missed", () => {
+  let ref: ReferenceData;
+  beforeAll(() => {
+    const db = openDb(":memory:");
+    applySchema(db);
+    seedMasterData(db, parseMasterData(JSON.parse(readFileSync("data/master_data.json", "utf8"))));
+    ref = loadReferenceData(db);
+  });
+
+  it("finds exactly one known supplier in the text (email 28: 'from Sensorik Nord')", async () => {
+    const { matchSupplierInText } = await import("../src/checks/supplier.ts");
+    const m = matchSupplierInText("Could you order roughly ten sensors from Sensorik Nord for the test bench?", null, ref.suppliers);
+    expect(m).toMatchObject({ supplierId: "SUP-015", matchedBy: "name" });
+    expect(m?.issues.map((i) => i.code)).toEqual(["SUPPLIER_FOUND_IN_TEXT"]);
+  });
+
+  it("does nothing when several suppliers match, or the model claimed another one", async () => {
+    const { matchSupplierInText } = await import("../src/checks/supplier.ts");
+    expect(matchSupplierInText("Müller Industriebedarf oder Mueller Industriebedarf AG?", null, ref.suppliers)).toBeNull();
+    expect(matchSupplierInText("bitte bei Hydraulik Zentrale bestellen", "Office Plus Schweiz", ref.suppliers)).toBeNull();
+    expect(matchSupplierInText("ACME Bearing Group Ltd quote", null, ref.suppliers)?.supplierId).toBe("SUP-006"); // not Acme Bearings
+  });
+
+  it("still blocks a blocked supplier found in the text", async () => {
+    const { matchSupplierInText } = await import("../src/checks/supplier.ts");
+    expect(matchSupplierInText("Baltic Steel Trading OÜ offer", null, ref.suppliers)?.issues.map((i) => i.code))
+      .toEqual(["SUPPLIER_FOUND_IN_TEXT", "SUPPLIER_BLOCKED"]);
+  });
+
+  it("uses the text scan in runChecks only when the model gave no usable supplier", async () => {
+    const doc = await parseEmail(readFileSync("data/emails/email_28.eml"));
+    const x = email25();
+    x.supplier_vat_id = { value: null, evidence: null };
+
+    // The model named the right supplier but gave no quote (unverified): code confirms it from the text.
+    x.supplier_name = { value: "Sensorik Nord", evidence: null };
+    const r = runChecks(doc, x, [{ field: "supplier_name", reason: "missing_evidence" }], ref);
+    expect(r.supplierId).toBe("SUP-015");
+    expect(r.issues.some((i) => i.field === "supplier_name" && i.code === "UNVERIFIED_VALUE")).toBe(false); // superseded
+
+    // The model claimed a different supplier: no scan, the unverified claim stays for the clerk.
+    x.supplier_name = { value: "TechnoPlast Kunststoffe GmbH", evidence: "invented" };
+    const other = runChecks(doc, x, [{ field: "supplier_name", reason: "quote_not_in_source" }], ref);
+    expect(other.supplierId).toBeNull();
+    expect(other.issues.some((i) => i.field === "supplier_name" && i.code === "UNVERIFIED_VALUE")).toBe(true);
+  });
+
+  it("reads a labelled validity date (email 31: 'Valid until: 30.04.2026')", async () => {
+    const { findValidUntilInText } = await import("../src/checks/dates.ts");
+    expect(findValidUntilInText("Date: 01.04.2026\nValid until: 30.04.2026\nValidity: 30 days")).toBe("2026-04-30");
+    expect(findValidUntilInText("Gültig bis: 5.6.2026")).toBe("2026-06-05");
+    expect(findValidUntilInText("Validity: 30 days from date of issue")).toBeNull();
+
+    const doc31 = await parseEmail(readFileSync("data/emails/email_31.eml"));
+    const r = runChecks(doc31, emptyExtraction(), [], ref);
+    expect(r.issues.find((i) => i.code === "QUOTE_EXPIRED")?.message).toContain("2026-04-30 (read from the email text)");
+  });
+});
+
+describe("superseded supplier claims (final run, email 49)", () => {
+  let ref: ReferenceData;
+  let doc25: SourceDocument;
+  beforeAll(async () => {
+    const db = openDb(":memory:");
+    applySchema(db);
+    seedMasterData(db, parseMasterData(JSON.parse(readFileSync("data/master_data.json", "utf8"))));
+    ref = loadReferenceData(db);
+    doc25 = await parseEmail(readFileSync("data/emails/email_25.eml"));
+  });
+
+  it("doesn't block on an unverified name when a verified VAT ID establishes the same supplier", () => {
+    const r = runChecks(doc25, email25(), [{ field: "supplier_name", reason: "value_not_in_quote" }], ref);
+    expect(r.supplierId).toBe("SUP-011");
+    expect(r.issues.some((i) => i.field === "supplier_name")).toBe(false);
+  });
+
+  it("still blocks when the unverified name points at a different supplier", () => {
+    const x = email25();
+    x.supplier_name = { value: "Office Plus Schweiz", evidence: "invented" };
+    const r = runChecks(doc25, x, [{ field: "supplier_name", reason: "quote_not_in_source" }], ref);
+    expect(r.issues.some((i) => i.field === "supplier_name" && i.severity === "blocks_approval")).toBe(true);
+  });
+});
+
+describe("approximate values (found in the rehearsal)", () => {
+  it("blocks approval for a quantity or price the email only estimates", async () => {
+    const db = openDb(":memory:");
+    applySchema(db);
+    seedMasterData(db, parseMasterData(JSON.parse(readFileSync("data/master_data.json", "utf8"))));
+    const ref = loadReferenceData(db);
+    const doc = await parseEmail(Buffer.from("From: tobias.weber@customer.com\r\nSubject: x\r\n\r\nbitte ca. 50 Stk Dichtungen, so um die 4 EUR das Stueck."));
+    const x = email25();
+    x.line_items = [{ description: "Dichtungen", item_code: null, quantity: 50, unit: "Stk", unit_price: 4, price_per: null, line_total: null,
+      evidence: "bitte ca. 50 Stk Dichtungen, so um die 4 EUR das Stueck." }];
+    const r = runChecks(doc, x, [], ref);
+    expect(r.issues.filter((i) => i.code === "APPROXIMATE_VALUE").map((i) => i.field)).toEqual(["line_items[0].quantity", "line_items[0].unit_price"]);
+    expect(blocksApproval(r.issues)).toBe(true);
+
+    // Once the clerk enters the exact figures, the estimate no longer counts.
+    const fixed = runChecks(doc, x, [], ref, { lines: { "0": { quantity: 48, unitPrice: 3.9 } } });
+    expect(fixed.issues.some((i) => i.code === "APPROXIMATE_VALUE")).toBe(false);
   });
 });

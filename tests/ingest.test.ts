@@ -30,6 +30,23 @@ describe("parseEmail", () => {
     expect(doc.body).toContain("Messraum 1"); // &nbsp; decoded
   });
 
+  it("converts an HTML-only email itself, ignoring mailparser's invented text (found in rehearsal)", async () => {
+    const eml = [
+      "From: ruedi.zimmermann@customer.com",
+      "Subject: Kalibrierung",
+      "Content-Type: text/html; charset=utf-8",
+      "",
+      "<html><body><table border=\"1\">",
+      "<tr><th>Pos</th><th>Beschreibung</th><th>Menge</th><th>Preis CHF</th></tr>",
+      "<tr><td>1</td><td>Kalibrierung Multimeter</td><td>10</td><td>300.00</td></tr>",
+      "</table></body></html>",
+    ].join("\r\n");
+    const doc = await parseEmail(Buffer.from(eml));
+    expect(doc.bodyFormat).toBe("html");
+    expect(doc.body).toMatch(/1\s+Kalibrierung Multimeter\s+10\s+300\.00/);
+    expect(doc.body).not.toContain("Multimeter10");
+  });
+
   it("records no attachment when the body only claims one (email 01)", async () => {
     const doc = await sample("email_01_clean_with_pdf.eml");
 

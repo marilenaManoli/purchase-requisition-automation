@@ -59,6 +59,23 @@ export function numbersIn(text: string): number[] {
 
 const AMOUNT_TOLERANCE = 0.005; // half a cent: guards against float noise only
 
+// Words that make the number after them approximate: "ca. 50", "so um die 4 EUR", "~120".
+const HEDGE_BEFORE = /(?:\b(?:ca|circa|zirka|approx|approximately|about|around|roughly|ungef(?:ä|ae)hr|etwa|rund)\b\.?|\bum die\b|~)\s*(?:[a-z]{3}\s*)?$/i;
+
+/**
+ * True if the quote states this number only approximately: a hedge word right
+ * before it (only a currency code may sit in between). Such a number passes the
+ * evidence check, because it IS in the quote, but it's still not a fact.
+ */
+export function isApproximate(value: number, quote: string): boolean {
+  const text = normaliseForMatch(quote);
+  for (const match of text.matchAll(/-?\d+(?:['.,]\d+)*/g)) {
+    if (!numbersIn(match[0]).some((n) => Math.abs(n - value) < AMOUNT_TOLERANCE)) continue;
+    if (HEDGE_BEFORE.test(text.slice(Math.max(0, match.index - 30), match.index))) return true;
+  }
+  return false;
+}
+
 function numberInQuote(value: number, quote: string): boolean {
   return numbersIn(quote).some((n) => Math.abs(n - value) < AMOUNT_TOLERANCE);
 }
@@ -107,7 +124,9 @@ function dateInQuote(iso: string, quote: string): boolean {
  * separate passages. Returns null if any line is not in the source at all.
  */
 export function passagesOf(evidence: string, normalisedSource: string): string[] | null {
-  const lines = evidence.split("\n").map(normaliseForMatch).filter((l) => l !== "");
+  // A list bullet the model put in front of a quote ("- Cost center CC-2002.") is
+  // cosmetic, like whitespace. ("-900" stays: a minus sign has no space after it.)
+  const lines = evidence.split("\n").map((l) => normaliseForMatch(l).replace(/^[-*•]\s+/, "")).filter((l) => l !== "");
   const [first, ...rest] = lines; // array destructuring: first element, then the remainder
   if (first === undefined || !normalisedSource.includes(first)) return null;
 

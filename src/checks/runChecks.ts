@@ -1,16 +1,17 @@
 import type { ReferenceData } from "../db/queries.ts";
-import type { UnverifiedValue } from "../extract/evidence.ts";
+import { isApproximate, type UnverifiedValue } from "../extract/evidence.ts";
 import type { ExtractionOutcome } from "../extract/extract.ts";
 import type { Extraction } from "../extract/schema.ts";
 import type { SourceDocument } from "../ingest/sourceDocument.ts";
 import { checkAmounts, type StatedTotal } from "./amounts.ts";
 import { checkCostCenter } from "./costCenter.ts";
-import { checkDeliveryDate, checkMissingAttachment, checkQuoteValidity } from "./dates.ts";
+import { renderSourceText } from "../ingest/sourceDocument.ts";
+import { checkDeliveryDate, checkMissingAttachment, checkQuoteValidity, findValidUntilInText } from "./dates.ts";
 import { convertToChf } from "./fx.ts";
 import { issue, type Issue } from "./issues.ts";
 import { editsFigures, overriddenFields, type ClerkOverrides } from "./overrides.ts";
 import { findRequester } from "./requester.ts";
-import { matchSupplier, type SupplierMatch } from "./supplier.ts";
+import { matchSupplier, matchSupplierInText, normaliseCompanyName, type SupplierMatch } from "./supplier.ts";
 import { isTrusted, trusted, unverifiedIssues } from "./trust.ts";
 
 // Runs every check on one extraction and returns what has been ESTABLISHED
@@ -64,14 +65,21 @@ export function runChecks(
 
   const requester = findRequester(doc.fromEmail, ref.employees);
 
+  const sourceText = renderSourceText(doc);
+  const modelName = t("supplier_name", x.supplier_name.value);
+  const modelVat = t("supplier_vat_id", x.supplier_vat_id.value);
+  // Step 9 fallback: if the model gave nothing usable, code looks for a known supplier name in the email.
+  const foundInText = ov.supplierId === undefined && modelName === null && modelVat === null
+    ? matchSupplierInText(sourceText, x.supplier_name.value, ref.suppliers)
+    : null;
   const supplier = ov.supplierId !== undefined
     ? supplierChosenByClerk(ov.supplierId, ref)
-    : matchSupplier(
-        t("supplier_name", x.supplier_name.value),
-        t("supplier_vat_id", x.supplier_vat_id.value),
-        bad("supplier_name") || bad("supplier_vat_id"),
-        ref.suppliers,
-      );
+    : foundInText ?? matchSupplier(modelName, modelVat, bad("supplier_name") || bad("supplier_vat_id"), ref.suppliers);
+  // An unverified supplier claim isn't used. If the supplier was established another
+  // way (verified VAT ID, or found in the text) and the claim agrees with it, the
+  // claim's "unverified" flag is noise, not a reason to block (email 49).
+  const supplierClaimSuperseded = foundInText !== null ||
+    (supplier.matchedBy === "vat" && claimAgrees(x.supplier_name.value, supplier.supplierId, ref));
 
   const costCenter = ov.costCenterCode !== undefined
     ? { code: ov.costCenterCode, suggestions: [], issues: [] } // validated against master data on edit
@@ -137,7 +145,7 @@ export function runChecks(
     : checkDeliveryDate(t("requested_delivery.iso", x.requested_delivery.iso), x.requested_delivery.text, bad("requested_delivery.iso"), doc.sentAt);
 
   const issues = [
-    ...unverifiedIssues(unverified),
+    ...unverifiedIssues(supplierClaimSuperseded ? unverified.filter((u) => u.field !== "supplier_name" && u.field !== "supplier_vat_id") : unverified),
     ...checkMissingAttachment(doc),
     ...requester.issues,
     ...supplier.issues,
@@ -147,13 +155,14 @@ export function runChecks(
           "Line figures were changed by the clerk; the total is recalculated from the lines and the document's totals are not used.")]
       : []),
     ...amounts.issues,
+    ...approximateValues(x, unverified, replaced),
     ...lines.flatMap((l, i) => (l.unitAssumed
       ? [issue("UNIT_ASSUMED", "warning", `line_items[${i}].unit`,
           `Line ${i + 1} states a quantity but no unit; it is treated as pieces (assumption 8). Correct it if that's wrong.`)]
       : [])),
     ...fx.issues,
     ...delivery.issues,
-    ...checkQuoteValidity(t("quote_valid_until.iso", x.quote_valid_until.iso), doc.sentAt),
+    ...quoteValidity(t("quote_valid_until.iso", x.quote_valid_until.iso), sourceText, doc.sentAt),
   ];
 
   return {
@@ -181,6 +190,39 @@ export function runChecks(
     })),
     issues,
   };
+}
+
+/**
+ * "ca. 50 Stk", "so um die 4 EUR": the number is in the quote, so it verifies, but the
+ * document itself only estimates it. Never route on an estimate: blocks approval.
+ * (Values the clerk has set, or that are unverified anyway, are skipped.)
+ */
+function approximateValues(x: Extraction, unverified: UnverifiedValue[], replaced: Set<string>) {
+  const found: { field: string; value: number }[] = [];
+  const consider = (field: string, value: number | null, quote: string | null) => {
+    if (value === null || quote === null || replaced.has(field) || !isTrusted(field, unverified)) return;
+    if (isApproximate(value, quote)) found.push({ field, value });
+  };
+  for (const f of ["net_total", "gross_total", "total_unlabelled"] as const) consider(f, x[f].value, x[f].evidence);
+  x.line_items.forEach((l, i) => {
+    consider(`line_items[${i}].quantity`, l.quantity, l.evidence);
+    consider(`line_items[${i}].unit_price`, l.unit_price, l.evidence);
+  });
+  return found.map((f) => issue("APPROXIMATE_VALUE", "blocks_approval", f.field,
+    `The email gives ${f.field} only approximately (${f.value}, e.g. "ca.", "around"). An estimate can't be ordered; the clerk must confirm the exact figure.`));
+}
+
+/** True if an (unverified) supplier name claim names no supplier, or the same one. */
+function claimAgrees(claim: string | null, supplierId: string | null, ref: ReferenceData): boolean {
+  if (claim === null) return true;
+  const named = ref.suppliers.filter((s) => normaliseCompanyName(s.name) === normaliseCompanyName(claim));
+  return named.length === 0 || named.some((s) => s.id === supplierId);
+}
+
+/** The model's validity date if verified; otherwise a labelled date read from the text (step 9 fallback). */
+function quoteValidity(modelIso: string | null, sourceText: string, sentAt: string | null) {
+  if (modelIso !== null) return checkQuoteValidity(modelIso, sentAt);
+  return checkQuoteValidity(findValidUntilInText(sourceText), sentAt, true);
 }
 
 /** A supplier picked by the clerk from the master data. Its status still applies. */

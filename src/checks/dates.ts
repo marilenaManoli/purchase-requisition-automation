@@ -29,10 +29,25 @@ export function checkDeliveryDate(
   return { date: iso, issues: [] };
 }
 
-export function checkQuoteValidity(validUntil: string | null, sentAt: string | null): Issue[] {
+export function checkQuoteValidity(validUntil: string | null, sentAt: string | null, readFromText = false): Issue[] {
   if (validUntil === null || sentAt === null || validUntil >= day(sentAt)) return [];
   return [issue("QUOTE_EXPIRED", "warning", "quote_valid_until",
-    `The quote was valid until ${validUntil}, before the request was sent; prices may have changed.`)];
+    `The quote was valid until ${validUntil}${readFromText ? " (read from the email text)" : ""}, before the request was sent; prices may have changed.`)];
+}
+
+// "Gültig bis: 30.04.2026", "Valid until: 2026-04-30"
+const VALID_UNTIL = /\b(?:g(?:ü|ue)ltig bis|valid until|valid till)\s*:?\s*(?:(\d{1,2})\.(\d{1,2})\.(\d{4})|(\d{4})-(\d{2})-(\d{2}))/i;
+
+/**
+ * Step 9 fallback, used only when the model's validity date is missing or
+ * unverified: a labelled date is a pattern, so code can read it (email 31).
+ */
+export function findValidUntilInText(text: string): string | null {
+  const m = VALID_UNTIL.exec(text);
+  if (!m) return null;
+  const [y, mo, d] = m[3] ? [m[3], m[2]!, m[1]!] : [m[4]!, m[5]!, m[6]!];
+  const iso = `${y}-${mo.padStart(2, "0")}-${d.padStart(2, "0")}`;
+  return Number.isNaN(Date.parse(iso)) ? null : iso;
 }
 
 // "anbei", "im Anhang", "attached", "[Attachment: …]"

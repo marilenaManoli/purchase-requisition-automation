@@ -1,8 +1,8 @@
-// `npm run load-saved`: puts every sample email through the real pipeline, but
-// instead of calling Ollama it replays the model answer saved by
-// `npm run extract-all` (out/extractions/). Seconds instead of ~40 minutes:
-// for developing the UI and preparing a demo. Run `npm run seed` first for a
-// clean database. Prints only ids, states and counts.
+// `npm run load-saved [-- out/extractions]`: puts every sample email through the
+// real pipeline, but instead of calling Ollama it replays recorded model answers:
+// by default the reference run in results/, or a folder written by
+// `npm run extract-all`. Seconds instead of ~40 minutes: for a quick demo.
+// Run `npm run seed` first for a clean database. Prints only ids and states.
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { config } from "../src/config.ts";
@@ -11,9 +11,9 @@ import { loadReferenceData } from "../src/db/queries.ts";
 import type { LlmClient } from "../src/extract/llm.ts";
 import { processEmail } from "../src/workflow/processEmail.ts";
 
-const SAVED = "out/extractions";
+const SAVED = process.argv[2] ?? "results/extractions";
 if (!existsSync(SAVED)) {
-  console.error(`No saved extractions in ${SAVED}. Run "npm run extract-all" first.`);
+  console.error(`No recorded answers in ${SAVED}.`);
   process.exit(1);
 }
 

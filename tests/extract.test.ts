@@ -1,6 +1,6 @@
 import { readFileSync } from "node:fs";
 import { beforeAll, describe, expect, it } from "vitest";
-import { findUnverifiedValues, numbersIn } from "../src/extract/evidence.ts";
+import { findUnverifiedValues, isApproximate, numbersIn } from "../src/extract/evidence.ts";
 import { extractRequisition, parseModelOutput } from "../src/extract/extract.ts";
 import { extractionJsonSchema } from "../src/extract/schema.ts";
 import { parseEmail } from "../src/ingest/parseEmail.ts";
@@ -170,5 +170,26 @@ describe("JSON schema sent to the model", () => {
     const schema = extractionJsonSchema as { required?: string[]; properties?: object };
     expect(schema.required).toEqual(Object.keys(schema.properties ?? {}));
     expect(schema.required).toContain("notes_for_clerk");
+  });
+});
+
+describe("found in the rehearsal with unseen emails", () => {
+  it("ignores a list bullet the model put in front of a quote", () => {
+    const x = email25();
+    x.cost_center_code = { value: "CC-1003", evidence: "- Kostenstelle CC-1003" };
+    expect(findUnverifiedValues(x, source25)).toEqual([]);
+  });
+
+  it.each([
+    ["bitte ca. 50 Stk O-Ring-Dichtungen bestellen", 50, true],
+    ["kosten so um die 4 EUR das Stück", 4, true],
+    ["around EUR 5,000 in total", 5000, true],
+    ["roughly 120 m of cable", 120, true],
+    ["~ 30 pcs", 30, true],
+    ["4 pcs digital torque wrench, EUR 610.00 each", 610, false],
+    ["Question about the order: 12 pcs", 12, false], // "about" not directly before the number
+    ["Rabatt -900.00", -900, false],
+  ])("isApproximate(%s, %d) = %s", (quote, value, expected) => {
+    expect(isApproximate(value, quote)).toBe(expected);
   });
 });

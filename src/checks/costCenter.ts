@@ -13,6 +13,10 @@ export interface CostCenterCheck {
   issues: Issue[];
 }
 
+// Letters, an optional hyphen, digits: CC-1002, CC 9100, KST4711. ("CC-9100" looks
+// right but isn't in the master data: that stays COST_CENTER_UNKNOWN.)
+const LOOKS_LIKE_A_CODE = /^[A-Z]{1,5}[- ]?\d{2,6}$/i;
+
 export function checkCostCenter(
   statedCode: string | null,
   statedName: string | null,
@@ -20,6 +24,13 @@ export function checkCostCenter(
   requesterDefault: string | null,
   costCenters: CostCenterRow[],
 ): CostCenterCheck {
+  // A "code" that doesn't even look like one ("London office") is a name: the model
+  // put it in the wrong field. Treat it as a hint, so the clerk gets a suggestion.
+  if (statedCode !== null && !LOOKS_LIKE_A_CODE.test(statedCode.trim())) {
+    statedName = statedName ?? statedCode;
+    statedCode = null;
+  }
+
   if (statedCode !== null) {
     // Only formatting is normalised ("cc-1002 " → "CC-1002"), never the digits.
     const code = statedCode.trim().toUpperCase();

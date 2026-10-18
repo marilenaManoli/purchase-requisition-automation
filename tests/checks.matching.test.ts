@@ -121,6 +121,15 @@ describe("checkCostCenter", () => {
     expect(c.issues[0]?.message).toContain("CC-3002");
   });
 
+  it("treats a 'code' that doesn't look like one as a name (final run, email 02)", () => {
+    const c = checkCostCenter("London office", null, false, null, ref.costCenters);
+    expect(c.code).toBeNull();
+    expect(c.suggestions).toEqual(["CC-3002"]);
+    expect(codes(c.issues)).toEqual(["COST_CENTER_MISSING"]);
+    // A code-shaped value that isn't in the master data is still "unknown", never a suggestion.
+    expect(codes(checkCostCenter("CC-9100", null, false, null, ref.costCenters).issues)).toEqual(["COST_CENTER_UNKNOWN"]);
+  });
+
   it("offers the requester's default cost centre as a suggestion only (assumption 6)", () => {
     const c = checkCostCenter(null, null, false, "CC-1001", ref.costCenters);
     expect(c.code).toBeNull();
