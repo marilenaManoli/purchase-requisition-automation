@@ -200,6 +200,7 @@ Use these as fixtures and expected outcomes:
 3. Free-of-charge line: flagged; unit price 0 suggested, applied only after clerk confirmation.
 4. Local LLM by default for privacy; hosted model possible behind the same interface.
 5. No real authentication: an "act as" user switcher stands in for login.
+6. A requester's `default_cost_center` may be shown as a suggestion when the email states none; never applied automatically.
 
 ## Engineering standards
 

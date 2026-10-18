@@ -37,6 +37,7 @@ Other commands:
 | --- | --- |
 | `npm test` | Unit tests (no Ollama or ERP needed) |
 | `npm run typecheck` | TypeScript type check |
+| `npm run ingest-summary` | Parses every sample email and prints its format and attachments (no LLM) |
 | `npm run run-all` | Processes every sample email and prints an outcome table |
 
 ## Architecture
@@ -63,6 +64,15 @@ Where the brief was ambiguous:
 4. **Local LLM by default** (Ollama) so personal data in emails never leaves the
    machine; a hosted model can be plugged in behind the same interface.
 5. **No real authentication.** An "act as" user switcher stands in for login.
+6. **Requester's default cost centre is a suggestion only.** Some employees have
+   a `default_cost_center` in the master data. When an email states no cost
+   centre, it may be shown to the clerk as a suggestion, but it is never applied
+   automatically: the cost centre must come from the email or from the clerk.
+
+The `rules` block in `master_data.json` (self-approval forbidden, duplicate roles
+collapse, approvals sequential) is not stored in the database. These rules are
+mandated by the brief and enforced in code; a stored flag that the code ignored
+would be misleading.
 
 ## Left out
 

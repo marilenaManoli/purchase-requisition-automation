@@ -13,12 +13,14 @@
     "run-all": "tsx --env-file-if-exists=.env scripts/runAll.ts",
     "test": "vitest run",
     "test:watch": "vitest",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "ingest-summary": "tsx scripts/ingestSummary.ts"
   },
   "dependencies": {
     "better-sqlite3": "^13.0.3",
     "ejs": "^7.0.2",
     "express": "^5.3.0",
+    "html-to-text": "^10.0.1",
     "mailparser": "^3.9.44",
     "unpdf": "^1.9.0",
     "zod": "^4.6.7"
@@ -26,6 +28,7 @@
   "devDependencies": {
     "@types/better-sqlite3": "^9.6.0",
     "@types/express": "^5.0.6",
+    "@types/html-to-text": "^9.0.4",
     "@types/mailparser": "^3.9.0",
     "@types/node": "^26.6.5",
     "tsx": "^4.23.15",
