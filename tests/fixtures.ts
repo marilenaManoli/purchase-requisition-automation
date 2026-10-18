@@ -57,3 +57,46 @@ export class FakeLlm implements LlmClient {
     return next;
   }
 }
+
+/** A correct extraction of email 23 (Andrea Roth requests on her own CC-1004, EUR 7,200). */
+export function email23(): Extraction {
+  const none = { value: null, evidence: null };
+  const noDate = { text: null, iso: null, evidence: null };
+  return {
+    requester_name: { value: "Andrea Roth", evidence: "From: Andrea Roth <andrea.roth@customer.com>" },
+    requester_email: { value: "andrea.roth@customer.com", evidence: "From: Andrea Roth <andrea.roth@customer.com>" },
+    supplier_name: { value: "Bergmann Werkzeugbau", evidence: "bitte bei Bergmann Werkzeugbau bestellen:" },
+    supplier_vat_id: none,
+    cost_center_code: { value: "CC-1004", evidence: "Kostenstelle CC-1004." },
+    cost_center_name: none,
+    currency: { value: "EUR", evidence: "3 Stk Vorrichtungsplatte VP-500, je EUR 1'600.00" },
+    line_items: [
+      { description: "Vorrichtungsplatte VP-500", item_code: "VP-500", quantity: 3, unit: "Stk", unit_price: 1600,
+        price_per: null, line_total: null, evidence: "3 Stk Vorrichtungsplatte VP-500, je EUR 1'600.00" },
+      { description: "Zentrierbolzen ZB-16", item_code: "ZB-16", quantity: 4, unit: "Satz", unit_price: 600,
+        price_per: null, line_total: null, evidence: "4 Satz Zentrierbolzen ZB-16, je EUR 600.00" },
+    ],
+    net_total: none,
+    vat_amount: none,
+    gross_total: none,
+    total_unlabelled: { value: 7200, evidence: "Total EUR 7'200.00." },
+    requested_delivery: noDate,
+    quote_valid_until: noDate,
+    quote_number: none,
+    referenced_requests: [],
+    notes_for_clerk: [],
+  };
+}
+
+/** A valid extraction that states nothing at all. */
+export function emptyExtraction(): Extraction {
+  const none = { value: null, evidence: null };
+  const noDate = { text: null, iso: null, evidence: null };
+  return {
+    requester_name: none, requester_email: none, supplier_name: none, supplier_vat_id: none,
+    cost_center_code: none, cost_center_name: none, currency: none, line_items: [],
+    net_total: none, vat_amount: none, gross_total: none, total_unlabelled: none,
+    requested_delivery: noDate, quote_valid_until: noDate, quote_number: none,
+    referenced_requests: [], notes_for_clerk: [],
+  };
+}

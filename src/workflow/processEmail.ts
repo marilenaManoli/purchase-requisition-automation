@@ -8,6 +8,7 @@ import type { LlmClient } from "../extract/llm.ts";
 import { parseEmail } from "../ingest/parseEmail.ts";
 import { renderSourceText } from "../ingest/sourceDocument.ts";
 import { nowIso, writeAudit } from "./audit.ts";
+import { findRelations } from "./duplicates.ts";
 import type { State } from "./states.ts";
 import { getState, transition } from "./transitions.ts";
 
@@ -75,9 +76,11 @@ export async function extractAndRoute(db: Db, id: number, llm: LlmClient, ref: R
     const chain = checks.netTotalChf !== null && checks.costCenterCode !== null
       ? buildChain(checks.netTotalChf, checks.costCenterCode, checks.requesterEmployeeId, ref)
       : null;
-    const issues = [...checks.issues, ...(chain?.issues ?? [])];
+    const related = findRelations(db, id, doc, { supplierId: checks.supplierId, netTotal: checks.netTotal });
+    const issues = [...checks.issues, ...(chain?.issues ?? []), ...related.issues];
 
     saveEstablishedValues(db, id, checks, chain?.band ?? null);
+    db.prepare(`UPDATE requisitions SET related_requisition_id = ?, relation = ? WHERE id = ?`).run(related.relatedId, related.relation, id);
     saveIssues(db, id, issues);
 
     if (chain === null || blocksApproval(issues)) {
@@ -109,7 +112,7 @@ function saveEstablishedValues(db: Db, id: number, c: CheckResult, band: number 
     insertLine.run(id, i + 1, l.description, l.itemCode, l.quantity, l.unit, l.unitPrice, l.pricePer ?? 1, l.amount));
 }
 
-function saveIssues(db: Db, id: number, issues: Issue[]): void {
+export function saveIssues(db: Db, id: number, issues: Issue[]): void {
   const insert = db.prepare(`INSERT INTO issues (requisition_id, code, severity, field, message, created_at) VALUES (?, ?, ?, ?, ?, ?)`);
   const now = nowIso();
   for (const i of issues) insert.run(id, i.code, i.severity, i.field, i.message, now);

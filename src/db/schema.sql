@@ -119,7 +119,7 @@ CREATE TABLE requisitions (
   requested_delivery_date TEXT,                        -- 'YYYY-MM-DD' or NULL
   approval_round          INTEGER NOT NULL DEFAULT 1,  -- +1 when a corrected rejection restarts the chain
   related_requisition_id  INTEGER REFERENCES requisitions(id),
-  relation                TEXT CHECK (relation IN ('duplicate', 'correction')),
+  relation                TEXT CHECK (relation IN ('duplicate', 'correction', 'reference')),
   rejection_reason        TEXT,
   erp_po_number           TEXT,
   erp_warnings_json       TEXT,
@@ -152,7 +152,8 @@ CREATE TABLE issues (
   message        TEXT NOT NULL,
   created_at     TEXT NOT NULL,
   resolved_at    TEXT,
-  resolved_by    TEXT REFERENCES employees(id)
+  resolved_by    TEXT,                                 -- actor: employee id or 'clerk'
+  resolution     TEXT                                  -- the clerk's note
 ) STRICT;
 
 -- The approval chain. Old rounds are kept, so a restart never erases history.
