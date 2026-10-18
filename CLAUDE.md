@@ -201,6 +201,7 @@ Use these as fixtures and expected outcomes:
 4. Local LLM by default for privacy; hosted model possible behind the same interface.
 5. No real authentication: an "act as" user switcher stands in for login.
 6. A requester's `default_cost_center` may be shown as a suggestion when the email states none; never applied automatically.
+7. A total without a VAT label is treated as net, with a "VAT status not stated" warning; net/gross is read from the evidence label by code.
 
 ## Engineering standards
 

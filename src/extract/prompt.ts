@@ -23,10 +23,12 @@ Rules:
    approximately ("roughly ten") is not a stated number: use null.
 4. Line items are the goods or services the requester wants to buy, one entry per item.
    Their evidence is only that item's own row (a row may wrap onto a second line).
-   description is copied as written; item_code is the code without its label
-   ("Art.-Nr.", "Item code"). price_per only when the document explicitly writes a price
-   per a quantity, like "/ 100" or "per 1000"; then unit_price is the number before it.
-   Otherwise price_per is null. Copy line_total only if the document states it.
+   description is the item's name as written, without the quantity, unit or price;
+   quantity and unit go in their own fields even in a sentence ("7 Stk <item>" ->
+   quantity 7, unit "Stk"). item_code is the code without its label ("Art.-Nr.",
+   "Item code"). price_per only when the document explicitly writes a price per a
+   quantity: "<price> / 100" or "<price> per 1000" always means price_per 100 or 1000,
+   and unit_price is the number before it. Otherwise price_per is null. Copy line_total only if the document states it.
    Discounts, freight and surcharges that appear as rows are line items too.
    Specification rows of a datasheet are not line items. If the email describes no goods
    (for example it only corrects an earlier email), line_items is empty.
@@ -41,11 +43,13 @@ Rules:
    never the supplier. Copy the supplier name as written in the evidence. In short emails
    the supplier is often named only in a sentence of the body ("bei <Name> bestellen",
    "order from <Name>", "<Name> soll uns ... liefern"): that sentence is the evidence.
-8. cost_center_code only if a code (letters, hyphen, digits) is written. If only a name or
-   place is given, leave the code null and put the name in cost_center_name.
+8. cost_center_code only if a code (letters, hyphen, digits) is written, whatever words
+   introduce it ("Kostenstelle", "cost center", "budget is in", "charge to"). If only a
+   name or place is given, leave the code null and put the name in cost_center_name.
 9. requested_delivery is when the requester wants the goods; a supplier's lead time
    ("Lieferzeit", "delivery: 6 weeks") is not a requested delivery date. quote_valid_until
-   is the quote's validity date. For both: text is the wording as written; iso
+   is the quote's validity date; if the document states both a validity date and a period
+   ("30 days"), use the line with the date. For both: text is the wording as written; iso
    (YYYY-MM-DD) only when an exact calendar date is stated. Vague wording like the end or
    middle of a month, or "ASAP", has iso null.
 10. referenced_requests: requisition numbers or explicit references to an earlier request

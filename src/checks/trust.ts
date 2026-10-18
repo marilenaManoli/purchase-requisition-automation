@@ -18,6 +18,9 @@ export function trusted<T>(field: string, value: T | null, unverified: Unverifie
 
 // What an unverified value blocks depends on what the field feeds into.
 function severityFor(field: string): Severity {
+  // An unverified line total is ignored (code computes qty × price itself), and a
+  // missing item code blocks nothing (brief §6): both are only worth a warning.
+  if (/^line_items\[\d+\]\.(line_total|item_code)$/.test(field)) return "warning";
   const top = field.split(/[.[]/)[0] ?? field; // "line_items[1].unit_price" → "line_items"
   switch (top) {
     case "supplier_name":

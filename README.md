@@ -69,6 +69,13 @@ Where the brief was ambiguous:
    centre, it may be shown to the clerk as a suggestion, but it is never applied
    automatically: the cost centre must come from the email or from the clerk.
 
+7. **A total without a VAT label is treated as net.** Many requests state only
+   "Total CHF 3'200.00". Such an amount is used as the net amount and the clerk
+   sees a "VAT status not stated" warning. Whether a stated total is net or gross
+   is read by code from the label in its evidence quote ("Zwischensumme", "excl.
+   VAT" → net; "inkl. MwSt", "brutto" → gross), not taken from the model's choice
+   of field. A total that matches neither net nor net + VAT blocks approval.
+
 The `rules` block in `master_data.json` (self-approval forbidden, duplicate roles
 collapse, approvals sequential) is not stored in the database. These rules are
 mandated by the brief and enforced in code; a stored flag that the code ignored
