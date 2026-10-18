@@ -38,6 +38,8 @@ Other commands:
 | `npm test` | Unit tests (no Ollama or ERP needed) |
 | `npm run typecheck` | TypeScript type check |
 | `npm run ingest-summary` | Parses every sample email and prints its format and attachments (no LLM) |
+| `npm run extract-all` | Runs the real LLM extraction on every sample email and saves the answers in `out/` |
+| `npm run load-saved` | Puts every sample email through the pipeline, replaying the saved answers (seconds, no LLM) |
 | `npm run run-all` | Processes every sample email and prints an outcome table |
 
 ## Architecture

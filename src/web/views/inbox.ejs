@@ -1,0 +1,43 @@
+<%- include("partials/head", { title: "Inbox" }) %>
+<%# The "=" tag escapes HTML and is used for all email content; the "-" tag (raw HTML) only includes our own partials. %>
+<h1><%= mine ? "Waiting for me" : "Inbox" %></h1>
+<p class="muted"><%= rows.length %> requisition<%= rows.length === 1 ? "" : "s" %></p>
+
+<form method="get" action="/" class="card" style="display:flex; gap:8px; align-items:center;">
+  <label for="state" class="muted small">State</label>
+  <select id="state" name="state" onchange="this.form.submit()">
+    <option value="">all</option>
+    <% for (const s of states) { %><option value="<%= s %>" <%= s === selectedState ? "selected" : "" %>><%= s.replace("_", " ") %></option><% } %>
+  </select>
+  <% if (mine) { %><input type="hidden" name="mine" value="1"><% } %>
+  <noscript><button>Filter</button></noscript>
+</form>
+
+<div class="card">
+<% if (rows.length === 0) { %>
+  <p class="muted">Nothing here.</p>
+<% } else { %>
+<table>
+  <thead>
+    <tr><th>Number</th><th>State</th><th>From</th><th>Subject</th><th>Supplier</th><th class="num">Net</th><th class="num">CHF</th><th>Band</th><th>Blocking</th><th>Waiting for</th></tr>
+  </thead>
+  <tbody>
+  <% for (const r of rows) { %>
+    <tr>
+      <td><a href="/requisitions/<%= r.id %>"><%= r.number %></a></td>
+      <td><span class="badge s-<%= r.state %>"><%= r.state.replace("_", " ") %></span></td>
+      <td class="small"><%= r.fromEmail ?? "—" %></td>
+      <td><%= r.subject ?? "(no subject)" %></td>
+      <td><%= r.supplierName ?? "—" %></td>
+      <td class="num"><%= r.netTotal === null ? "—" : formatMoney(r.netTotal) + " " + (r.currency ?? "") %></td>
+      <td class="num"><%= r.netTotalChf === null ? "—" : formatMoney(r.netTotalChf) %></td>
+      <td><%= r.band ?? "—" %></td>
+      <td><% if (r.blockingIssues > 0) { %><span class="badge sev-blocks_approval"><%= r.blockingIssues %></span><% } else { %><span class="muted">0</span><% } %></td>
+      <td class="small"><%= r.waitingFor ?? "" %></td>
+    </tr>
+  <% } %>
+  </tbody>
+</table>
+<% } %>
+</div>
+<%- include("partials/foot") %>

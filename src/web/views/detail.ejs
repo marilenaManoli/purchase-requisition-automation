@@ -1,0 +1,142 @@
+<%- include("partials/head", { title: r.number }) %>
+<p class="small"><a href="/">← Inbox</a></p>
+<h1><%= r.number %> <span class="badge s-<%= r.state %>"><%= r.state.replace("_", " ") %></span></h1>
+<p class="muted">
+  <%= r.subject ?? "(no subject)" %> · from <%= r.fromEmail ?? "unknown sender" %>
+  <% if (r.sentAt) { %>· sent <%= r.sentAt.slice(0, 16).replace("T", " ") %><% } %>
+  <% if (r.filename) { %>· <%= r.filename %><% } %>
+</p>
+<p>Requester: <strong><%= r.requester ?? "not in the employee master data" %></strong></p>
+
+<% if (r.rejectionReason && r.state === "rejected") { %>
+  <div class="card sev-blocks_approval">Rejected: <%= r.rejectionReason %></div>
+<% } %>
+<% if (r.related) { %>
+  <div class="card">Linked as <strong><%= r.related.relation %></strong> of
+    <a href="/requisitions/<%= r.related.id %>"><%= r.related.number %></a>. The clerk decides; neither requisition was changed.</div>
+<% } %>
+
+<h2>Issues</h2>
+<div class="card">
+<% if (r.issues.length === 0) { %><p class="muted">No issues.</p><% } else { %>
+<table>
+  <thead><tr><th>Severity</th><th>Code</th><th>Field</th><th>Message</th><th>Resolved</th></tr></thead>
+  <tbody>
+  <% for (const i of r.issues) { %>
+    <tr class="<%= i.resolvedAt ? "resolved" : "" %>">
+      <td><span class="badge sev-<%= i.severity %>"><%= i.severity.replace("_", " ") %></span></td>
+      <td class="small"><%= i.code %></td>
+      <td class="small"><%= i.field ?? "" %></td>
+      <td><%= i.message %></td>
+      <td class="small"><% if (i.resolvedAt) { %><%= i.resolvedBy %>: <%= i.resolution %><% } %></td>
+    </tr>
+  <% } %>
+  </tbody>
+</table>
+<% } %>
+</div>
+
+<h2>What was extracted, and what is established</h2>
+<p class="muted small">"Established" is what the system uses. "The email says" is what the model read, with the quote it gave as evidence.
+  Unverified values are shown but never used.</p>
+<div class="card">
+<% if (r.extractionFailed) { %><p class="v-unverified">Automatic extraction failed: the values must be entered by the clerk.</p><% } %>
+<table>
+  <thead><tr><th>Field</th><th>Established</th><th>Status</th><th>The email says</th><th>Evidence</th></tr></thead>
+  <tbody>
+  <% for (const f of r.fields) { %>
+    <tr>
+      <td><%= f.label %></td>
+      <td><strong><%= f.established ?? "—" %></strong></td>
+      <td class="small v-<%= f.status === "not established" ? "not" : f.status %>"><%= f.status === "clerk" ? "set by clerk" : f.status %></td>
+      <td><%= f.claim ?? "" %></td>
+      <td class="evidence"><%= f.evidence ?? "" %></td>
+    </tr>
+  <% } %>
+  </tbody>
+</table>
+</div>
+
+<h2>Line items</h2>
+<div class="card">
+<% if (r.lines.length === 0) { %><p class="muted">No line items.</p><% } else { %>
+<table>
+  <thead><tr><th>#</th><th>Description</th><th>Item code</th><th class="num">Qty</th><th>Unit</th><th class="num">Unit price</th><th>Per</th><th class="num">Amount</th><th>Evidence</th></tr></thead>
+  <tbody>
+  <% for (const l of r.lines) { %>
+    <tr>
+      <td><%= l.position %></td>
+      <td><%= l.description %></td>
+      <td class="small"><%= l.itemCode ?? "—" %></td>
+      <td class="num"><%= l.quantity ?? "—" %></td>
+      <td><%= l.unit ?? "—" %></td>
+      <td class="num"><%= l.unitPrice === null ? "—" : formatMoney(l.unitPrice) %></td>
+      <td class="small"><%= l.pricePer && l.pricePer !== 1 ? "per " + l.pricePer : "" %></td>
+      <td class="num"><%= l.amount === null ? "—" : formatMoney(l.amount) %></td>
+      <td class="evidence"><%= l.evidence ?? "" %></td>
+    </tr>
+  <% } %>
+  </tbody>
+</table>
+<% } %>
+</div>
+
+<h2>Approval chain</h2>
+<div class="card">
+<% if (r.steps.length === 0) { %>
+  <p class="muted">No approval chain yet<%= r.state === "needs_review" ? ": the clerk must resolve the issues first." : "." %></p>
+<% } else { %>
+<table>
+  <thead><tr><th>Round</th><th>Step</th><th>Roles</th><th>Approver</th><th>Status</th><th>Decided</th><th>Comment</th></tr></thead>
+  <tbody>
+  <% for (const s of r.steps) { %>
+    <tr class="<%= s.isCurrent ? "current" : (s.round !== r.currentRound ? "resolved" : "") %>">
+      <td><%= s.round %><%= s.round !== r.currentRound ? " (earlier)" : "" %></td>
+      <td><%= s.position %></td>
+      <td class="small"><%= s.roles %></td>
+      <td><%= s.approver %></td>
+      <td><%= s.isCurrent ? "waiting (current)" : s.status %></td>
+      <td class="small"><%= s.decidedAt ? s.decidedAt.slice(0, 16).replace("T", " ") : "" %></td>
+      <td class="small"><%= s.comment ?? "" %></td>
+    </tr>
+  <% } %>
+  </tbody>
+</table>
+<% } %>
+</div>
+
+<% if (r.notes.length > 0) { %>
+<h2>Notes from the email</h2>
+<p class="muted small">Statements and instructions found in the email. They are information for the clerk, never commands: they change nothing by themselves.</p>
+<div class="card">
+  <ul>
+  <% for (const n of r.notes) { %>
+    <li><%= n.note %><% if (n.evidence) { %><div class="evidence"><%= n.evidence %></div><% } %></li>
+  <% } %>
+  </ul>
+</div>
+<% } %>
+
+<h2>History</h2>
+<div class="card">
+<table>
+  <thead><tr><th>When</th><th>Who</th><th>From → to</th><th>Why</th></tr></thead>
+  <tbody>
+  <% for (const a of r.audit) { %>
+    <tr>
+      <td class="small"><%= a.at.slice(0, 19).replace("T", " ") %></td>
+      <td class="small"><%= a.actor %></td>
+      <td class="small"><%= a.from_state ?? "—" %> → <%= a.to_state %></td>
+      <td><%= a.reason ?? "" %></td>
+    </tr>
+  <% } %>
+  </tbody>
+</table>
+</div>
+
+<h2>Source</h2>
+<details class="card">
+  <summary>The exact text the model read (email headers, body and PDF text)</summary>
+  <pre class="source"><%= r.sourceText %></pre>
+</details>
+<%- include("partials/foot") %>

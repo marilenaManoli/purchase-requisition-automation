@@ -15,7 +15,8 @@
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit",
     "ingest-summary": "tsx scripts/ingestSummary.ts",
-    "extract-all": "tsx --env-file-if-exists=.env scripts/extractAll.ts"
+    "extract-all": "tsx --env-file-if-exists=.env scripts/extractAll.ts",
+    "load-saved": "tsx --env-file-if-exists=.env scripts/loadSaved.ts"
   },
   "dependencies": {
     "better-sqlite3": "^13.0.3",
