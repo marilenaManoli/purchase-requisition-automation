@@ -5,3 +5,4 @@ node_modules/
 .claude/settings.local.json
 *.db-wal
 *.db-shm
+notes/

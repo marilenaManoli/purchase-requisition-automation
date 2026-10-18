@@ -5,7 +5,7 @@
   "description": "Turns purchase-request emails into checked, routed requisitions (BLP Digital take-home)",
   "type": "module",
   "engines": {
-    "node": ">=22"
+    "node": ">=22.9"
   },
   "scripts": {
     "dev": "tsx watch --env-file-if-exists=.env src/web/server.ts",

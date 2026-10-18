@@ -11,7 +11,7 @@ or the master data is left empty, with the reason recorded, for a human to decid
 
 ## Setup
 
-Requirements: Node.js ≥ 22 (developed on 25), Python 3 (for the mock ERP),
+Requirements: Node.js ≥ 22.9 (developed on 25), Python 3 (for the mock ERP),
 [Ollama](https://ollama.com).
 
 ```bash
