@@ -1,0 +1,35 @@
+{
+  "name": "purchase-requisition-automation",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Turns purchase-request emails into checked, routed requisitions (BLP Digital take-home)",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "tsx watch --env-file-if-exists=.env src/web/server.ts",
+    "seed": "tsx --env-file-if-exists=.env src/db/seed.ts",
+    "run-all": "tsx --env-file-if-exists=.env scripts/runAll.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "better-sqlite3": "^13.0.3",
+    "ejs": "^7.0.2",
+    "express": "^5.3.0",
+    "mailparser": "^3.9.44",
+    "unpdf": "^1.9.0",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^9.6.0",
+    "@types/express": "^5.0.6",
+    "@types/mailparser": "^3.9.0",
+    "@types/node": "^26.6.5",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.12"
+  }
+}
