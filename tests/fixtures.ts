@@ -88,15 +88,5 @@ export function email23(): Extraction {
   };
 }
 
-/** A valid extraction that states nothing at all. */
-export function emptyExtraction(): Extraction {
-  const none = { value: null, evidence: null };
-  const noDate = { text: null, iso: null, evidence: null };
-  return {
-    requester_name: none, requester_email: none, supplier_name: none, supplier_vat_id: none,
-    cost_center_code: none, cost_center_name: none, currency: none, line_items: [],
-    net_total: none, vat_amount: none, gross_total: none, total_unlabelled: none,
-    requested_delivery: noDate, quote_valid_until: noDate, quote_number: none,
-    referenced_requests: [], notes_for_clerk: [],
-  };
-}
+// Re-exported so tests keep one import line.
+export { emptyExtraction } from "../src/extract/schema.ts";

@@ -68,5 +68,18 @@ export const ExtractionSchema = z.object({
 export type Extraction = z.infer<typeof ExtractionSchema>;
 export type ExtractedLineItem = z.infer<typeof LineItem>;
 
+/** An extraction that states nothing: the starting point when extraction failed and a clerk fills in the values. */
+export function emptyExtraction(): Extraction {
+  const none = { value: null, evidence: null };
+  const noDate = { text: null, iso: null, evidence: null };
+  return {
+    requester_name: none, requester_email: none, supplier_name: none, supplier_vat_id: none,
+    cost_center_code: none, cost_center_name: none, currency: none, line_items: [],
+    net_total: none, vat_amount: none, gross_total: none, total_unlabelled: none,
+    requested_delivery: noDate, quote_valid_until: noDate, quote_number: none,
+    referenced_requests: [], notes_for_clerk: [],
+  };
+}
+
 /** The JSON schema handed to the model (Ollama's `format` parameter). */
 export const extractionJsonSchema = z.toJSONSchema(ExtractionSchema);

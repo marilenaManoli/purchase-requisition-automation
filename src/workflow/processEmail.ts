@@ -94,7 +94,7 @@ export async function extractAndRoute(db: Db, id: number, llm: LlmClient, ref: R
   })();
 }
 
-function saveEstablishedValues(db: Db, id: number, c: CheckResult, band: number | null): void {
+export function saveEstablishedValues(db: Db, id: number, c: CheckResult, band: number | null): void {
   db.prepare(
     `UPDATE requisitions SET requester_employee_id = ?, supplier_id = ?, cost_center_code = ?, currency = ?,
        net_total = ?, vat_amount = ?, gross_total = ?, net_total_chf = ?, band = ?, requested_delivery_date = ?,

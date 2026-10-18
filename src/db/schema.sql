@@ -125,6 +125,7 @@ CREATE TABLE requisitions (
   erp_warnings_json       TEXT,
   extraction_json         TEXT,                        -- validated LLM output
   extraction_raw          TEXT,                        -- raw model output, kept for debugging failures
+  clerk_overrides_json    TEXT,                        -- values a clerk entered; they replace the model's claim (6c)
   created_at              TEXT NOT NULL,
   updated_at              TEXT NOT NULL
 ) STRICT;
