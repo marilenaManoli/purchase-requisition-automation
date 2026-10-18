@@ -102,14 +102,53 @@ describe("safety", () => {
     expect(html).toContain('<option value="clerk" selected>');
   });
 
-  it("only redirects back within the app after switching user", async () => {
+  it("refuses a POST that comes from another website (CSRF)", async () => {
+    const forged: Record<string, string>[] = [{ origin: "https://evil.example" }, { referer: "https://evil.example/phish" }];
+    for (const header of forged) {
+      const res = await fetch(base + "/act-as", {
+        method: "POST",
+        headers: { "content-type": "application/x-www-form-urlencoded", ...header },
+        body: "actor=EMP-103",
+        redirect: "manual",
+      });
+      expect(res.status).toBe(403);
+      expect(res.headers.get("set-cookie")).toBeNull();
+    }
+  });
+
+  it("accepts its own forms and redirects back only to its own pages", async () => {
     const res = await fetch(base + "/act-as", {
       method: "POST",
-      headers: { "content-type": "application/x-www-form-urlencoded", referer: "https://evil.example/phish" },
+      headers: { "content-type": "application/x-www-form-urlencoded", origin: base, referer: `${base}/?state=approved` },
       body: "actor=EMP-103",
       redirect: "manual",
     });
-    expect(res.headers.get("location")).toBe("/");
+    expect(res.headers.get("location")).toBe("/?state=approved");
     expect(res.headers.get("set-cookie")).toContain("actAs=EMP-103");
+  });
+});
+
+describe("workflow diagram", () => {
+  it("draws every allowed transition as an arrow, from the same table the code enforces", async () => {
+    const { ALLOWED_TRANSITIONS } = await import("../src/workflow/states.ts");
+    const { workflowSvg } = await import("../src/web/workflowDiagram.ts");
+    const svg = workflowSvg();
+    let arrows = 0;
+    for (const [from, targets] of Object.entries(ALLOWED_TRANSITIONS)) {
+      for (const to of targets) {
+        expect(svg).toContain(`data-from="${from}" data-to="${to}"`);
+        arrows++;
+      }
+    }
+    expect(svg.match(/<line /g)).toHaveLength(arrows); // and nothing else
+  });
+
+  it("shows counts on the workflow page and the current position on a detail page", async () => {
+    const page = (await get("/workflow")).html;
+    expect(page).toMatch(/data-state="needs_review" class="wf-box"><rect[^>]*\/><text[^>]*>Needs review<\/text><text[^>]*>2<\/text>/);
+    const detail = (await get(`/requisitions/${clean}`)).html;
+    expect(detail).toContain('data-state="pending_approval" class="wf-box wf-current wf-visited"');
+    expect(detail).toContain('data-state="extracted" class="wf-box wf-visited"');
+    expect(detail).toContain('data-state="needs_review" class="wf-box"'); // never visited
   });
 });

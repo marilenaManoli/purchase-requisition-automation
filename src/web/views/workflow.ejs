@@ -1,0 +1,24 @@
+<%- include("partials/head", { title: "Workflow" }) %>
+<h1>Workflow</h1>
+<p class="muted">Every requisition moves through these states. The arrows are exactly the moves the system allows: the diagram is drawn from the same table the code enforces. The number in each box is how many requisitions are in that state now.</p>
+
+<div class="card">
+  <%# Raw output is safe here: the SVG is built only from our own constants, never from email content. %>
+  <%- svg %>
+</div>
+
+<div class="card">
+<table>
+  <thead><tr><th>State</th><th>Meaning</th><th>Who moves it on</th></tr></thead>
+  <tbody>
+    <tr><td><span class="badge s-inbox">inbox</span></td><td>Email stored; extraction pending or postponed (LLM unreachable).</td><td>System (retry possible)</td></tr>
+    <tr><td><span class="badge s-extracted">extracted</span></td><td>The LLM has read the email; checks run immediately.</td><td>System</td></tr>
+    <tr><td><span class="badge s-needs_review">needs review</span></td><td>Something could not be established or blocks approval. Each reason is listed as an issue.</td><td>Clerk: correct, resolve, send for approval, or reject</td></tr>
+    <tr><td><span class="badge s-pending_approval">pending approval</span></td><td>Walking the approval chain, one approver at a time. A clean requisition comes here directly.</td><td>The current approver; the clerk can pull it back</td></tr>
+    <tr><td><span class="badge s-approved">approved</span></td><td>Every step approved. Nothing is ever approved automatically.</td><td>Clerk sends it to the ERP</td></tr>
+    <tr><td><span class="badge s-ordered">ordered</span></td><td>Booked in the ERP, which assigned the PO number. Final.</td><td>—</td></tr>
+    <tr><td><span class="badge s-rejected">rejected</span></td><td>Stopped with a reason; kept as a record. A corrected one can be reopened and restarts at step 1.</td><td>Clerk can reopen</td></tr>
+  </tbody>
+</table>
+</div>
+<%- include("partials/foot") %>

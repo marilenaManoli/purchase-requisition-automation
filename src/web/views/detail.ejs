@@ -6,6 +6,11 @@
   <% if (r.sentAt) { %>· sent <%= r.sentAt.slice(0, 16).replace("T", " ") %><% } %>
   <% if (r.filename) { %>· <%= r.filename %><% } %>
 </p>
+<div class="card">
+  <%# Raw output is safe: the SVG is built only from our own constants. %>
+  <%- svg %>
+  <p class="muted small">Filled box: where this requisition is now. Outlined: states it has passed through (from its history).</p>
+</div>
 <p>Requester: <strong><%= r.requester ?? "not in the employee master data" %></strong></p>
 
 <% if (msg) { %><div class="card msg"><%= msg %></div><% } %>

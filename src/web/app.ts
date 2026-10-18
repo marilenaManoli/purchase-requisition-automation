@@ -11,6 +11,8 @@ import { STATES } from "../workflow/states.ts";
 import { InvalidTransitionError } from "../workflow/transitions.ts";
 import { parseAssignments, parseEditForm } from "./forms.ts";
 import { employeeName, formatMoney, inboxRows, requisitionDetail } from "./views.ts";
+import { workflowSvg } from "./workflowDiagram.ts";
+import type { State } from "../workflow/states.ts";
 
 // The web app. `createApp` takes its dependencies as arguments, so tests can
 // run it against an in-memory database and a fake LLM.
@@ -35,6 +37,7 @@ export function createApp(deps: AppDeps): express.Express & { extractionsRunning
   app.set("views", fileURLToPath(new URL("./views", import.meta.url)));
   app.use(express.urlencoded({ extended: false })); // HTML form posts
 
+
   // Extractions running in the background (one at a time per requisition).
   const running = new Set<number>();
   function startExtraction(id: number): boolean {
@@ -55,6 +58,20 @@ export function createApp(deps: AppDeps): express.Express & { extractionsRunning
     res.locals.people = ref.employees.filter((e) => e.role !== "requester_only");
     res.locals.formatMoney = formatMoney;
     next();
+  });
+
+  // (Runs after the act-as middleware: the error page shows the current user.)
+  // Every state-changing request must come from this app's own pages. Browsers
+  // send an Origin (or at least a Referer) header with a POST; a form on another
+  // website would carry that site's origin and is refused. Without this, a
+  // forged POST without our cookie would run as the default actor, the clerk.
+  // (Production: CSRF tokens or SSO sessions.) Requests with neither header
+  // (curl, tests) are allowed: they can't ride on a victim's browser.
+  app.use((req, res, next) => {
+    if (req.method !== "POST") return next();
+    const source = req.get("origin") ?? req.get("referer");
+    if (source === undefined || sameHost(source, req.get("host"))) return next();
+    res.status(403).render("error", { message: "Request refused: it did not come from this application." });
   });
 
   const clerkOnly = (_req: Request, res: Response, next: NextFunction) => {
@@ -92,11 +109,19 @@ export function createApp(deps: AppDeps): express.Express & { extractionsRunning
     res.render("inbox", { rows, states: STATES, selectedState: state ?? "", mine, error: req.query.error ?? null });
   });
 
+  app.get("/workflow", (_req, res) => {
+    const rows = db.prepare(`SELECT state, COUNT(*) AS n FROM requisitions GROUP BY state`).all() as { state: State; n: number }[];
+    const counts = Object.fromEntries(STATES.map((s) => [s, rows.find((r) => r.state === s)?.n ?? 0]));
+    res.render("workflow", { svg: workflowSvg({ counts }) });
+  });
+
   app.get("/requisitions/:id", (req, res, next) => {
     const detail = requisitionDetail(db, ref, Number(req.params.id));
     if (!detail) return next(); // falls through to the 404 handler
+    const visited = new Set<State>(detail.audit.map((a) => a.to_state));
     res.render("detail", {
       r: detail,
+      svg: workflowSvg({ current: detail.state, visited }),
       ref,
       extracting: running.has(detail.id),
       msg: typeof req.query.msg === "string" ? req.query.msg : null,
@@ -175,6 +200,14 @@ function readCookie(req: Request, name: string): string | undefined {
     if (key === name) return decodeURIComponent(rest.join("="));
   }
   return undefined;
+}
+
+function sameHost(url: string, host: string | undefined): boolean {
+  try {
+    return new URL(url).host === host;
+  } catch {
+    return false;
+  }
 }
 
 /** Redirect back only within this app (never to another site via the Referer header). */

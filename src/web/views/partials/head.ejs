@@ -42,6 +42,13 @@
     .actions input[type=text], .actions textarea { width: 100%; max-width: 520px; }
     .actions table input { width: 100%; min-width: 70px; }
     .msg { background: var(--green-bg); color: var(--green); }
+    svg.wf { width: 100%; height: auto; max-width: 970px; display: block; }
+    .wf-edge { stroke: #98a2b3; stroke-width: 1.5; fill: none; } .wf-arrowhead { fill: #98a2b3; }
+    .wf-box rect { fill: var(--card); stroke: var(--line); stroke-width: 1.5; }
+    .wf-box text { text-anchor: middle; font-size: 13px; fill: var(--fg); }
+    .wf-box .wf-count { font-size: 12px; fill: var(--muted); }
+    .wf-visited rect { stroke: var(--blue); stroke-width: 2; }
+    .wf-current rect { fill: var(--blue); stroke: var(--blue); } .wf-current text, .wf-box.wf-current .wf-count { fill: #fff; font-weight: 600; }
   </style>
 </head>
 <body>
@@ -49,6 +56,7 @@
   <a class="home" href="/">Purchase requisitions</a>
   <nav>
     <a href="/">Inbox</a>
+    <a href="/workflow">Workflow</a>
     <% if (actor !== "clerk") { %><a href="/?mine=1">Waiting for me</a><% } %>
   </nav>
   <form method="post" action="/act-as">
