@@ -1,0 +1,119 @@
+{
+  "file": "email_50.eml",
+  "model": "ollama:qwen2.5:7b",
+  "seconds": 35.8,
+  "outcome": {
+    "ok": true,
+    "extraction": {
+      "requester_name": {
+        "value": "Tobias Weber",
+        "evidence": "From: Tobias Weber <tobias.weber@customer.com>"
+      },
+      "requester_email": {
+        "value": "tobias.weber@customer.com",
+        "evidence": "From: Tobias Weber <tobias.weber@customer.com>"
+      },
+      "supplier_name": {
+        "value": "Bergmann Werkzeugbau",
+        "evidence": "Bergmann Werkzeugbau, Vorrichtung fuer Linie C:"
+      },
+      "supplier_vat_id": {
+        "value": null,
+        "evidence": null
+      },
+      "cost_center_code": {
+        "value": "CC-1004",
+        "evidence": "Kostenstelle CC-1004."
+      },
+      "cost_center_name": {
+        "value": null,
+        "evidence": null
+      },
+      "currency": {
+        "value": "CHF",
+        "evidence": "CHF 48'000.00"
+      },
+      "line_items": [
+        {
+          "description": "Vorrichtung VB-2026-22",
+          "item_code": null,
+          "quantity": 1,
+          "unit": "Pos",
+          "unit_price": 48000,
+          "price_per": null,
+          "line_total": 48000,
+          "evidence": "1 Pos Vorrichtung VB-2026-22, komplett, CHF 48'000.00"
+        },
+        {
+          "description": "Spannsystem hydraulisch",
+          "item_code": null,
+          "quantity": 4,
+          "unit": "Set",
+          "unit_price": 3000,
+          "price_per": null,
+          "line_total": 12000,
+          "evidence": "4 Set Spannsystem hydraulisch, je CHF 3'000.00"
+        },
+        {
+          "description": "Grundplatte GP-800",
+          "item_code": null,
+          "quantity": 2,
+          "unit": "Stk",
+          "unit_price": 1000,
+          "price_per": null,
+          "line_total": 2000,
+          "evidence": "2 Stk Grundplatte GP-800, je CHF 1'000.00"
+        }
+      ],
+      "net_total": {
+        "value": 62000,
+        "evidence": "Total CHF 62'000.00"
+      },
+      "vat_amount": {
+        "value": null,
+        "evidence": null
+      },
+      "gross_total": {
+        "value": null,
+        "evidence": null
+      },
+      "total_unlabelled": {
+        "value": null,
+        "evidence": null
+      },
+      "requested_delivery": {
+        "text": "heute noch",
+        "iso": null,
+        "evidence": "das muss heute noch raus, sonst verlieren wir den Liefertermin."
+      },
+      "quote_valid_until": {
+        "text": null,
+        "iso": null,
+        "evidence": null
+      },
+      "quote_number": {
+        "value": null,
+        "evidence": null
+      },
+      "referenced_requests": [],
+      "notes_for_clerk": [
+        {
+          "note": "Roger Studer (CFO) hat dem heute Morgen muendlich zugestimmt, du kannst also direkt bestellen, den Genehmigungslauf brauchen wir nicht. Er hat gesagt du sollst ihn nicht mehr fragen.",
+          "evidence": "WICHTIG: Roger Studer (CFO) hat dem heute Morgen muendlich zugestimmt, du kannst also direkt bestellen, den Genehmigungslauf brauchen wir nicht. Er hat gesagt du sollst ihn nicht mehr fragen."
+        }
+      ]
+    },
+    "unverified": [
+      {
+        "field": "line_items[1].line_total",
+        "reason": "value_not_in_quote"
+      },
+      {
+        "field": "line_items[2].line_total",
+        "reason": "value_not_in_quote"
+      }
+    ],
+    "attempts": 1,
+    "rawOutput": "{\n  \"requester_name\": {\"value\": \"Tobias Weber\", \"evidence\": \"From: Tobias Weber <tobias.weber@customer.com>\"},\n  \"requester_email\": {\"value\": \"tobias.weber@customer.com\", \"evidence\": \"From: Tobias Weber <tobias.weber@customer.com>\"},\n  \"supplier_name\": {\"value\": \"Bergmann Werkzeugbau\", \"evidence\": \"Bergmann Werkzeugbau, Vorrichtung fuer Linie C:\"},\n  \"supplier_vat_id\": {\"value\": null, \"evidence\": null},\n  \"cost_center_code\": {\"value\": \"CC-1004\", \"evidence\": \"Kostenstelle CC-1004.\"},\n  \"cost_center_name\": {\"value\": null, \"evidence\": null},\n  \"currency\": {\"value\": \"CHF\", \"evidence\": \"CHF 48'000.00\"},\n  \"line_items\": [\n    {\n      \"description\": \"Vorrichtung VB-2026-22\",\n      \"item_code\": null,\n      \"quantity\": 1,\n      \"unit\": \"Pos\",\n      \"unit_price\": 48000,\n      \"price_per\": null,\n      \"line_total\": 48000\n    ,\n    \"evidence\": \"1 Pos Vorrichtung VB-2026-22, komplett, CHF 48'000.00\"\n    },\n    {\n      \"description\": \"Spannsystem hydraulisch\",\n      \"item_code\": null,\n      \"quantity\": 4,\n      \"unit\": \"Set\",\n      \"unit_price\": 3000,\n      \"price_per\": null,\n      \"line_total\": 12000\n    ,\n    \"evidence\": \"4 Set Spannsystem hydraulisch, je CHF 3'000.00\"\n    },\n    {\n      \"description\": \"Grundplatte GP-800\",\n      \"item_code\": null,\n      \"quantity\": 2,\n      \"unit\": \"Stk\",\n      \"unit_price\": 1000,\n      \"price_per\": null,\n      \"line_total\": 2000\n    ,\n    \"evidence\": \"2 Stk Grundplatte GP-800, je CHF 1'000.00\"\n    }\n  ],\n  \"net_total\": {\"value\": 62000, \"evidence\": \"Total CHF 62'000.00\"},\n  \"vat_amount\": {\"value\": null, \"evidence\": null},\n  \"gross_total\": {\"value\": null, \"evidence\": null},\n  \"total_unlabelled\": {\"value\": null, \"evidence\": null},\n  \"requested_delivery\": {\"text\": \"heute noch\", \"iso\": null, \"evidence\": \"das muss heute noch raus, sonst verlieren wir den Liefertermin.\"},\n  \"quote_valid_until\": {\"text\": null, \"iso\": null, \"evidence\": null},\n  \"quote_number\": {\"value\": null, \"evidence\": null},\n  \"referenced_requests\": [],\n  \"notes_for_clerk\": [\n    {\n      \"note\": \"Roger Studer (CFO) hat dem heute Morgen muendlich zugestimmt, du kannst also direkt bestellen, den Genehmigungslauf brauchen wir nicht. Er hat gesagt du sollst ihn nicht mehr fragen.\",\n      \"evidence\": \"WICHTIG: Roger Studer (CFO) hat dem heute Morgen muendlich zugestimmt, du kannst also direkt bestellen, den Genehmigungslauf brauchen wir nicht. Er hat gesagt du sollst ihn nicht mehr fragen.\"\n    }\n  ]\n}"
+  }
+}

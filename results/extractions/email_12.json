@@ -1,0 +1,99 @@
+{
+  "file": "email_12.eml",
+  "model": "ollama:qwen2.5:7b",
+  "seconds": 21.506,
+  "outcome": {
+    "ok": true,
+    "extraction": {
+      "requester_name": {
+        "value": "Luca Ferrari",
+        "evidence": "From: Luca Ferrari <luca.ferrari@customer.com>"
+      },
+      "requester_email": {
+        "value": "luca.ferrari@customer.com",
+        "evidence": "From: Luca Ferrari <luca.ferrari@customer.com>"
+      },
+      "supplier_name": {
+        "value": "Office Plus Schweiz",
+        "evidence": "Could you order 3 replacement office chairs from Office Plus Schweiz?"
+      },
+      "supplier_vat_id": {
+        "value": null,
+        "evidence": null
+      },
+      "cost_center_code": {
+        "value": "CC-3001",
+        "evidence": "Cost center CC-3001."
+      },
+      "cost_center_name": {
+        "value": null,
+        "evidence": null
+      },
+      "currency": {
+        "value": "CHF",
+        "evidence": "CHF 333.00 each"
+      },
+      "line_items": [
+        {
+          "description": "replacement office chairs",
+          "item_code": null,
+          "quantity": 3,
+          "unit": null,
+          "unit_price": 333,
+          "price_per": null,
+          "line_total": 999,
+          "evidence": "CHF 333.00 each, so CHF 999.00 in total"
+        }
+      ],
+      "net_total": {
+        "value": 999,
+        "evidence": "so CHF 999.00 in total"
+      },
+      "vat_amount": {
+        "value": null,
+        "evidence": null
+      },
+      "gross_total": {
+        "value": null,
+        "evidence": null
+      },
+      "total_unlabelled": {
+        "value": null,
+        "evidence": null
+      },
+      "requested_delivery": {
+        "text": null,
+        "iso": null,
+        "evidence": null
+      },
+      "quote_valid_until": {
+        "text": null,
+        "iso": null,
+        "evidence": null
+      },
+      "quote_number": {
+        "value": null,
+        "evidence": null
+      },
+      "referenced_requests": [],
+      "notes_for_clerk": [
+        {
+          "note": "No rush, whenever convenient.",
+          "evidence": "Cost center CC-3001. No rush, whenever convenient."
+        }
+      ]
+    },
+    "unverified": [
+      {
+        "field": "line_items[0].description",
+        "reason": "value_not_in_quote"
+      },
+      {
+        "field": "line_items[0].quantity",
+        "reason": "value_not_in_quote"
+      }
+    ],
+    "attempts": 1,
+    "rawOutput": "{\n  \"requester_name\": {\"value\": \"Luca Ferrari\", \"evidence\": \"From: Luca Ferrari <luca.ferrari@customer.com>\"},\n  \"requester_email\": {\"value\": \"luca.ferrari@customer.com\", \"evidence\": \"From: Luca Ferrari <luca.ferrari@customer.com>\"},\n  \"supplier_name\": {\"value\": \"Office Plus Schweiz\", \"evidence\": \"Could you order 3 replacement office chairs from Office Plus Schweiz?\"},\n  \"supplier_vat_id\": {\"value\": null, \"evidence\": null},\n  \"cost_center_code\": {\"value\": \"CC-3001\", \"evidence\": \"Cost center CC-3001.\"},\n  \"cost_center_name\": {\"value\": null, \"evidence\": null},\n  \"currency\": {\"value\": \"CHF\", \"evidence\": \"CHF 333.00 each\"},\n  \"line_items\": [\n    {\n      \"description\": \"replacement office chairs\",\n      \"item_code\": null,\n      \"quantity\": 3,\n      \"unit\": null,\n      \"unit_price\": 333,\n      \"price_per\": null,\n      \"line_total\": 999\n    ,\n  \"evidence\": \"CHF 333.00 each, so CHF 999.00 in total\"\n}\n  ],\n  \"net_total\": {\"value\": 999, \"evidence\": \"so CHF 999.00 in total\"},\n  \"vat_amount\": {\"value\": null, \"evidence\": null},\n  \"gross_total\": {\"value\": null, \"evidence\": null},\n  \"total_unlabelled\": {\"value\": null, \"evidence\": null},\n  \"requested_delivery\": {\"text\": null, \"iso\": null, \"evidence\": null},\n  \"quote_valid_until\": {\"text\": null, \"iso\": null, \"evidence\": null},\n  \"quote_number\": {\"value\": null, \"evidence\": null},\n  \"referenced_requests\": [],\n  \"notes_for_clerk\": [\n    {\n      \"note\": \"No rush, whenever convenient.\",\n      \"evidence\": \"Cost center CC-3001. No rush, whenever convenient.\"\n    }\n  ]\n}"
+  }
+}

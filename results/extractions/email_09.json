@@ -1,0 +1,100 @@
+{
+  "file": "email_09.eml",
+  "model": "ollama:qwen2.5:7b",
+  "seconds": 39.508,
+  "outcome": {
+    "ok": true,
+    "extraction": {
+      "requester_name": {
+        "value": "Ahmed Nasser",
+        "evidence": "From: Ahmed Nasser <ahmed.nasser@customer.com>"
+      },
+      "requester_email": {
+        "value": "ahmed.nasser@customer.com",
+        "evidence": "From: Ahmed Nasser <ahmed.nasser@customer.com>"
+      },
+      "supplier_name": {
+        "value": "Baltic Steel Trading OÜ",
+        "evidence": "Baltic Steel Trading OÜ\nSadama tee 12\n10111 Tallinn, Estonia"
+      },
+      "supplier_vat_id": {
+        "value": "EE101234567",
+        "evidence": "VAT: EE101234567"
+      },
+      "cost_center_code": {
+        "value": "CC-1005",
+        "evidence": "Cost center CC-1005."
+      },
+      "cost_center_name": {
+        "value": null,
+        "evidence": null
+      },
+      "currency": {
+        "value": "EUR",
+        "evidence": "Unit price (EUR)"
+      },
+      "line_items": [
+        {
+          "description": "Steel coil S355MC, 3.0 mm",
+          "item_code": null,
+          "quantity": 8000,
+          "unit": "kg",
+          "unit_price": 1.85,
+          "price_per": null,
+          "line_total": 14800,
+          "evidence": "# Description Qty Unit Unit price (EUR) Line total (EUR)\n1 Steel coil S355MC, 3.0 mm 8000 kg 1.85 14,800.00"
+        },
+        {
+          "description": "Galvanised sheet DX51D, 2.0 mm",
+          "item_code": null,
+          "quantity": 3000,
+          "unit": "kg",
+          "unit_price": 2.4,
+          "price_per": null,
+          "line_total": 7200,
+          "evidence": "# Description Qty Unit Unit price (EUR) Line total (EUR)\n2 Galvanised sheet DX51D, 2.0 mm 3000 kg 2.40 7,200.00"
+        }
+      ],
+      "net_total": {
+        "value": 22000,
+        "evidence": "Subtotal: 22,000.00 EUR"
+      },
+      "vat_amount": {
+        "value": 0,
+        "evidence": "VAT (0%, intra-EU supply): 0.00 EUR"
+      },
+      "gross_total": {
+        "value": null,
+        "evidence": null
+      },
+      "total_unlabelled": {
+        "value": null,
+        "evidence": null
+      },
+      "requested_delivery": {
+        "text": "4 weeks FCA Tallinn",
+        "iso": null,
+        "evidence": "Delivery: 4 weeks FCA Tallinn"
+      },
+      "quote_valid_until": {
+        "text": "20.05.2026",
+        "iso": "2026-05-20",
+        "evidence": "Valid until: 20.05.2026"
+      },
+      "quote_number": {
+        "value": "BST-2026-0663",
+        "evidence": "Quote no.: BST-2026-0663"
+      },
+      "referenced_requests": [],
+      "notes_for_clerk": [
+        {
+          "note": "Prices firm for 14 days due to raw material volatility.",
+          "evidence": "Prices firm for 14 days due to raw material volatility."
+        }
+      ]
+    },
+    "unverified": [],
+    "attempts": 1,
+    "rawOutput": "{\n  \"requester_name\": {\n    \"value\": \"Ahmed Nasser\",\n    \"evidence\": \"From: Ahmed Nasser <ahmed.nasser@customer.com>\"\n  },\n  \"requester_email\": {\n    \"value\": \"ahmed.nasser@customer.com\",\n    \"evidence\": \"From: Ahmed Nasser <ahmed.nasser@customer.com>\"\n  },\n  \"supplier_name\": {\n    \"value\": \"Baltic Steel Trading OÜ\",\n    \"evidence\": \"Baltic Steel Trading OÜ\\nSadama tee 12\\n10111 Tallinn, Estonia\"\n  },\n  \"supplier_vat_id\": {\n    \"value\": \"EE101234567\",\n    \"evidence\": \"VAT: EE101234567\"\n  },\n  \"cost_center_code\": {\n    \"value\": \"CC-1005\",\n    \"evidence\": \"Cost center CC-1005.\"\n  },\n  \"cost_center_name\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"currency\": {\n    \"value\": \"EUR\",\n    \"evidence\": \"Unit price (EUR)\"\n  },\n  \"line_items\": [\n    {\n      \"description\": \"Steel coil S355MC, 3.0 mm\",\n      \"item_code\": null,\n      \"quantity\": 8000,\n      \"unit\": \"kg\",\n      \"unit_price\": 1.85,\n      \"price_per\": null,\n      \"line_total\": 14800\n    ,\n    \"evidence\": \"# Description Qty Unit Unit price (EUR) Line total (EUR)\\n1 Steel coil S355MC, 3.0 mm 8000 kg 1.85 14,800.00\"\n    },\n    {\n      \"description\": \"Galvanised sheet DX51D, 2.0 mm\",\n      \"item_code\": null,\n      \"quantity\": 3000,\n      \"unit\": \"kg\",\n      \"unit_price\": 2.40,\n      \"price_per\": null,\n      \"line_total\": 7200\n    ,\n      \"evidence\": \"# Description Qty Unit Unit price (EUR) Line total (EUR)\\n2 Galvanised sheet DX51D, 2.0 mm 3000 kg 2.40 7,200.00\"\n    }\n  ],\n  \"net_total\": {\n    \"value\": 22000,\n    \"evidence\": \"Subtotal: 22,000.00 EUR\"\n  },\n  \"vat_amount\": {\n    \"value\": 0,\n    \"evidence\": \"VAT (0%, intra-EU supply): 0.00 EUR\"\n  },\n  \"gross_total\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"total_unlabelled\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"requested_delivery\": {\n    \"text\": \"4 weeks FCA Tallinn\",\n    \"iso\": null\n  ,\n    \"evidence\": \"Delivery: 4 weeks FCA Tallinn\"\n  },\n  \"quote_valid_until\": {\n    \"text\": \"20.05.2026\",\n    \"iso\": \"2026-05-20\"\n  ,\n    \"evidence\": \"Valid until: 20.05.2026\"\n  },\n  \"quote_number\": {\n    \"value\": \"BST-2026-0663\",\n    \"evidence\": \"Quote no.: BST-2026-0663\"\n  },\n  \"referenced_requests\": [],\n  \"notes_for_clerk\": [\n    {\n      \"note\": \"Prices firm for 14 days due to raw material volatility.\"\n    ,\n      \"evidence\": \"Prices firm for 14 days due to raw material volatility.\"\n    }\n  ]\n}"
+  }
+}

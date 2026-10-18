@@ -1,0 +1,320 @@
+{
+  "file": "email_37.eml",
+  "model": "ollama:qwen2.5:7b",
+  "seconds": 216.22,
+  "outcome": {
+    "ok": true,
+    "extraction": {
+      "requester_name": {
+        "value": "Tobias Weber",
+        "evidence": "From: Tobias Weber <tobias.weber@customer.com>"
+      },
+      "requester_email": {
+        "value": "tobias.weber@customer.com",
+        "evidence": "From: Tobias Weber <tobias.weber@customer.com>"
+      },
+      "supplier_name": {
+        "value": "Acme Bearings GmbH",
+        "evidence": "Acme Bearings GmbH\nIndustriestrasse 12\n73614 Schorndorf, Germany"
+      },
+      "supplier_vat_id": {
+        "value": null,
+        "evidence": null
+      },
+      "cost_center_code": {
+        "value": "CC-1001",
+        "evidence": "Kostenstelle CC-1001."
+      },
+      "cost_center_name": {
+        "value": null,
+        "evidence": null
+      },
+      "currency": {
+        "value": "EUR",
+        "evidence": "# Beschreibung Menge Einheit Einzelpreis (EUR) Total (EUR)"
+      },
+      "line_items": [
+        {
+          "description": "Rillenkugellager 6204-2RS",
+          "item_code": "6204-2RS",
+          "quantity": 400,
+          "unit": "Stk",
+          "unit_price": 7.2,
+          "price_per": null,
+          "line_total": 2880,
+          "evidence": "# Beschreibung Menge Einheit Einzelpreis (EUR) Total (EUR)\n1 Rillenkugellager 6204-2RS Art.-Nr. 6204-2RS 400 Stk 7.20 2,880.00"
+        },
+        {
+          "description": "Rillenkugellager 6205-2RS",
+          "item_code": "6205-2RS",
+          "quantity": 400,
+          "unit": "Stk",
+          "unit_price": 8.5,
+          "price_per": null,
+          "line_total": 3400,
+          "evidence": "# Beschreibung Menge Einheit Einzelpreis (EUR) Total (EUR)\n2 Rillenkugellager 6205-2RS Art.-Nr. 6205-2RS 400 Stk 8.50 3,400.00"
+        },
+        {
+          "description": "Rillenkugellager 6206-2RS",
+          "item_code": "6206-2RS",
+          "quantity": 300,
+          "unit": "Stk",
+          "unit_price": 10.4,
+          "price_per": null,
+          "line_total": 3120,
+          "evidence": "# Beschreibung Menge Einheit Einzelpreis (EUR) Total (EUR)\n3 Rillenkugellager 6206-2RS Art.-Nr. 6206-2RS 300 Stk 10.40 3,120.00"
+        },
+        {
+          "description": "Rillenkugellager 6208-2RS",
+          "item_code": "6208-2RS",
+          "quantity": 200,
+          "unit": "Stk",
+          "unit_price": 16.8,
+          "price_per": null,
+          "line_total": 3360,
+          "evidence": "# Beschreibung Menge Einheit Einzelpreis (EUR) Total (EUR)\n4 Rillenkugellager 6208-2RS Art.-Nr. 6208-2RS 200 Stk 16.80 3,360.00"
+        },
+        {
+          "description": "Kegelrollenlager 30206",
+          "item_code": "30206",
+          "quantity": 150,
+          "unit": "Stk",
+          "unit_price": 28,
+          "price_per": null,
+          "line_total": 4200,
+          "evidence": "# Beschreibung Menge Einheit Einzelpreis (EUR) Total (EUR)\n5 Kegelrollenlager 30206 Art.-Nr. 30206 150 Stk 28.00 4,200.00"
+        },
+        {
+          "description": "Kegelrollenlager 30210",
+          "item_code": "30210",
+          "quantity": 120,
+          "unit": "Stk",
+          "unit_price": 42,
+          "price_per": null,
+          "line_total": 5040,
+          "evidence": "# Beschreibung Menge Einheit Einzelpreis (EUR) Total (EUR)\n6 Kegelrollenlager 30210 Art.-Nr. 30210 120 Stk 42.00 5,040.00"
+        },
+        {
+          "description": "Kegelrollenlager 32210",
+          "item_code": "32210",
+          "quantity": 80,
+          "unit": "Stk",
+          "unit_price": 51.5,
+          "price_per": null,
+          "line_total": 4120,
+          "evidence": "# Beschreibung Menge Einheit Einzelpreis (EUR) Total (EUR)\n7 Kegelrollenlager 32210 Art.-Nr. 32210 80 Stk 51.50 4,120.00"
+        },
+        {
+          "description": "Pendelrollenlager 22216 E",
+          "item_code": "22216-E",
+          "quantity": 40,
+          "unit": "Stk",
+          "unit_price": 189.5,
+          "price_per": null,
+          "line_total": 7580,
+          "evidence": "# Beschreibung Menge Einheit Einzelpreis (EUR) Total (EUR)\n8 Pendelrollenlager 22216 E Art.-Nr. 22216-E 40 Stk 189.50 7,580.00"
+        },
+        {
+          "description": "Pendelrollenlager 22220 E",
+          "item_code": "22220-E",
+          "quantity": 24,
+          "unit": "Stk",
+          "unit_price": 268,
+          "price_per": null,
+          "line_total": 6432,
+          "evidence": "# Beschreibung Menge Einheit Einzelpreis (EUR) Total (EUR)\n9 Pendelrollenlager 22220 E Art.-Nr. 22220-E 24 Stk 268.00 6,432.00"
+        },
+        {
+          "description": "Axial-Rillenkugellager 51108",
+          "item_code": "51108",
+          "quantity": 60,
+          "unit": "Stk",
+          "unit_price": 22.5,
+          "price_per": null,
+          "line_total": 1350,
+          "evidence": "# Beschreibung Menge Einheit Einzelpreis (EUR) Total (EUR)\n10 Axial-Rillenkugellager 51108 Art.-Nr. 51108 60 Stk 22.50 1,350.00"
+        },
+        {
+          "description": "Nadellager NA4905",
+          "item_code": "NA4905",
+          "quantity": 120,
+          "unit": "Stk",
+          "unit_price": 34,
+          "price_per": null,
+          "line_total": 4080,
+          "evidence": "# Beschreibung Menge Einheit Einzelpreis (EUR) Total (EUR)\n11 Nadellager NA4905 Art.-Nr. NA4905 120 Stk 34.00 4,080.00"
+        },
+        {
+          "description": "Nadellager NA4910",
+          "item_code": "NA4910",
+          "quantity": 80,
+          "unit": "Stk",
+          "unit_price": 47,
+          "price_per": null,
+          "line_total": 3760,
+          "evidence": "# Beschreibung Menge Einheit Einzelpreis (EUR) Total (EUR)\n12 Nadellager NA4910 Art.-Nr. NA4910 80 Stk 47.00 3,760.00"
+        },
+        {
+          "description": "Gehaeuselager UCP 205",
+          "item_code": "UCP-205",
+          "quantity": 60,
+          "unit": "Stk",
+          "unit_price": 38,
+          "price_per": null,
+          "line_total": 2280,
+          "evidence": "# Beschreibung Menge Einheit Einzelpreis (EUR) Total (EUR)\n13 Gehaeuselager UCP 205 Art.-Nr. UCP-205 60 Stk 38.00 2,280.00"
+        },
+        {
+          "description": "Gehaeuselager UCP 208",
+          "item_code": "UCP-208",
+          "quantity": 40,
+          "unit": "Stk",
+          "unit_price": 62,
+          "price_per": null,
+          "line_total": 2480,
+          "evidence": "# Beschreibung Menge Einheit Einzelpreis (EUR) Total (EUR)\n14 Gehaeuselager UCP 208 Art.-Nr. UCP-208 40 Stk 62.00 2,480.00"
+        },
+        {
+          "description": "Spannlager UC 206",
+          "item_code": "UC-206",
+          "quantity": 50,
+          "unit": "Stk",
+          "unit_price": 29.6,
+          "price_per": null,
+          "line_total": 1480,
+          "evidence": "# Beschreibung Menge Einheit Einzelpreis (EUR) Total (EUR)\n15 Spannlager UC 206 Art.-Nr. UC-206 50 Stk 29.60 1,480.00"
+        },
+        {
+          "description": "Wellendichtring 30x47x7 NBR",
+          "item_code": "WDR-30-47-7",
+          "quantity": 300,
+          "unit": "Stk",
+          "unit_price": 2.4,
+          "price_per": null,
+          "line_total": 720,
+          "evidence": "# Beschreibung Menge Einheit Einzelpreis (EUR) Total (EUR)\n16 Wellendichtring 30x47x7 NBR Art.-Nr. WDR-30-47-7 300 Stk 2.40 720.00"
+        },
+        {
+          "description": "Wellendichtring 40x62x8 NBR",
+          "item_code": "WDR-40-62-8",
+          "quantity": 300,
+          "unit": "Stk",
+          "unit_price": 3.1,
+          "price_per": null,
+          "line_total": 930,
+          "evidence": "# Beschreibung Menge Einheit Einzelpreis (EUR) Total (EUR)\n17 Wellendichtring 40x62x8 NBR Art.-Nr. WDR-40-62-8 300 Stk 3.10 930.00"
+        },
+        {
+          "description": "Wellendichtring 55x80x10 NBR",
+          "item_code": null,
+          "quantity": 200,
+          "unit": "Stk",
+          "unit_price": 4.6,
+          "price_per": null,
+          "line_total": 920,
+          "evidence": "# Beschreibung Menge Einheit Einzelpreis (EUR) Total (EUR)\n18 Wellendichtring 55x80x10 NBR Art.-Nr. WDR-55-80-10 200 Stk 4.60 920.00"
+        },
+        {
+          "description": "O-Ring Sortiment NBR 70, Box",
+          "item_code": "OR-SORT-NBR",
+          "quantity": 12,
+          "unit": "Box",
+          "unit_price": 96,
+          "price_per": null,
+          "line_total": 1152,
+          "evidence": "# Beschreibung Menge Einheit Einzelpreis (EUR) Total (EUR)\n19 O-Ring Sortiment NBR 70, Box Art.-Nr. OR-SORT-NBR 12 Box 96.00 1,152.00"
+        },
+        {
+          "description": "Lagerfett Hochtemperatur, 1 kg Dose",
+          "item_code": "FETT-HT-1",
+          "quantity": 60,
+          "unit": "Dose",
+          "unit_price": 24.9,
+          "price_per": null,
+          "line_total": 1494,
+          "evidence": "# Beschreibung Menge Einheit Einzelpreis (EUR) Total (EUR)\n20 Lagerfett Hochtemperatur, 1 kg Dose Art.-Nr. FETT-HT-1 60 Dose 24.90 1,494.00"
+        },
+        {
+          "description": "Lagerfett Lebensmittel H1, 1 kg Dose",
+          "item_code": "FETT-H1-1",
+          "quantity": 24,
+          "unit": "Dose",
+          "unit_price": 41,
+          "price_per": null,
+          "line_total": 984,
+          "evidence": "# Beschreibung Menge Einheit Einzelpreis (EUR) Total (EUR)\n21 Lagerfett Lebensmittel H1, 1 kg Dose Art.-Nr. FETT-H1-1 24 Dose 41.00 984.00"
+        },
+        {
+          "description": "Montagepaste, 500 g Tube",
+          "item_code": "MP-500",
+          "quantity": 36,
+          "unit": "Tube",
+          "unit_price": 18.5,
+          "price_per": null,
+          "line_total": 666,
+          "evidence": "# Beschreibung Menge Einheit Einzelpreis (EUR) Total (EUR)\n22 Montagepaste, 500 g Tube Art.-Nr. MP-500 36 Tube 18.50 666.00"
+        },
+        {
+          "description": "Abziehvorrichtung 3-armig, Satz",
+          "item_code": "AV-3-SATZ",
+          "quantity": 4,
+          "unit": "Satz",
+          "unit_price": 268,
+          "price_per": null,
+          "line_total": 1072,
+          "evidence": "# Beschreibung Menge Einheit Einzelpreis (EUR) Total (EUR)\n23 Abziehvorrichtung 3-armig, Satz Art.-Nr. AV-3-SATZ 4 Satz 268.00 1,072.00"
+        },
+        {
+          "description": "Induktionsheizgeraet fuer Lagermontage",
+          "item_code": "IH-200",
+          "quantity": 1,
+          "unit": "Stk",
+          "unit_price": 14500,
+          "price_per": null,
+          "line_total": 14500,
+          "evidence": "# Beschreibung Menge Einheit Einzelpreis (EUR) Total (EUR)\n24 Induktionsheizgeraet fuer Lagermontage Art.-Nr. IH-200 1 Stk 14,500.00 14,500.00"
+        }
+      ],
+      "net_total": {
+        "value": 78000,
+        "evidence": "Total: 78,000.00 EUR"
+      },
+      "vat_amount": {
+        "value": null,
+        "evidence": "USt (0%, innergemeinschaftliche Lieferung): 0.00 EUR"
+      },
+      "gross_total": {
+        "value": null,
+        "evidence": null
+      },
+      "total_unlabelled": {
+        "value": null,
+        "evidence": null
+      },
+      "requested_delivery": {
+        "text": "Abrufe nach Bedarf",
+        "iso": null,
+        "evidence": "# Beschreibung Menge Einheit Einzelpreis (EUR) Total (EUR)\nLieferzeit: Abrufe nach Bedarf, 5 Tage ab Abruf"
+      },
+      "quote_valid_until": {
+        "text": "Gültig bis: 10.06.2026",
+        "iso": "2026-06-10",
+        "evidence": "Gültig bis: 10.06.2026"
+      },
+      "quote_number": {
+        "value": "Q-2026-05233",
+        "evidence": "Offert-Nr.: Q-2026-05233"
+      },
+      "referenced_requests": [],
+      "notes_for_clerk": [
+        {
+          "note": "Jahresabruf fuer Lager und Dichtungen, Angebot von Acme im Anhang. Bitte so bestellen.",
+          "evidence": "Hoi\n\nJahresabruf fuer Lager und Dichtungen, Angebot von Acme im Anhang. Bitte so bestellen."
+        }
+      ]
+    },
+    "unverified": [],
+    "attempts": 1,
+    "rawOutput": "{\n  \"requester_name\": {\n    \"value\": \"Tobias Weber\",\n    \"evidence\": \"From: Tobias Weber <tobias.weber@customer.com>\"\n  },\n  \"requester_email\": {\n    \"value\": \"tobias.weber@customer.com\",\n    \"evidence\": \"From: Tobias Weber <tobias.weber@customer.com>\"\n  },\n  \"supplier_name\": {\n    \"value\": \"Acme Bearings GmbH\",\n    \"evidence\": \"Acme Bearings GmbH\\nIndustriestrasse 12\\n73614 Schorndorf, Germany\"\n  },\n  \"supplier_vat_id\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"cost_center_code\": {\n    \"value\": \"CC-1001\",\n    \"evidence\": \"Kostenstelle CC-1001.\"\n  },\n  \"cost_center_name\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"currency\": {\n    \"value\": \"EUR\",\n    \"evidence\": \"# Beschreibung Menge Einheit Einzelpreis (EUR) Total (EUR)\"\n  },\n  \"line_items\": [\n    {\n      \"description\": \"Rillenkugellager 6204-2RS\",\n      \"item_code\": \"6204-2RS\",\n      \"quantity\": 400,\n      \"unit\": \"Stk\",\n      \"unit_price\": 7.2,\n      \"price_per\": null,\n      \"line_total\": 2880\n    ,\n    \"evidence\": \"# Beschreibung Menge Einheit Einzelpreis (EUR) Total (EUR)\\n1 Rillenkugellager 6204-2RS Art.-Nr. 6204-2RS 400 Stk 7.20 2,880.00\"\n    },\n    {\n      \"description\": \"Rillenkugellager 6205-2RS\",\n      \"item_code\": \"6205-2RS\",\n      \"quantity\": 400,\n      \"unit\": \"Stk\",\n      \"unit_price\": 8.5,\n      \"price_per\": null,\n      \"line_total\": 3400\n    ,\n    \"evidence\": \"# Beschreibung Menge Einheit Einzelpreis (EUR) Total (EUR)\\n2 Rillenkugellager 6205-2RS Art.-Nr. 6205-2RS 400 Stk 8.50 3,400.00\"\n    },\n    {\n      \"description\": \"Rillenkugellager 6206-2RS\",\n      \"item_code\": \"6206-2RS\",\n      \"quantity\": 300,\n      \"unit\": \"Stk\",\n      \"unit_price\": 10.4,\n      \"price_per\": null,\n      \"line_total\": 3120\n    ,\n    \"evidence\": \"# Beschreibung Menge Einheit Einzelpreis (EUR) Total (EUR)\\n3 Rillenkugellager 6206-2RS Art.-Nr. 6206-2RS 300 Stk 10.40 3,120.00\"\n    },\n    {\n      \"description\": \"Rillenkugellager 6208-2RS\",\n      \"item_code\": \"6208-2RS\",\n      \"quantity\": 200,\n      \"unit\": \"Stk\",\n      \"unit_price\": 16.8,\n      \"price_per\": null,\n      \"line_total\": 3360\n    ,\n    \"evidence\": \"# Beschreibung Menge Einheit Einzelpreis (EUR) Total (EUR)\\n4 Rillenkugellager 6208-2RS Art.-Nr. 6208-2RS 200 Stk 16.80 3,360.00\"\n    },\n    {\n      \"description\": \"Kegelrollenlager 30206\",\n      \"item_code\": \"30206\",\n      \"quantity\": 150,\n      \"unit\": \"Stk\",\n      \"unit_price\": 28,\n      \"price_per\": null,\n      \"line_total\": 4200\n    ,\n    \"evidence\": \"# Beschreibung Menge Einheit Einzelpreis (EUR) Total (EUR)\\n5 Kegelrollenlager 30206 Art.-Nr. 30206 150 Stk 28.00 4,200.00\"\n    },\n    {\n      \"description\": \"Kegelrollenlager 30210\",\n      \"item_code\": \"30210\",\n      \"quantity\": 120,\n      \"unit\": \"Stk\",\n      \"unit_price\": 42,\n      \"price_per\": null,\n      \"line_total\": 5040\n    ,\n    \"evidence\": \"# Beschreibung Menge Einheit Einzelpreis (EUR) Total (EUR)\\n6 Kegelrollenlager 30210 Art.-Nr. 30210 120 Stk 42.00 5,040.00\"\n    },\n    {\n      \"description\": \"Kegelrollenlager 32210\",\n      \"item_code\": \"32210\",\n      \"quantity\": 80,\n      \"unit\": \"Stk\",\n      \"unit_price\": 51.5,\n      \"price_per\": null,\n      \"line_total\": 4120\n    ,\n    \"evidence\": \"# Beschreibung Menge Einheit Einzelpreis (EUR) Total (EUR)\\n7 Kegelrollenlager 32210 Art.-Nr. 32210 80 Stk 51.50 4,120.00\"\n    },\n    {\n      \"description\": \"Pendelrollenlager 22216 E\",\n      \"item_code\": \"22216-E\",\n      \"quantity\": 40,\n      \"unit\": \"Stk\",\n      \"unit_price\": 189.5,\n      \"price_per\": null,\n      \"line_total\": 7580\n    ,\n    \"evidence\": \"# Beschreibung Menge Einheit Einzelpreis (EUR) Total (EUR)\\n8 Pendelrollenlager 22216 E Art.-Nr. 22216-E 40 Stk 189.50 7,580.00\"\n    },\n    {\n      \"description\": \"Pendelrollenlager 22220 E\",\n      \"item_code\": \"22220-E\",\n      \"quantity\": 24,\n      \"unit\": \"Stk\",\n      \"unit_price\": 268,\n      \"price_per\": null,\n      \"line_total\": 6432\n    ,\n    \"evidence\": \"# Beschreibung Menge Einheit Einzelpreis (EUR) Total (EUR)\\n9 Pendelrollenlager 22220 E Art.-Nr. 22220-E 24 Stk 268.00 6,432.00\"\n    },\n    {\n      \"description\": \"Axial-Rillenkugellager 51108\",\n      \"item_code\": \"51108\",\n      \"quantity\": 60,\n      \"unit\": \"Stk\",\n      \"unit_price\": 22.5,\n      \"price_per\": null,\n      \"line_total\": 1350\n    ,\n    \"evidence\": \"# Beschreibung Menge Einheit Einzelpreis (EUR) Total (EUR)\\n10 Axial-Rillenkugellager 51108 Art.-Nr. 51108 60 Stk 22.50 1,350.00\"\n    },\n    {\n      \"description\": \"Nadellager NA4905\",\n      \"item_code\": \"NA4905\",\n      \"quantity\": 120,\n      \"unit\": \"Stk\",\n      \"unit_price\": 34,\n      \"price_per\": null,\n      \"line_total\": 4080\n    ,\n    \"evidence\": \"# Beschreibung Menge Einheit Einzelpreis (EUR) Total (EUR)\\n11 Nadellager NA4905 Art.-Nr. NA4905 120 Stk 34.00 4,080.00\"\n    },\n    {\n      \"description\": \"Nadellager NA4910\",\n      \"item_code\": \"NA4910\",\n      \"quantity\": 80,\n      \"unit\": \"Stk\",\n      \"unit_price\": 47,\n      \"price_per\": null,\n      \"line_total\": 3760\n    ,\n    \"evidence\": \"# Beschreibung Menge Einheit Einzelpreis (EUR) Total (EUR)\\n12 Nadellager NA4910 Art.-Nr. NA4910 80 Stk 47.00 3,760.00\"\n    },\n    {\n      \"description\": \"Gehaeuselager UCP 205\",\n      \"item_code\": \"UCP-205\",\n      \"quantity\": 60,\n      \"unit\": \"Stk\",\n      \"unit_price\": 38,\n      \"price_per\": null,\n      \"line_total\": 2280\n    ,\n    \"evidence\": \"# Beschreibung Menge Einheit Einzelpreis (EUR) Total (EUR)\\n13 Gehaeuselager UCP 205 Art.-Nr. UCP-205 60 Stk 38.00 2,280.00\"\n    },\n    {\n      \"description\": \"Gehaeuselager UCP 208\",\n      \"item_code\": \"UCP-208\",\n      \"quantity\": 40,\n      \"unit\": \"Stk\",\n      \"unit_price\": 62,\n      \"price_per\": null,\n      \"line_total\": 2480\n    ,\n    \"evidence\": \"# Beschreibung Menge Einheit Einzelpreis (EUR) Total (EUR)\\n14 Gehaeuselager UCP 208 Art.-Nr. UCP-208 40 Stk 62.00 2,480.00\"\n    },\n    {\n      \"description\": \"Spannlager UC 206\",\n      \"item_code\": \"UC-206\",\n      \"quantity\": 50,\n      \"unit\": \"Stk\",\n      \"unit_price\": 29.6,\n      \"price_per\": null,\n      \"line_total\": 1480\n    ,\n    \"evidence\": \"# Beschreibung Menge Einheit Einzelpreis (EUR) Total (EUR)\\n15 Spannlager UC 206 Art.-Nr. UC-206 50 Stk 29.60 1,480.00\"\n    },\n    {\n      \"description\": \"Wellendichtring 30x47x7 NBR\",\n      \"item_code\": \"WDR-30-47-7\",\n      \"quantity\": 300,\n      \"unit\": \"Stk\",\n      \"unit_price\": 2.4,\n      \"price_per\": null,\n      \"line_total\": 720\n    ,\n    \"evidence\": \"# Beschreibung Menge Einheit Einzelpreis (EUR) Total (EUR)\\n16 Wellendichtring 30x47x7 NBR Art.-Nr. WDR-30-47-7 300 Stk 2.40 720.00\"\n    },\n    {\n      \"description\": \"Wellendichtring 40x62x8 NBR\",\n      \"item_code\": \"WDR-40-62-8\",\n      \"quantity\": 300,\n      \"unit\": \"Stk\",\n      \"unit_price\": 3.1,\n      \"price_per\": null,\n      \"line_total\": 930\n    ,\n    \"evidence\": \"# Beschreibung Menge Einheit Einzelpreis (EUR) Total (EUR)\\n17 Wellendichtring 40x62x8 NBR Art.-Nr. WDR-40-62-8 300 Stk 3.10 930.00\"\n    },\n    {\n      \"description\": \"Wellendichtring 55x80x10 NBR\",\n      \"item_code\": null,\n      \"quantity\": 200,\n      \"unit\": \"Stk\",\n      \"unit_price\": 4.6,\n      \"price_per\": null,\n      \"line_total\": 920\n    ,\n    \"evidence\": \"# Beschreibung Menge Einheit Einzelpreis (EUR) Total (EUR)\\n18 Wellendichtring 55x80x10 NBR Art.-Nr. WDR-55-80-10 200 Stk 4.60 920.00\"\n    },\n    {\n      \"description\": \"O-Ring Sortiment NBR 70, Box\",\n      \"item_code\": \"OR-SORT-NBR\",\n      \"quantity\": 12,\n      \"unit\": \"Box\",\n      \"unit_price\": 96,\n      \"price_per\": null,\n      \"line_total\": 1152\n    ,\n    \"evidence\": \"# Beschreibung Menge Einheit Einzelpreis (EUR) Total (EUR)\\n19 O-Ring Sortiment NBR 70, Box Art.-Nr. OR-SORT-NBR 12 Box 96.00 1,152.00\"\n    },\n    {\n      \"description\": \"Lagerfett Hochtemperatur, 1 kg Dose\",\n      \"item_code\": \"FETT-HT-1\",\n      \"quantity\": 60,\n      \"unit\": \"Dose\",\n      \"unit_price\": 24.9,\n      \"price_per\": null,\n      \"line_total\": 1494\n    ,\n    \"evidence\": \"# Beschreibung Menge Einheit Einzelpreis (EUR) Total (EUR)\\n20 Lagerfett Hochtemperatur, 1 kg Dose Art.-Nr. FETT-HT-1 60 Dose 24.90 1,494.00\"\n    },\n    {\n      \"description\": \"Lagerfett Lebensmittel H1, 1 kg Dose\",\n      \"item_code\": \"FETT-H1-1\",\n      \"quantity\": 24,\n      \"unit\": \"Dose\",\n      \"unit_price\": 41,\n      \"price_per\": null,\n      \"line_total\": 984\n    ,\n    \"evidence\": \"# Beschreibung Menge Einheit Einzelpreis (EUR) Total (EUR)\\n21 Lagerfett Lebensmittel H1, 1 kg Dose Art.-Nr. FETT-H1-1 24 Dose 41.00 984.00\"\n    },\n    {\n      \"description\": \"Montagepaste, 500 g Tube\",\n      \"item_code\": \"MP-500\",\n      \"quantity\": 36,\n      \"unit\": \"Tube\",\n      \"unit_price\": 18.5,\n      \"price_per\": null,\n      \"line_total\": 666\n    ,\n    \"evidence\": \"# Beschreibung Menge Einheit Einzelpreis (EUR) Total (EUR)\\n22 Montagepaste, 500 g Tube Art.-Nr. MP-500 36 Tube 18.50 666.00\"\n    },\n    {\n      \"description\": \"Abziehvorrichtung 3-armig, Satz\",\n      \"item_code\": \"AV-3-SATZ\",\n      \"quantity\": 4,\n      \"unit\": \"Satz\",\n      \"unit_price\": 268,\n      \"price_per\": null,\n      \"line_total\": 1072\n    ,\n    \"evidence\": \"# Beschreibung Menge Einheit Einzelpreis (EUR) Total (EUR)\\n23 Abziehvorrichtung 3-armig, Satz Art.-Nr. AV-3-SATZ 4 Satz 268.00 1,072.00\"\n    },\n    {\n      \"description\": \"Induktionsheizgeraet fuer Lagermontage\",\n      \"item_code\": \"IH-200\",\n      \"quantity\": 1,\n      \"unit\": \"Stk\",\n      \"unit_price\": 14500,\n      \"price_per\": null,\n      \"line_total\": 14500\n    ,\n    \"evidence\": \"# Beschreibung Menge Einheit Einzelpreis (EUR) Total (EUR)\\n24 Induktionsheizgeraet fuer Lagermontage Art.-Nr. IH-200 1 Stk 14,500.00 14,500.00\"\n    }\n  ],\n  \"net_total\": {\n    \"value\": 78000,\n    \"evidence\": \"Total: 78,000.00 EUR\"\n  },\n  \"vat_amount\": {\n    \"value\": null,\n    \"evidence\": \"USt (0%, innergemeinschaftliche Lieferung): 0.00 EUR\"\n  },\n  \"gross_total\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"total_unlabelled\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"requested_delivery\": {\n    \"text\": \"Abrufe nach Bedarf\",\n    \"iso\": null\n  ,\n  \"evidence\": \"# Beschreibung Menge Einheit Einzelpreis (EUR) Total (EUR)\\nLieferzeit: Abrufe nach Bedarf, 5 Tage ab Abruf\"\n  },\n  \"quote_valid_until\": {\n    \"text\": \"Gültig bis: 10.06.2026\",\n    \"iso\": \"2026-06-10\"\n  ,\n  \"evidence\": \"Gültig bis: 10.06.2026\"\n  },\n  \"quote_number\": {\n    \"value\": \"Q-2026-05233\",\n    \"evidence\": \"Offert-Nr.: Q-2026-05233\"\n  },\n  \"referenced_requests\": [],\n  \"notes_for_clerk\": [\n    {\n      \"note\": \"Jahresabruf fuer Lager und Dichtungen, Angebot von Acme im Anhang. Bitte so bestellen.\",\n      \"evidence\": \"Hoi\\n\\nJahresabruf fuer Lager und Dichtungen, Angebot von Acme im Anhang. Bitte so bestellen.\"\n    }\n  ]\n}"
+  }
+}

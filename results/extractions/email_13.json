@@ -1,0 +1,100 @@
+{
+  "file": "email_13.eml",
+  "model": "ollama:qwen2.5:7b",
+  "seconds": 29.564,
+  "outcome": {
+    "ok": true,
+    "extraction": {
+      "requester_name": {
+        "value": "Luca Ferrari",
+        "evidence": "From: Luca Ferrari <luca.ferrari@customer.com>"
+      },
+      "requester_email": {
+        "value": "luca.ferrari@customer.com",
+        "evidence": "From: Luca Ferrari <luca.ferrari@customer.com>"
+      },
+      "supplier_name": {
+        "value": "Office Plus Schweiz",
+        "evidence": "again via Office Plus Schweiz"
+      },
+      "supplier_vat_id": {
+        "value": null,
+        "evidence": null
+      },
+      "cost_center_code": {
+        "value": "CC-3001",
+        "evidence": "Cost center CC-3001."
+      },
+      "cost_center_name": {
+        "value": null,
+        "evidence": null
+      },
+      "currency": {
+        "value": "CHF",
+        "evidence": "CHF 85.00 each"
+      },
+      "line_items": [
+        {
+          "description": "desk lamp, LED",
+          "item_code": null,
+          "quantity": 4,
+          "unit": "x",
+          "unit_price": 85,
+          "price_per": null,
+          "line_total": 340,
+          "evidence": "4 x desk lamp, LED, CHF 85.00 each = CHF 340.00"
+        },
+        {
+          "description": "storage box, A4",
+          "item_code": null,
+          "quantity": 12,
+          "unit": "x",
+          "unit_price": 55,
+          "price_per": null,
+          "line_total": 660,
+          "evidence": "12 x storage box, A4, CHF 55.00 each = CHF 660.00"
+        }
+      ],
+      "net_total": {
+        "value": 1000,
+        "evidence": "Total CHF 1,000.00 exactly."
+      },
+      "vat_amount": {
+        "value": null,
+        "evidence": null
+      },
+      "gross_total": {
+        "value": null,
+        "evidence": null
+      },
+      "total_unlabelled": {
+        "value": null,
+        "evidence": null
+      },
+      "requested_delivery": {
+        "text": null,
+        "iso": null,
+        "evidence": null
+      },
+      "quote_valid_until": {
+        "text": null,
+        "iso": null,
+        "evidence": null
+      },
+      "quote_number": {
+        "value": null,
+        "evidence": null
+      },
+      "referenced_requests": [],
+      "notes_for_clerk": [
+        {
+          "note": "One more small order for the Zurich office, again via Office Plus Schweiz",
+          "evidence": "Hi,\n\nOne more small order for the Zurich office, again via Office Plus Schweiz:"
+        }
+      ]
+    },
+    "unverified": [],
+    "attempts": 1,
+    "rawOutput": "{\n  \"requester_name\": {\n    \"value\": \"Luca Ferrari\",\n    \"evidence\": \"From: Luca Ferrari <luca.ferrari@customer.com>\"\n  },\n  \"requester_email\": {\n    \"value\": \"luca.ferrari@customer.com\",\n    \"evidence\": \"From: Luca Ferrari <luca.ferrari@customer.com>\"\n  },\n  \"supplier_name\": {\n    \"value\": \"Office Plus Schweiz\",\n    \"evidence\": \"again via Office Plus Schweiz\"\n  },\n  \"supplier_vat_id\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"cost_center_code\": {\n    \"value\": \"CC-3001\",\n    \"evidence\": \"Cost center CC-3001.\"\n  },\n  \"cost_center_name\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"currency\": {\n    \"value\": \"CHF\",\n    \"evidence\": \"CHF 85.00 each\"\n  },\n  \"line_items\": [\n    {\n      \"description\": \"desk lamp, LED\",\n      \"item_code\": null,\n      \"quantity\": 4,\n      \"unit\": \"x\",\n      \"unit_price\": 85,\n      \"price_per\": null,\n      \"line_total\": 340\n    ,\n    \"evidence\": \"4 x desk lamp, LED, CHF 85.00 each = CHF 340.00\"\n    },\n    {\n      \"description\": \"storage box, A4\",\n      \"item_code\": null,\n      \"quantity\": 12,\n      \"unit\": \"x\",\n      \"unit_price\": 55,\n      \"price_per\": null,\n      \"line_total\": 660\n    ,\n    \"evidence\": \"12 x storage box, A4, CHF 55.00 each = CHF 660.00\"\n    }\n  ],\n  \"net_total\": {\n    \"value\": 1000,\n    \"evidence\": \"Total CHF 1,000.00 exactly.\"\n  },\n  \"vat_amount\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"gross_total\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"total_unlabelled\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"requested_delivery\": {\n    \"text\": null,\n    \"iso\": null\n  ,\n  \"evidence\": null\n  },\n  \"quote_valid_until\": {\n    \"text\": null,\n    \"iso\": null\n  ,\n  \"evidence\": null\n  },\n  \"quote_number\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"referenced_requests\": [],\n  \"notes_for_clerk\": [\n    {\n      \"note\": \"One more small order for the Zurich office, again via Office Plus Schweiz\"\n    ,\n    \"evidence\": \"Hi,\\n\\nOne more small order for the Zurich office, again via Office Plus Schweiz:\"\n    }\n  ]\n}"
+  }
+}

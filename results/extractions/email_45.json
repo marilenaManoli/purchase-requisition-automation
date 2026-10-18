@@ -1,0 +1,141 @@
+{
+  "file": "email_45.eml",
+  "model": "ollama:qwen2.5:7b",
+  "seconds": 46.511,
+  "outcome": {
+    "ok": true,
+    "extraction": {
+      "requester_name": {
+        "value": "Sophie Dubois",
+        "evidence": "From: Sophie Dubois <sophie.dubois@customer.com>"
+      },
+      "requester_email": {
+        "value": "sophie.dubois@customer.com",
+        "evidence": "From: Sophie Dubois <sophie.dubois@customer.com>"
+      },
+      "supplier_name": {
+        "value": "Zenith Automation BV",
+        "evidence": "Kind regards,\nJeroen Bakker\nZenith Automation BV"
+      },
+      "supplier_vat_id": {
+        "value": "NL004567891B01",
+        "evidence": "VAT: NL004567891B01"
+      },
+      "cost_center_code": {
+        "value": "CC-2001",
+        "evidence": "Cost center CC-2001."
+      },
+      "cost_center_name": {
+        "value": null,
+        "evidence": null
+      },
+      "currency": {
+        "value": "EUR",
+        "evidence": "Unit price (EUR)"
+      },
+      "line_items": [
+        {
+          "description": "Gripper assembly GA-40, spare",
+          "item_code": null,
+          "quantity": 4,
+          "unit": "ea",
+          "unit_price": 3900,
+          "price_per": null,
+          "line_total": 15600,
+          "evidence": "Gripper assembly GA-40, spare                   4         3,900.00           15,600.00"
+        },
+        {
+          "description": "Servo drive SD-12, spare",
+          "item_code": null,
+          "quantity": 3,
+          "unit": "ea",
+          "unit_price": 5200,
+          "price_per": null,
+          "line_total": 15600,
+          "evidence": "Servo drive SD-12, spare                        3         5,200.00           15,600.00"
+        },
+        {
+          "description": "Safety relay module SR-4",
+          "item_code": null,
+          "quantity": 8,
+          "unit": "ea",
+          "unit_price": 500,
+          "price_per": null,
+          "line_total": 4000,
+          "evidence": "Safety relay module SR-4                        8           500.00            4,000.00"
+        },
+        {
+          "description": "Spare cable set, cell 2",
+          "item_code": null,
+          "quantity": 1,
+          "unit": "ea",
+          "unit_price": 6000,
+          "price_per": null,
+          "line_total": 6000,
+          "evidence": "Spare cable set, cell 2                         1         6,000.00            6,000.00"
+        }
+      ],
+      "net_total": {
+        "value": 41200,
+        "evidence": "Total:                41,200.00 EUR"
+      },
+      "vat_amount": {
+        "value": null,
+        "evidence": null
+      },
+      "gross_total": {
+        "value": null,
+        "evidence": null
+      },
+      "total_unlabelled": {
+        "value": null,
+        "evidence": null
+      },
+      "requested_delivery": {
+        "text": "6 weeks ex works Veldhoven",
+        "iso": null,
+        "evidence": "Delivery: 6 weeks ex works Veldhoven."
+      },
+      "quote_valid_until": {
+        "text": "30 days",
+        "iso": "2026-06-12",
+        "evidence": "Validity: 30 days."
+      },
+      "quote_number": {
+        "value": null,
+        "evidence": null
+      },
+      "referenced_requests": [],
+      "notes_for_clerk": [
+        {
+          "note": "This has been going round for a week. Bottom of the chain has the actual numbers.",
+          "evidence": "Hi Procurement,\n\nSee below, this has been going round for a week. Bottom of the chain has the actual numbers. Cost center CC-2001."
+        }
+      ]
+    },
+    "unverified": [
+      {
+        "field": "quote_valid_until.iso",
+        "reason": "value_not_in_quote"
+      },
+      {
+        "field": "line_items[0].unit",
+        "reason": "value_not_in_quote"
+      },
+      {
+        "field": "line_items[1].unit",
+        "reason": "value_not_in_quote"
+      },
+      {
+        "field": "line_items[2].unit",
+        "reason": "value_not_in_quote"
+      },
+      {
+        "field": "line_items[3].unit",
+        "reason": "value_not_in_quote"
+      }
+    ],
+    "attempts": 1,
+    "rawOutput": "{\n  \"requester_name\": {\n    \"value\": \"Sophie Dubois\",\n    \"evidence\": \"From: Sophie Dubois <sophie.dubois@customer.com>\"\n  },\n  \"requester_email\": {\n    \"value\": \"sophie.dubois@customer.com\",\n    \"evidence\": \"From: Sophie Dubois <sophie.dubois@customer.com>\"\n  },\n  \"supplier_name\": {\n    \"value\": \"Zenith Automation BV\",\n    \"evidence\": \"Kind regards,\\nJeroen Bakker\\nZenith Automation BV\"\n  },\n  \"supplier_vat_id\": {\n    \"value\": \"NL004567891B01\",\n    \"evidence\": \"VAT: NL004567891B01\"\n  },\n  \"cost_center_code\": {\n    \"value\": \"CC-2001\",\n    \"evidence\": \"Cost center CC-2001.\"\n  },\n  \"cost_center_name\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"currency\": {\n    \"value\": \"EUR\",\n    \"evidence\": \"Unit price (EUR)\"\n  },\n  \"line_items\": [\n    {\n      \"description\": \"Gripper assembly GA-40, spare\",\n      \"item_code\": null,\n      \"quantity\": 4,\n      \"unit\": \"ea\",\n      \"unit_price\": 3900.0,\n      \"price_per\": null,\n      \"line_total\": 15600.0\n    ,\n    \"evidence\": \"Gripper assembly GA-40, spare                   4         3,900.00           15,600.00\"\n    },\n    {\n      \"description\": \"Servo drive SD-12, spare\",\n      \"item_code\": null,\n      \"quantity\": 3,\n      \"unit\": \"ea\",\n      \"unit_price\": 5200.0,\n      \"price_per\": null,\n      \"line_total\": 15600.0\n    ,\n      \"evidence\": \"Servo drive SD-12, spare                        3         5,200.00           15,600.00\"\n    },\n    {\n      \"description\": \"Safety relay module SR-4\",\n      \"item_code\": null,\n      \"quantity\": 8,\n      \"unit\": \"ea\",\n      \"unit_price\": 500.0,\n      \"price_per\": null,\n      \"line_total\": 4000.0\n    ,\n      \"evidence\": \"Safety relay module SR-4                        8           500.00            4,000.00\"\n    },\n    {\n      \"description\": \"Spare cable set, cell 2\",\n      \"item_code\": null,\n      \"quantity\": 1,\n      \"unit\": \"ea\",\n      \"unit_price\": 6000.0,\n      \"price_per\": null,\n      \"line_total\": 6000.0\n    ,\n      \"evidence\": \"Spare cable set, cell 2                         1         6,000.00            6,000.00\"\n    }\n  ],\n  \"net_total\": {\n    \"value\": 41200.0,\n    \"evidence\": \"Total:                41,200.00 EUR\"\n  },\n  \"vat_amount\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"gross_total\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"total_unlabelled\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"requested_delivery\": {\n    \"text\": \"6 weeks ex works Veldhoven\",\n    \"iso\": null\n  ,\n    \"evidence\": \"Delivery: 6 weeks ex works Veldhoven.\"\n  },\n  \"quote_valid_until\": {\n    \"text\": \"30 days\",\n    \"iso\": \"2026-06-12\"\n  ,\n    \"evidence\": \"Validity: 30 days.\"\n  },\n  \"quote_number\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"referenced_requests\": [],\n  \"notes_for_clerk\": [\n    {\n      \"note\": \"This has been going round for a week. Bottom of the chain has the actual numbers.\",\n      \"evidence\": \"Hi Procurement,\\n\\nSee below, this has been going round for a week. Bottom of the chain has the actual numbers. Cost center CC-2001.\"\n    }\n  ]\n}"
+  }
+}

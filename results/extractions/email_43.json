@@ -1,0 +1,123 @@
+{
+  "file": "email_43.eml",
+  "model": "ollama:qwen2.5:7b",
+  "seconds": 36.206,
+  "outcome": {
+    "ok": true,
+    "extraction": {
+      "requester_name": {
+        "value": "Sophie Dubois",
+        "evidence": "From: Sophie Dubois <sophie.dubois@customer.com>"
+      },
+      "requester_email": {
+        "value": "sophie.dubois@customer.com",
+        "evidence": "From: Sophie Dubois <sophie.dubois@customer.com>"
+      },
+      "supplier_name": {
+        "value": "Rapid Prototyping Studio",
+        "evidence": "- 20 h design preparation and file repair at CHF 120.00 per hour"
+      },
+      "supplier_vat_id": {
+        "value": null,
+        "evidence": null
+      },
+      "cost_center_code": {
+        "value": "CC-2003",
+        "evidence": "- Cost center CC-2003"
+      },
+      "cost_center_name": {
+        "value": null,
+        "evidence": null
+      },
+      "currency": {
+        "value": "CHF",
+        "evidence": "- 1 print run, SLS nylon, 14 parts, CHF 4,900.00"
+      },
+      "line_items": [
+        {
+          "description": "20 h design preparation and file repair",
+          "item_code": null,
+          "quantity": 20,
+          "unit": "h",
+          "unit_price": 120,
+          "price_per": 120,
+          "line_total": null,
+          "evidence": "- 20 h design preparation and file repair at CHF 120.00 per hour"
+        },
+        {
+          "description": "1 print run, SLS nylon",
+          "item_code": null,
+          "quantity": 14,
+          "unit": "parts",
+          "unit_price": 350,
+          "price_per": null,
+          "line_total": 4900,
+          "evidence": "- 1 print run, SLS nylon, 14 parts, CHF 4,900.00"
+        },
+        {
+          "description": "1 finishing and dyeing lot",
+          "item_code": null,
+          "quantity": 1,
+          "unit": "lot",
+          "unit_price": 1200,
+          "price_per": null,
+          "line_total": 1200,
+          "evidence": "- 1 finishing and dyeing lot, CHF 1,200.00"
+        }
+      ],
+      "net_total": {
+        "value": 8500,
+        "evidence": "Total CHF 8,500.00."
+      },
+      "vat_amount": {
+        "value": null,
+        "evidence": null
+      },
+      "gross_total": {
+        "value": null,
+        "evidence": null
+      },
+      "total_unlabelled": {
+        "value": null,
+        "evidence": null
+      },
+      "requested_delivery": {
+        "text": "2026-06-12 for the design review",
+        "iso": "2026-06-12",
+        "evidence": "We need the parts by 2026-06-12 for the design review."
+      },
+      "quote_valid_until": {
+        "text": null,
+        "iso": null,
+        "evidence": null
+      },
+      "quote_number": {
+        "value": null,
+        "evidence": null
+      },
+      "referenced_requests": [],
+      "notes_for_clerk": [
+        {
+          "note": "Rapid Prototyping Studio",
+          "evidence": "- 20 h design preparation and file repair at CHF 120.00 per hour"
+        }
+      ]
+    },
+    "unverified": [
+      {
+        "field": "supplier_name",
+        "reason": "value_not_in_quote"
+      },
+      {
+        "field": "cost_center_code",
+        "reason": "quote_not_in_source"
+      },
+      {
+        "field": "line_items[1].unit_price",
+        "reason": "value_not_in_quote"
+      }
+    ],
+    "attempts": 1,
+    "rawOutput": "{\n  \"requester_name\": {\n    \"value\": \"Sophie Dubois\",\n    \"evidence\": \"From: Sophie Dubois <sophie.dubois@customer.com>\"\n  },\n  \"requester_email\": {\n    \"value\": \"sophie.dubois@customer.com\",\n    \"evidence\": \"From: Sophie Dubois <sophie.dubois@customer.com>\"\n  },\n  \"supplier_name\": {\n    \"value\": \"Rapid Prototyping Studio\",\n    \"evidence\": \"- 20 h design preparation and file repair at CHF 120.00 per hour\"\n  },\n  \"supplier_vat_id\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"cost_center_code\": {\n    \"value\": \"CC-2003\",\n    \"evidence\": \"- Cost center CC-2003\"\n  },\n  \"cost_center_name\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"currency\": {\n    \"value\": \"CHF\",\n    \"evidence\": \"- 1 print run, SLS nylon, 14 parts, CHF 4,900.00\"\n  },\n  \"line_items\": [\n    {\n      \"description\": \"20 h design preparation and file repair\",\n      \"item_code\": null,\n      \"quantity\": 20,\n      \"unit\": \"h\",\n      \"unit_price\": 120,\n      \"price_per\": 120,\n      \"line_total\": null\n    ,\n    \"evidence\": \"- 20 h design preparation and file repair at CHF 120.00 per hour\"\n    },\n    {\n      \"description\": \"1 print run, SLS nylon\",\n      \"item_code\": null,\n      \"quantity\": 14,\n      \"unit\": \"parts\",\n      \"unit_price\": 350,\n      \"price_per\": null,\n      \"line_total\": 4900\n    ,\n    \"evidence\": \"- 1 print run, SLS nylon, 14 parts, CHF 4,900.00\"\n    },\n    {\n      \"description\": \"1 finishing and dyeing lot\",\n      \"item_code\": null,\n      \"quantity\": 1,\n      \"unit\": \"lot\",\n      \"unit_price\": 1200,\n      \"price_per\": null,\n      \"line_total\": 1200\n    ,\n    \"evidence\": \"- 1 finishing and dyeing lot, CHF 1,200.00\"\n    }\n  ],\n  \"net_total\": {\n    \"value\": 8500,\n    \"evidence\": \"Total CHF 8,500.00.\"\n  },\n  \"vat_amount\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"gross_total\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"total_unlabelled\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"requested_delivery\": {\n    \"text\": \"2026-06-12 for the design review\",\n    \"iso\": \"2026-06-12\"\n  ,\n  \"evidence\": \"We need the parts by 2026-06-12 for the design review.\"\n  },\n  \"quote_valid_until\": {\n    \"text\": null,\n    \"iso\": null\n  ,\n    \"evidence\": null\n  },\n  \"quote_number\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"referenced_requests\": [],\n  \"notes_for_clerk\": [\n    {\n      \"note\": \"Rapid Prototyping Studio\"\n    ,\n    \"evidence\": \"- 20 h design preparation and file repair at CHF 120.00 per hour\"\n    }\n  ]\n}"
+  }
+}

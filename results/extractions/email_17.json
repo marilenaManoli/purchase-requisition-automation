@@ -1,0 +1,110 @@
+{
+  "file": "email_17.eml",
+  "model": "ollama:qwen2.5:7b",
+  "seconds": 47.497,
+  "outcome": {
+    "ok": true,
+    "extraction": {
+      "requester_name": {
+        "value": "Reto Ammann",
+        "evidence": "From: Reto Ammann <reto.ammann@customer.com>"
+      },
+      "requester_email": {
+        "value": "reto.ammann@customer.com",
+        "evidence": "From: Reto Ammann <reto.ammann@customer.com>"
+      },
+      "supplier_name": {
+        "value": "Bergmann Werkzeugbau KG",
+        "evidence": "Bergmann Werkzeugbau KG\nIndustriepark Ost 3\n73431 Aalen, Germany"
+      },
+      "supplier_vat_id": {
+        "value": null,
+        "evidence": null
+      },
+      "cost_center_code": {
+        "value": "CC-1004",
+        "evidence": "Kostenstelle CC-1004."
+      },
+      "cost_center_name": {
+        "value": null,
+        "evidence": null
+      },
+      "currency": {
+        "value": "EUR",
+        "evidence": "Total: 52,000.00 EUR"
+      },
+      "line_items": [
+        {
+          "description": "Vorrichtungsbau Auftrag VB-2026-14, komplett",
+          "item_code": null,
+          "quantity": 1,
+          "unit": "Pos",
+          "unit_price": 28400,
+          "price_per": null,
+          "line_total": 28400,
+          "evidence": "# Beschreibung Menge Einheit Einzelpreis\n(EUR) Total (EUR)\n1 Vorrichtungsbau Auftrag VB-2026-14, komplett 1 Pos 28,400.00 28,400.00"
+        },
+        {
+          "description": "CNC-Spannsystem Set, hydraulisch",
+          "item_code": null,
+          "quantity": 4,
+          "unit": "Set",
+          "unit_price": 4250,
+          "price_per": null,
+          "line_total": 17000,
+          "evidence": "# Beschreibung Menge Einheit Einzelpreis\n(EUR) Total (EUR)\n2 CNC-Spannsystem Set, hydraulisch 4 Set 4,250.00 17,000.00"
+        },
+        {
+          "description": "Konstruktion & Engineering",
+          "item_code": null,
+          "quantity": 66,
+          "unit": "Std",
+          "unit_price": 100,
+          "price_per": null,
+          "line_total": 6600,
+          "evidence": "# Beschreibung Menge Einheit Einzelpreis\n(EUR) Total (EUR)\n3 Konstruktion & Engineering 66 Std 100.00 6,600.00"
+        }
+      ],
+      "net_total": {
+        "value": 52000,
+        "evidence": "Zwischensumme: 52,000.00 EUR"
+      },
+      "vat_amount": {
+        "value": 0,
+        "evidence": "USt (0%, innergemeinschaftliche Lieferung): 0.00 EUR"
+      },
+      "gross_total": {
+        "value": null,
+        "evidence": null
+      },
+      "total_unlabelled": {
+        "value": null,
+        "evidence": null
+      },
+      "requested_delivery": {
+        "text": "bis Ende August produktionsbereit sein",
+        "iso": null,
+        "evidence": "Die Vorrichtung muss bis Ende August produktionsbereit sein, die Lieferzeit ist also knapp."
+      },
+      "quote_valid_until": {
+        "text": "Gültig bis: 10.06.2026",
+        "iso": "2026-06-10",
+        "evidence": "Gültig bis: 10.06.2026"
+      },
+      "quote_number": {
+        "value": "BW-2026-0948",
+        "evidence": "Offert-Nr.: BW-2026-0948"
+      },
+      "referenced_requests": [],
+      "notes_for_clerk": [
+        {
+          "note": "Kostenstelle CC-1004.",
+          "evidence": "Kostenstelle CC-1004."
+        }
+      ]
+    },
+    "unverified": [],
+    "attempts": 1,
+    "rawOutput": "{\n  \"requester_name\": {\n    \"value\": \"Reto Ammann\",\n    \"evidence\": \"From: Reto Ammann <reto.ammann@customer.com>\"\n  },\n  \"requester_email\": {\n    \"value\": \"reto.ammann@customer.com\",\n    \"evidence\": \"From: Reto Ammann <reto.ammann@customer.com>\"\n  },\n  \"supplier_name\": {\n    \"value\": \"Bergmann Werkzeugbau KG\",\n    \"evidence\": \"Bergmann Werkzeugbau KG\\nIndustriepark Ost 3\\n73431 Aalen, Germany\"\n  },\n  \"supplier_vat_id\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"cost_center_code\": {\n    \"value\": \"CC-1004\",\n    \"evidence\": \"Kostenstelle CC-1004.\"\n  },\n  \"cost_center_name\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"currency\": {\n    \"value\": \"EUR\",\n    \"evidence\": \"Total: 52,000.00 EUR\"\n  },\n  \"line_items\": [\n    {\n      \"description\": \"Vorrichtungsbau Auftrag VB-2026-14, komplett\",\n      \"item_code\": null,\n      \"quantity\": 1,\n      \"unit\": \"Pos\",\n      \"unit_price\": 28400.0,\n      \"price_per\": null,\n      \"line_total\": 28400.0\n    ,\n    \"evidence\": \"# Beschreibung Menge Einheit Einzelpreis\\n(EUR) Total (EUR)\\n1 Vorrichtungsbau Auftrag VB-2026-14, komplett 1 Pos 28,400.00 28,400.00\"\n    },\n    {\n      \"description\": \"CNC-Spannsystem Set, hydraulisch\",\n      \"item_code\": null,\n      \"quantity\": 4,\n      \"unit\": \"Set\",\n      \"unit_price\": 4250.0,\n      \"price_per\": null,\n      \"line_total\": 17000.0\n    ,\n    \"evidence\": \"# Beschreibung Menge Einheit Einzelpreis\\n(EUR) Total (EUR)\\n2 CNC-Spannsystem Set, hydraulisch 4 Set 4,250.00 17,000.00\"\n    },\n    {\n      \"description\": \"Konstruktion & Engineering\",\n      \"item_code\": null,\n      \"quantity\": 66,\n      \"unit\": \"Std\",\n      \"unit_price\": 100.0,\n      \"price_per\": null,\n      \"line_total\": 6600.0\n    ,\n    \"evidence\": \"# Beschreibung Menge Einheit Einzelpreis\\n(EUR) Total (EUR)\\n3 Konstruktion & Engineering 66 Std 100.00 6,600.00\"\n    }\n  ],\n  \"net_total\": {\n    \"value\": 52000.0,\n    \"evidence\": \"Zwischensumme: 52,000.00 EUR\"\n  },\n  \"vat_amount\": {\n    \"value\": 0.0,\n    \"evidence\": \"USt (0%, innergemeinschaftliche Lieferung): 0.00 EUR\"\n  },\n  \"gross_total\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"total_unlabelled\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"requested_delivery\": {\n    \"text\": \"bis Ende August produktionsbereit sein\",\n    \"iso\": null\n  ,\n    \"evidence\": \"Die Vorrichtung muss bis Ende August produktionsbereit sein, die Lieferzeit ist also knapp.\"\n  },\n  \"quote_valid_until\": {\n    \"text\": \"Gültig bis: 10.06.2026\",\n    \"iso\": \"2026-06-10\"\n  ,\n    \"evidence\": \"Gültig bis: 10.06.2026\"\n  },\n  \"quote_number\": {\n    \"value\": \"BW-2026-0948\",\n    \"evidence\": \"Offert-Nr.: BW-2026-0948\"\n  },\n  \"referenced_requests\": [],\n  \"notes_for_clerk\": [\n    {\n      \"note\": \"Kostenstelle CC-1004.\"\n    ,\n    \"evidence\": \"Kostenstelle CC-1004.\"\n  }\n  ]\n}"
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "file": "email_24.eml",
+  "model": "ollama:qwen2.5:7b",
+  "seconds": 41.944,
+  "outcome": {
+    "ok": true,
+    "extraction": {
+      "requester_name": {
+        "value": "Miriam Frick",
+        "evidence": "From: Miriam Frick <miriam.frick@customer.com>"
+      },
+      "requester_email": {
+        "value": "miriam.frick@customer.com",
+        "evidence": "From: Miriam Frick <miriam.frick@customer.com>"
+      },
+      "supplier_name": {
+        "value": "Kabelwerk Rheintal GmbH",
+        "evidence": "Kabelwerk Rheintal GmbH\nAm Rheindamm 4\n78462 Konstanz, Germany"
+      },
+      "supplier_vat_id": {
+        "value": "DE556677889",
+        "evidence": "VAT: DE556677889"
+      },
+      "cost_center_code": {
+        "value": "CC-1002",
+        "evidence": "Cost center CC-1002."
+      },
+      "cost_center_name": {
+        "value": null,
+        "evidence": null
+      },
+      "currency": {
+        "value": "EUR",
+        "evidence": "Unit price (EUR)"
+      },
+      "line_items": [
+        {
+          "description": "Control cable LiYCY 4x0.5",
+          "item_code": "LIYCY-4X05",
+          "quantity": 600,
+          "unit": "m",
+          "unit_price": 2.3,
+          "price_per": null,
+          "line_total": 1380,
+          "evidence": "# Description Qty Unit Unit price (EUR) Line total (EUR)\n1 Control cable LiYCY 4x0.5\nItem code LIYCY-4X05 600 m 2.30 1,380.00"
+        },
+        {
+          "description": "Cable carrier CK-40, assembled",
+          "item_code": "CK-40-A",
+          "quantity": 200,
+          "unit": "m",
+          "unit_price": 15,
+          "price_per": null,
+          "line_total": 3000,
+          "evidence": "# Description Qty Unit Unit price (EUR) Line total (EUR)\n2 Cable carrier CK-40, assembled\nItem code CK-40-A 200 m 15.00 3,000.00"
+        }
+      ],
+      "net_total": {
+        "value": 4380,
+        "evidence": "Subtotal: 4,380.00 EUR"
+      },
+      "vat_amount": {
+        "value": null,
+        "evidence": null
+      },
+      "gross_total": {
+        "value": 4830,
+        "evidence": "Total: 4,830.00 EUR"
+      },
+      "total_unlabelled": {
+        "value": null,
+        "evidence": null
+      },
+      "requested_delivery": {
+        "text": "Needed for the line A retrofit in week 24",
+        "iso": null,
+        "evidence": "--- EMAIL BODY ---\nHi Procurement,\n\nPlease order per the attached quote from Kabelwerk Rheintal. Cost center CC-1002.\nNeeded for the line A retrofit in week 24."
+      },
+      "quote_valid_until": {
+        "text": "Valid until: 11.06.2026",
+        "iso": "2026-06-11",
+        "evidence": "Valid until: 11.06.2026"
+      },
+      "quote_number": {
+        "value": "KR-2026-1187",
+        "evidence": "Quote no.: KR-2026-1187"
+      },
+      "referenced_requests": [],
+      "notes_for_clerk": [
+        {
+          "note": "Please quote reference KR-2026-1187 on your purchase order.",
+          "evidence": "Please quote reference KR-2026-1187 on your purchase order."
+        }
+      ]
+    },
+    "unverified": [],
+    "attempts": 1,
+    "rawOutput": "{\n  \"requester_name\": {\n    \"value\": \"Miriam Frick\",\n    \"evidence\": \"From: Miriam Frick <miriam.frick@customer.com>\"\n  },\n  \"requester_email\": {\n    \"value\": \"miriam.frick@customer.com\",\n    \"evidence\": \"From: Miriam Frick <miriam.frick@customer.com>\"\n  },\n  \"supplier_name\": {\n    \"value\": \"Kabelwerk Rheintal GmbH\",\n    \"evidence\": \"Kabelwerk Rheintal GmbH\\nAm Rheindamm 4\\n78462 Konstanz, Germany\"\n  },\n  \"supplier_vat_id\": {\n    \"value\": \"DE556677889\",\n    \"evidence\": \"VAT: DE556677889\"\n  },\n  \"cost_center_code\": {\n    \"value\": \"CC-1002\",\n    \"evidence\": \"Cost center CC-1002.\"\n  },\n  \"cost_center_name\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"currency\": {\n    \"value\": \"EUR\",\n    \"evidence\": \"Unit price (EUR)\"\n  },\n  \"line_items\": [\n    {\n      \"description\": \"Control cable LiYCY 4x0.5\",\n      \"item_code\": \"LIYCY-4X05\",\n      \"quantity\": 600,\n      \"unit\": \"m\",\n      \"unit_price\": 2.3,\n      \"price_per\": null,\n      \"line_total\": 1380\n    ,\n    \"evidence\": \"# Description Qty Unit Unit price (EUR) Line total (EUR)\\n1 Control cable LiYCY 4x0.5\\nItem code LIYCY-4X05 600 m 2.30 1,380.00\"\n    },\n    {\n      \"description\": \"Cable carrier CK-40, assembled\",\n      \"item_code\": \"CK-40-A\",\n      \"quantity\": 200,\n      \"unit\": \"m\",\n      \"unit_price\": 15,\n      \"price_per\": null,\n      \"line_total\": 3000\n    ,\n    \"evidence\": \"# Description Qty Unit Unit price (EUR) Line total (EUR)\\n2 Cable carrier CK-40, assembled\\nItem code CK-40-A 200 m 15.00 3,000.00\"\n    }\n  ],\n  \"net_total\": {\n    \"value\": 4380,\n    \"evidence\": \"Subtotal: 4,380.00 EUR\"\n  },\n  \"vat_amount\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"gross_total\": {\n    \"value\": 4830,\n    \"evidence\": \"Total: 4,830.00 EUR\"\n  },\n  \"total_unlabelled\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"requested_delivery\": {\n    \"text\": \"Needed for the line A retrofit in week 24\",\n    \"iso\": null\n  ,\n    \"evidence\": \"--- EMAIL BODY ---\\nHi Procurement,\\n\\nPlease order per the attached quote from Kabelwerk Rheintal. Cost center CC-1002.\\nNeeded for the line A retrofit in week 24.\"\n  },\n  \"quote_valid_until\": {\n    \"text\": \"Valid until: 11.06.2026\",\n    \"iso\": \"2026-06-11\"\n  ,\n    \"evidence\": \"Valid until: 11.06.2026\"\n  },\n  \"quote_number\": {\n    \"value\": \"KR-2026-1187\",\n    \"evidence\": \"Quote no.: KR-2026-1187\"\n  },\n  \"referenced_requests\": [],\n  \"notes_for_clerk\": [\n    {\n      \"note\": \"Please quote reference KR-2026-1187 on your purchase order.\"\n    ,\n    \"evidence\": \"Please quote reference KR-2026-1187 on your purchase order.\"\n  }\n  ]\n}"
+  }
+}

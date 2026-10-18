@@ -1,0 +1,99 @@
+{
+  "file": "email_28.eml",
+  "model": "ollama:qwen2.5:7b",
+  "seconds": 24.781,
+  "outcome": {
+    "ok": true,
+    "extraction": {
+      "requester_name": {
+        "value": "Sophie Dubois",
+        "evidence": "From: Sophie Dubois <sophie.dubois@customer.com>"
+      },
+      "requester_email": {
+        "value": "sophie.dubois@customer.com",
+        "evidence": "From: Sophie Dubois <sophie.dubois@customer.com>"
+      },
+      "supplier_name": {
+        "value": "Sensorik Nord",
+        "evidence": "Could you order roughly ten inductive proximity sensors from Sensorik Nord for the test bench?"
+      },
+      "supplier_vat_id": {
+        "value": null,
+        "evidence": null
+      },
+      "cost_center_code": {
+        "value": "CC-2002",
+        "evidence": "Cost center CC-2002."
+      },
+      "cost_center_name": {
+        "value": null,
+        "evidence": null
+      },
+      "currency": {
+        "value": null,
+        "evidence": null
+      },
+      "line_items": [
+        {
+          "description": "inductive proximity sensors",
+          "item_code": null,
+          "quantity": 10,
+          "unit": null,
+          "unit_price": null,
+          "price_per": null,
+          "line_total": null,
+          "evidence": "Could you order roughly ten inductive proximity sensors from Sensorik Nord for the test bench?"
+        }
+      ],
+      "net_total": {
+        "value": null,
+        "evidence": null
+      },
+      "vat_amount": {
+        "value": null,
+        "evidence": null
+      },
+      "gross_total": {
+        "value": null,
+        "evidence": null
+      },
+      "total_unlabelled": {
+        "value": 5000,
+        "evidence": "the whole lot comes to around five thousand euros, give or take."
+      },
+      "requested_delivery": {
+        "text": null,
+        "iso": null,
+        "evidence": null
+      },
+      "quote_valid_until": {
+        "text": null,
+        "iso": null,
+        "evidence": null
+      },
+      "quote_number": {
+        "value": null,
+        "evidence": null
+      },
+      "referenced_requests": [],
+      "notes_for_clerk": [
+        {
+          "note": "Could you order roughly ten inductive proximity sensors from Sensorik Nord for the test bench? Type IN-M12, the ones we used last time.",
+          "evidence": "Could you order roughly ten inductive proximity sensors from Sensorik Nord for the test bench?"
+        }
+      ]
+    },
+    "unverified": [
+      {
+        "field": "total_unlabelled",
+        "reason": "value_not_in_quote"
+      },
+      {
+        "field": "line_items[0].quantity",
+        "reason": "value_not_in_quote"
+      }
+    ],
+    "attempts": 1,
+    "rawOutput": "{\n  \"requester_name\": {\n    \"value\": \"Sophie Dubois\",\n    \"evidence\": \"From: Sophie Dubois <sophie.dubois@customer.com>\"\n  },\n  \"requester_email\": {\n    \"value\": \"sophie.dubois@customer.com\",\n    \"evidence\": \"From: Sophie Dubois <sophie.dubois@customer.com>\"\n  },\n  \"supplier_name\": {\n    \"value\": \"Sensorik Nord\",\n    \"evidence\": \"Could you order roughly ten inductive proximity sensors from Sensorik Nord for the test bench?\"\n  },\n  \"supplier_vat_id\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"cost_center_code\": {\n    \"value\": \"CC-2002\",\n    \"evidence\": \"Cost center CC-2002.\"\n  },\n  \"cost_center_name\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"currency\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"line_items\": [\n    {\n      \"description\": \"inductive proximity sensors\",\n      \"item_code\": null,\n      \"quantity\": 10,\n      \"unit\": null,\n      \"unit_price\": null,\n      \"price_per\": null,\n      \"line_total\": null\n    ,\n    \"evidence\": \"Could you order roughly ten inductive proximity sensors from Sensorik Nord for the test bench?\"\n  }\n  ],\n  \"net_total\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"vat_amount\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"gross_total\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"total_unlabelled\": {\n    \"value\": 5000,\n    \"evidence\": \"the whole lot comes to around five thousand euros, give or take.\"\n  },\n  \"requested_delivery\": {\n    \"text\": null,\n    \"iso\": null\n  ,\n  \"evidence\": null\n  },\n  \"quote_valid_until\": {\n    \"text\": null,\n    \"iso\": null\n  ,\n  \"evidence\": null\n  },\n  \"quote_number\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"referenced_requests\": [],\n  \"notes_for_clerk\": [\n    {\n      \"note\": \"Could you order roughly ten inductive proximity sensors from Sensorik Nord for the test bench? Type IN-M12, the ones we used last time.\"\n    ,\n    \"evidence\": \"Could you order roughly ten inductive proximity sensors from Sensorik Nord for the test bench?\"\n  }\n  ]\n}"
+  }
+}

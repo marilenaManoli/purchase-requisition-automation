@@ -1,0 +1,100 @@
+{
+  "file": "email_23.eml",
+  "model": "ollama:qwen2.5:7b",
+  "seconds": 28.543,
+  "outcome": {
+    "ok": true,
+    "extraction": {
+      "requester_name": {
+        "value": "Andrea Roth",
+        "evidence": "From: Andrea Roth <andrea.roth@customer.com>"
+      },
+      "requester_email": {
+        "value": "andrea.roth@customer.com",
+        "evidence": "From: Andrea Roth <andrea.roth@customer.com>"
+      },
+      "supplier_name": {
+        "value": "Bergmann Werkzeugbau",
+        "evidence": "bitte bei Bergmann Werkzeugbau bestellen:"
+      },
+      "supplier_vat_id": {
+        "value": null,
+        "evidence": null
+      },
+      "cost_center_code": {
+        "value": "CC-1004",
+        "evidence": "Kostenstelle CC-1004."
+      },
+      "cost_center_name": {
+        "value": null,
+        "evidence": null
+      },
+      "currency": {
+        "value": "EUR",
+        "evidence": "je EUR 1'600.00"
+      },
+      "line_items": [
+        {
+          "description": "Vorrichtungsplatte VP-500",
+          "item_code": null,
+          "quantity": 3,
+          "unit": null,
+          "unit_price": 1600,
+          "price_per": null,
+          "line_total": null,
+          "evidence": "3 Stk Vorrichtungsplatte VP-500, je EUR 1'600.00"
+        },
+        {
+          "description": "Zentrierbolzen ZB-16",
+          "item_code": null,
+          "quantity": 4,
+          "unit": "Satz",
+          "unit_price": 600,
+          "price_per": null,
+          "line_total": null,
+          "evidence": "4 Satz Zentrierbolzen ZB-16, je EUR 600.00"
+        }
+      ],
+      "net_total": {
+        "value": 7200,
+        "evidence": "Total EUR 7'200.00."
+      },
+      "vat_amount": {
+        "value": null,
+        "evidence": null
+      },
+      "gross_total": {
+        "value": null,
+        "evidence": null
+      },
+      "total_unlabelled": {
+        "value": null,
+        "evidence": null
+      },
+      "requested_delivery": {
+        "text": null,
+        "iso": null,
+        "evidence": null
+      },
+      "quote_valid_until": {
+        "text": null,
+        "iso": null,
+        "evidence": null
+      },
+      "quote_number": {
+        "value": null,
+        "evidence": null
+      },
+      "referenced_requests": [],
+      "notes_for_clerk": [
+        {
+          "note": "Kostenstelle CC-1004.",
+          "evidence": "Kostenstelle CC-1004."
+        }
+      ]
+    },
+    "unverified": [],
+    "attempts": 1,
+    "rawOutput": "{\n  \"requester_name\": {\n    \"value\": \"Andrea Roth\",\n    \"evidence\": \"From: Andrea Roth <andrea.roth@customer.com>\"\n  },\n  \"requester_email\": {\n    \"value\": \"andrea.roth@customer.com\",\n    \"evidence\": \"From: Andrea Roth <andrea.roth@customer.com>\"\n  },\n  \"supplier_name\": {\n    \"value\": \"Bergmann Werkzeugbau\",\n    \"evidence\": \"bitte bei Bergmann Werkzeugbau bestellen:\"\n  },\n  \"supplier_vat_id\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"cost_center_code\": {\n    \"value\": \"CC-1004\",\n    \"evidence\": \"Kostenstelle CC-1004.\"\n  },\n  \"cost_center_name\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"currency\": {\n    \"value\": \"EUR\",\n    \"evidence\": \"je EUR 1'600.00\"\n  },\n  \"line_items\": [\n    {\n      \"description\": \"Vorrichtungsplatte VP-500\",\n      \"item_code\": null,\n      \"quantity\": 3,\n      \"unit\": null,\n      \"unit_price\": 1600,\n      \"price_per\": null,\n      \"line_total\": null\n    ,\n    \"evidence\": \"3 Stk Vorrichtungsplatte VP-500, je EUR 1'600.00\"\n    },\n    {\n      \"description\": \"Zentrierbolzen ZB-16\",\n      \"item_code\": null,\n      \"quantity\": 4,\n      \"unit\": \"Satz\",\n      \"unit_price\": 600,\n      \"price_per\": null,\n      \"line_total\": null\n    ,\n    \"evidence\": \"4 Satz Zentrierbolzen ZB-16, je EUR 600.00\"\n    }\n  ],\n  \"net_total\": {\n    \"value\": 7200,\n    \"evidence\": \"Total EUR 7'200.00.\"\n  },\n  \"vat_amount\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"gross_total\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"total_unlabelled\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"requested_delivery\": {\n    \"text\": null,\n    \"iso\": null\n  ,\n  \"evidence\": null\n  },\n  \"quote_valid_until\": {\n    \"text\": null,\n    \"iso\": null\n  ,\n  \"evidence\": null\n  },\n  \"quote_number\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"referenced_requests\": [],\n  \"notes_for_clerk\": [\n    {\n      \"note\": \"Kostenstelle CC-1004.\"\n    ,\n    \"evidence\": \"Kostenstelle CC-1004.\"\n  }\n  ]\n}"
+  }
+}

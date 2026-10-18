@@ -1,0 +1,90 @@
+{
+  "file": "email_02_inline_request.eml",
+  "model": "ollama:qwen2.5:7b",
+  "seconds": 22.858,
+  "outcome": {
+    "ok": true,
+    "extraction": {
+      "requester_name": {
+        "value": "Emily",
+        "evidence": "From: Emily Carter <emily.carter@customer.com>"
+      },
+      "requester_email": {
+        "value": "emily.carter@customer.com",
+        "evidence": "From: Emily Carter <emily.carter@customer.com>"
+      },
+      "supplier_name": {
+        "value": null,
+        "evidence": null
+      },
+      "supplier_vat_id": {
+        "value": null,
+        "evidence": null
+      },
+      "cost_center_code": {
+        "value": "London office",
+        "evidence": "Charge to the London office cost center."
+      },
+      "cost_center_name": {
+        "value": null,
+        "evidence": "Charge to the London office cost center."
+      },
+      "currency": {
+        "value": null,
+        "evidence": null
+      },
+      "line_items": [
+        {
+          "description": "27\" 4K monitors",
+          "item_code": null,
+          "quantity": 6,
+          "unit": null,
+          "unit_price": null,
+          "price_per": null,
+          "line_total": null,
+          "evidence": "Could we please order 6 x 27\" 4K monitors? Dell U2723QE if possible, or anything equivalent."
+        }
+      ],
+      "net_total": {
+        "value": null,
+        "evidence": null
+      },
+      "vat_amount": {
+        "value": null,
+        "evidence": null
+      },
+      "gross_total": {
+        "value": null,
+        "evidence": null
+      },
+      "total_unlabelled": {
+        "value": null,
+        "evidence": null
+      },
+      "requested_delivery": {
+        "text": null,
+        "iso": null,
+        "evidence": null
+      },
+      "quote_valid_until": {
+        "text": null,
+        "iso": null,
+        "evidence": null
+      },
+      "quote_number": {
+        "value": null,
+        "evidence": null
+      },
+      "referenced_requests": [],
+      "notes_for_clerk": [
+        {
+          "note": "Three new starters joining next week and we are short on monitors.",
+          "evidence": "We have three new starters joining next week and we are short on monitors."
+        }
+      ]
+    },
+    "unverified": [],
+    "attempts": 1,
+    "rawOutput": "{\n  \"requester_name\": {\n    \"value\": \"Emily\",\n    \"evidence\": \"From: Emily Carter <emily.carter@customer.com>\"\n  },\n  \"requester_email\": {\n    \"value\": \"emily.carter@customer.com\",\n    \"evidence\": \"From: Emily Carter <emily.carter@customer.com>\"\n  },\n  \"supplier_name\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"supplier_vat_id\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"cost_center_code\": {\n    \"value\": \"London office\",\n    \"evidence\": \"Charge to the London office cost center.\"\n  },\n  \"cost_center_name\": {\n    \"value\": null,\n    \"evidence\": \"Charge to the London office cost center.\"\n  },\n  \"currency\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"line_items\": [\n    {\n      \"description\": \"27\\\" 4K monitors\",\n      \"item_code\": null,\n      \"quantity\": 6,\n      \"unit\": null,\n      \"unit_price\": null,\n      \"price_per\": null,\n      \"line_total\": null\n   ,\n    \"evidence\": \"Could we please order 6 x 27\\\" 4K monitors? Dell U2723QE if possible, or anything equivalent.\"\n  }\n  ],\n  \"net_total\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"vat_amount\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"gross_total\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"total_unlabelled\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"requested_delivery\": {\n    \"text\": null,\n    \"iso\": null\n  ,\n  \"evidence\": null\n  },\n  \"quote_valid_until\": {\n    \"text\": null,\n    \"iso\": null\n  ,\n  \"evidence\": null\n  },\n  \"quote_number\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"referenced_requests\": [],\n  \"notes_for_clerk\": [\n    {\n      \"note\": \"Three new starters joining next week and we are short on monitors.\"\n    ,\n    \"evidence\": \"We have three new starters joining next week and we are short on monitors.\"\n  }\n  ]\n}"
+  }
+}

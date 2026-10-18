@@ -1,0 +1,115 @@
+{
+  "file": "email_15.eml",
+  "model": "ollama:qwen2.5:7b",
+  "seconds": 44.379,
+  "outcome": {
+    "ok": true,
+    "extraction": {
+      "requester_name": {
+        "value": "Sophie Dubois",
+        "evidence": "Best, Sophie Dubois\nR&D Test Lab"
+      },
+      "requester_email": {
+        "value": "sophie.dubois@customer.com",
+        "evidence": "From: Sophie Dubois <sophie.dubois@customer.com>"
+      },
+      "supplier_name": {
+        "value": "PrecisionCast Metals Ltd",
+        "evidence": "PrecisionCast Metals Ltd\nFoundry Lane, Sheffield S9 2LR\nUnited Kingdom"
+      },
+      "supplier_vat_id": {
+        "value": "GB112233445",
+        "evidence": "VAT: GB112233445"
+      },
+      "cost_center_code": {
+        "value": "CC-2003",
+        "evidence": "Cost center CC-2003."
+      },
+      "cost_center_name": {
+        "value": null,
+        "evidence": null
+      },
+      "currency": {
+        "value": "GBP",
+        "evidence": "Unit price (GBP)"
+      },
+      "line_items": [
+        {
+          "description": "Investment cast housing, alloy 316L, rev C",
+          "item_code": null,
+          "quantity": 25,
+          "unit": "pcs",
+          "unit_price": 214,
+          "price_per": null,
+          "line_total": 5350,
+          "evidence": "# Description Qty Unit Unit price (GBP) Line total (GBP)\n1 Investment cast housing, alloy 316L, rev C 25 pcs 214.00 5,350.00"
+        },
+        {
+          "description": "Cast bracket assembly, alloy 316L",
+          "item_code": null,
+          "quantity": 40,
+          "unit": "pcs",
+          "unit_price": 62.5,
+          "price_per": null,
+          "line_total": 2500,
+          "evidence": "# Description Qty Unit Unit price (GBP) Line total (GBP)\n2 Cast bracket assembly, alloy 316L 40 pcs 62.50 2,500.00"
+        },
+        {
+          "description": "Tooling setup charge, one-off",
+          "item_code": null,
+          "quantity": 1,
+          "unit": "lot",
+          "unit_price": 1050,
+          "price_per": null,
+          "line_total": 1050,
+          "evidence": "# Description Qty Unit Unit price (GBP) Line total (GBP)\n3 Tooling setup charge, one-off 1 lot 1,050.00 1,050.00"
+        }
+      ],
+      "net_total": {
+        "value": 8900,
+        "evidence": "Subtotal: 8,900.00 GBP"
+      },
+      "vat_amount": {
+        "value": 0,
+        "evidence": "VAT (0%, export): 0.00 GBP"
+      },
+      "gross_total": {
+        "value": null,
+        "evidence": null
+      },
+      "total_unlabelled": {
+        "value": null,
+        "evidence": null
+      },
+      "requested_delivery": {
+        "text": "end of July",
+        "iso": "2026-07-31",
+        "evidence": "We need the castings by end of July to keep the rev C build on schedule."
+      },
+      "quote_valid_until": {
+        "text": "Valid until: 04.06.2026",
+        "iso": "2026-06-04",
+        "evidence": "Valid until: 04.06.2026"
+      },
+      "quote_number": {
+        "value": "PCM-Q-4477",
+        "evidence": "Quote no.: PCM-Q-4477"
+      },
+      "referenced_requests": [],
+      "notes_for_clerk": [
+        {
+          "note": "Investment castings, prototype housing rev C",
+          "evidence": "Reference: Investment castings, prototype housing rev C"
+        }
+      ]
+    },
+    "unverified": [
+      {
+        "field": "requested_delivery.iso",
+        "reason": "value_not_in_quote"
+      }
+    ],
+    "attempts": 1,
+    "rawOutput": "{\n  \"requester_name\": {\n    \"value\": \"Sophie Dubois\",\n    \"evidence\": \"Best, Sophie Dubois\\nR&D Test Lab\"\n  },\n  \"requester_email\": {\n    \"value\": \"sophie.dubois@customer.com\",\n    \"evidence\": \"From: Sophie Dubois <sophie.dubois@customer.com>\"\n  },\n  \"supplier_name\": {\n    \"value\": \"PrecisionCast Metals Ltd\",\n    \"evidence\": \"PrecisionCast Metals Ltd\\nFoundry Lane, Sheffield S9 2LR\\nUnited Kingdom\"\n  },\n  \"supplier_vat_id\": {\n    \"value\": \"GB112233445\",\n    \"evidence\": \"VAT: GB112233445\"\n  },\n  \"cost_center_code\": {\n    \"value\": \"CC-2003\",\n    \"evidence\": \"Cost center CC-2003.\"\n  },\n  \"cost_center_name\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"currency\": {\n    \"value\": \"GBP\",\n    \"evidence\": \"Unit price (GBP)\"\n  },\n  \"line_items\": [\n    {\n      \"description\": \"Investment cast housing, alloy 316L, rev C\",\n      \"item_code\": null,\n      \"quantity\": 25,\n      \"unit\": \"pcs\",\n      \"unit_price\": 214.00,\n      \"price_per\": null,\n      \"line_total\": 5350.00\n    ,\n    \"evidence\": \"# Description Qty Unit Unit price (GBP) Line total (GBP)\\n1 Investment cast housing, alloy 316L, rev C 25 pcs 214.00 5,350.00\"\n    },\n    {\n      \"description\": \"Cast bracket assembly, alloy 316L\",\n      \"item_code\": null,\n      \"quantity\": 40,\n      \"unit\": \"pcs\",\n      \"unit_price\": 62.50,\n      \"price_per\": null,\n      \"line_total\": 2500.00\n    ,\n    \"evidence\": \"# Description Qty Unit Unit price (GBP) Line total (GBP)\\n2 Cast bracket assembly, alloy 316L 40 pcs 62.50 2,500.00\"\n    },\n    {\n      \"description\": \"Tooling setup charge, one-off\",\n      \"item_code\": null,\n      \"quantity\": 1,\n      \"unit\": \"lot\",\n      \"unit_price\": 1050.00,\n      \"price_per\": null,\n      \"line_total\": 1050.00\n    ,\n    \"evidence\": \"# Description Qty Unit Unit price (GBP) Line total (GBP)\\n3 Tooling setup charge, one-off 1 lot 1,050.00 1,050.00\"\n    }\n  ],\n  \"net_total\": {\n    \"value\": 8900.00,\n    \"evidence\": \"Subtotal: 8,900.00 GBP\"\n  },\n  \"vat_amount\": {\n    \"value\": 0.00,\n    \"evidence\": \"VAT (0%, export): 0.00 GBP\"\n  },\n  \"gross_total\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"total_unlabelled\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"requested_delivery\": {\n    \"text\": \"end of July\",\n    \"iso\": \"2026-07-31\"\n  ,\n    \"evidence\": \"We need the castings by end of July to keep the rev C build on schedule.\"\n  },\n  \"quote_valid_until\": {\n    \"text\": \"Valid until: 04.06.2026\",\n    \"iso\": \"2026-06-04\"\n  ,\n    \"evidence\": \"Valid until: 04.06.2026\"\n  },\n  \"quote_number\": {\n    \"value\": \"PCM-Q-4477\",\n    \"evidence\": \"Quote no.: PCM-Q-4477\"\n  },\n  \"referenced_requests\": [],\n  \"notes_for_clerk\": [\n    {\n      \"note\": \"Investment castings, prototype housing rev C\",\n      \"evidence\": \"Reference: Investment castings, prototype housing rev C\"\n    }\n  ]\n}"
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "file": "email_08.eml",
+  "model": "ollama:qwen2.5:7b",
+  "seconds": 38.093,
+  "outcome": {
+    "ok": true,
+    "extraction": {
+      "requester_name": {
+        "value": "Reto Ammann",
+        "evidence": "Guten Morgen,\n\nbitte folgendes bei Stahlhandel Wyss AG in Winterthur bestellen:\n\n--- EMAIL BODY ---\nGuten Morgen,\n\nbitte folgendes bei Stahlhandel Wyss AG in Winterthur bestellen:"
+      },
+      "requester_email": {
+        "value": "reto.ammann@customer.com",
+        "evidence": "From: Reto Ammann <reto.ammann@customer.com>"
+      },
+      "supplier_name": {
+        "value": "Stahlhandel Wyss AG in Winterthur",
+        "evidence": "bitte folgendes bei Stahlhandel Wyss AG in Winterthur bestellen:"
+      },
+      "supplier_vat_id": {
+        "value": null,
+        "evidence": null
+      },
+      "cost_center_code": {
+        "value": "CC-1004",
+        "evidence": "Kostenstelle CC-1004."
+      },
+      "cost_center_name": {
+        "value": null,
+        "evidence": null
+      },
+      "currency": {
+        "value": "CHF",
+        "evidence": "Total CHF 3'200.00"
+      },
+      "line_items": [
+        {
+          "description": "Stahlplatte S235JR, 10 mm, 2000 x 1000",
+          "item_code": null,
+          "quantity": 4,
+          "unit": "Stk",
+          "unit_price": 480,
+          "price_per": null,
+          "line_total": null,
+          "evidence": "4 Stk Stahlplatte S235JR, 10 mm, 2000 x 1000, je CHF 480.00"
+        },
+        {
+          "description": "Rundstahl",
+          "item_code": null,
+          "quantity": 6,
+          "unit": "m",
+          "unit_price": 95,
+          "price_per": null,
+          "line_total": null,
+          "evidence": "6 m Rundstahl 40 mm, je CHF 95.00"
+        },
+        {
+          "description": "Zuschnitt und Bearbeitung",
+          "item_code": null,
+          "quantity": 1,
+          "unit": "Pos",
+          "unit_price": 710,
+          "price_per": null,
+          "line_total": null,
+          "evidence": "1 Pos Zuschnitt und Bearbeitung pauschal, CHF 710.00"
+        }
+      ],
+      "net_total": {
+        "value": 3200,
+        "evidence": "Total CHF 3'200.00."
+      },
+      "vat_amount": {
+        "value": null,
+        "evidence": null
+      },
+      "gross_total": {
+        "value": null,
+        "evidence": null
+      },
+      "total_unlabelled": {
+        "value": null,
+        "evidence": null
+      },
+      "requested_delivery": {
+        "text": "Lieferung bis 29.05.2026",
+        "iso": "2026-05-29",
+        "evidence": "Lieferung bis 29.05.2026."
+      },
+      "quote_valid_until": {
+        "text": null,
+        "iso": null,
+        "evidence": null
+      },
+      "quote_number": {
+        "value": null,
+        "evidence": null
+      },
+      "referenced_requests": [],
+      "notes_for_clerk": [
+        {
+          "note": "Toolroom & Fixtures",
+          "evidence": "Danke\nReto Ammann\nToolroom & Fixtures"
+        }
+      ]
+    },
+    "unverified": [
+      {
+        "field": "requester_name",
+        "reason": "value_not_in_quote"
+      }
+    ],
+    "attempts": 1,
+    "rawOutput": "{\n  \"requester_name\": {\n    \"value\": \"Reto Ammann\",\n    \"evidence\": \"Guten Morgen,\\n\\nbitte folgendes bei Stahlhandel Wyss AG in Winterthur bestellen:\\n\\n--- EMAIL BODY ---\\nGuten Morgen,\\n\\nbitte folgendes bei Stahlhandel Wyss AG in Winterthur bestellen:\"\n  },\n  \"requester_email\": {\n    \"value\": \"reto.ammann@customer.com\",\n    \"evidence\": \"From: Reto Ammann <reto.ammann@customer.com>\"\n  },\n  \"supplier_name\": {\n    \"value\": \"Stahlhandel Wyss AG in Winterthur\",\n    \"evidence\": \"bitte folgendes bei Stahlhandel Wyss AG in Winterthur bestellen:\"\n  },\n  \"supplier_vat_id\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"cost_center_code\": {\n    \"value\": \"CC-1004\",\n    \"evidence\": \"Kostenstelle CC-1004.\"\n  },\n  \"cost_center_name\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"currency\": {\n    \"value\": \"CHF\",\n    \"evidence\": \"Total CHF 3'200.00\"\n  },\n  \"line_items\": [\n    {\n      \"description\": \"Stahlplatte S235JR, 10 mm, 2000 x 1000\",\n      \"item_code\": null,\n      \"quantity\": 4,\n      \"unit\": \"Stk\",\n      \"unit_price\": 480.0,\n      \"price_per\": null,\n      \"line_total\": null\n    ,\n    \"evidence\": \"4 Stk Stahlplatte S235JR, 10 mm, 2000 x 1000, je CHF 480.00\"\n    },\n    {\n      \"description\": \"Rundstahl\",\n      \"item_code\": null,\n      \"quantity\": 6,\n      \"unit\": \"m\",\n      \"unit_price\": 95.0,\n      \"price_per\": null,\n      \"line_total\": null\n    ,\n    \"evidence\": \"6 m Rundstahl 40 mm, je CHF 95.00\"\n    },\n    {\n      \"description\": \"Zuschnitt und Bearbeitung\",\n      \"item_code\": null,\n      \"quantity\": 1,\n      \"unit\": \"Pos\",\n      \"unit_price\": 710.0,\n      \"price_per\": null,\n      \"line_total\": null\n    ,\n    \"evidence\": \"1 Pos Zuschnitt und Bearbeitung pauschal, CHF 710.00\"\n    }\n  ],\n  \"net_total\": {\n    \"value\": 3200.0,\n    \"evidence\": \"Total CHF 3'200.00.\"\n  },\n  \"vat_amount\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"gross_total\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"total_unlabelled\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"requested_delivery\": {\n    \"text\": \"Lieferung bis 29.05.2026\",\n    \"iso\": \"2026-05-29\"\n  ,\n    \"evidence\": \"Lieferung bis 29.05.2026.\"\n  },\n  \"quote_valid_until\": {\n    \"text\": null,\n    \"iso\": null\n  ,\n    \"evidence\": null\n  },\n  \"quote_number\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"referenced_requests\": [],\n  \"notes_for_clerk\": [\n    {\n      \"note\": \"Toolroom & Fixtures\"\n    ,\n    \"evidence\": \"Danke\\nReto Ammann\\nToolroom & Fixtures\"\n    }\n  ]\n}"
+  }
+}

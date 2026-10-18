@@ -1,0 +1,84 @@
+{
+  "file": "email_04_ambiguous.eml",
+  "model": "ollama:qwen2.5:7b",
+  "seconds": 18.955,
+  "outcome": {
+    "ok": true,
+    "extraction": {
+      "requester_name": {
+        "value": "Tobias Weber",
+        "evidence": "From: Tobias Weber <tobias.weber@customer.com>"
+      },
+      "requester_email": {
+        "value": "tobias.weber@customer.com",
+        "evidence": "From: Tobias Weber <tobias.weber@customer.com>"
+      },
+      "supplier_name": {
+        "value": null,
+        "evidence": null
+      },
+      "supplier_vat_id": {
+        "value": null,
+        "evidence": null
+      },
+      "cost_center_code": {
+        "value": null,
+        "evidence": null
+      },
+      "cost_center_name": {
+        "value": null,
+        "evidence": null
+      },
+      "currency": {
+        "value": null,
+        "evidence": null
+      },
+      "line_items": [],
+      "net_total": {
+        "value": null,
+        "evidence": null
+      },
+      "vat_amount": {
+        "value": null,
+        "evidence": null
+      },
+      "gross_total": {
+        "value": null,
+        "evidence": null
+      },
+      "total_unlabelled": {
+        "value": null,
+        "evidence": null
+      },
+      "requested_delivery": {
+        "text": null,
+        "iso": null,
+        "evidence": null
+      },
+      "quote_valid_until": {
+        "text": null,
+        "iso": null,
+        "evidence": null
+      },
+      "quote_number": {
+        "value": null,
+        "evidence": null
+      },
+      "referenced_requests": [],
+      "notes_for_clerk": [
+        {
+          "note": "Bitte das übliche für Linie A bestellen, gleicher Lieferant wie immer. Eilt nicht.",
+          "evidence": "Hoi\n\nBitte das übliche für Linie A bestellen, gleicher Lieferant wie immer. Eilt nicht.\nGruss Tobi"
+        }
+      ]
+    },
+    "unverified": [
+      {
+        "field": "notes_for_clerk[0]",
+        "reason": "quote_not_in_source"
+      }
+    ],
+    "attempts": 1,
+    "rawOutput": "{\n  \"requester_name\": {\n    \"value\": \"Tobias Weber\",\n    \"evidence\": \"From: Tobias Weber <tobias.weber@customer.com>\"\n  },\n  \"requester_email\": {\n    \"value\": \"tobias.weber@customer.com\",\n    \"evidence\": \"From: Tobias Weber <tobias.weber@customer.com>\"\n  },\n  \"supplier_name\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"supplier_vat_id\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"cost_center_code\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"cost_center_name\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"currency\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"line_items\": [],\n  \"net_total\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"vat_amount\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"gross_total\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"total_unlabelled\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"requested_delivery\": {\n    \"text\": null,\n    \"iso\": null\n  ,\n  \"evidence\": null\n  },\n  \"quote_valid_until\": {\n    \"text\": null,\n    \"iso\": null\n  ,\n  \"evidence\": null\n  },\n  \"quote_number\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"referenced_requests\": [],\n  \"notes_for_clerk\": [\n    {\n      \"note\": \"Bitte das übliche für Linie A bestellen, gleicher Lieferant wie immer. Eilt nicht.\",\n      \"evidence\": \"Hoi\\n\\nBitte das übliche für Linie A bestellen, gleicher Lieferant wie immer. Eilt nicht.\\nGruss Tobi\"\n    }\n  ]\n}"
+  }
+}

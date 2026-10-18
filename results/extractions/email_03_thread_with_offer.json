@@ -1,0 +1,141 @@
+{
+  "file": "email_03_thread_with_offer.eml",
+  "model": "ollama:qwen2.5:7b",
+  "seconds": 48.639,
+  "outcome": {
+    "ok": true,
+    "extraction": {
+      "requester_name": {
+        "value": "Lukas Frei",
+        "evidence": "From: Lukas Frei <lukas.frei@customer.com>"
+      },
+      "requester_email": {
+        "value": "lukas.frei@customer.com",
+        "evidence": "From: Lukas Frei <lukas.frei@customer.com>"
+      },
+      "supplier_name": {
+        "value": "Nordic Tools AS",
+        "evidence": "Best regards,\nErik Hansen\nNordic Tools AS"
+      },
+      "supplier_vat_id": {
+        "value": "NO998877665",
+        "evidence": "VAT: NO998877665"
+      },
+      "cost_center_code": {
+        "value": "CC-2001",
+        "evidence": "Budget is in CC-2001."
+      },
+      "cost_center_name": {
+        "value": null,
+        "evidence": null
+      },
+      "currency": {
+        "value": "EUR",
+        "evidence": "Unit price (EUR)"
+      },
+      "line_items": [
+        {
+          "description": "Linear actuator LA-200",
+          "item_code": "LA-200",
+          "quantity": 4,
+          "unit": "ea",
+          "unit_price": 1250,
+          "price_per": null,
+          "line_total": 5000,
+          "evidence": "Linear actuator LA-200          4         1,250.00            5,000.00"
+        },
+        {
+          "description": "Custom mounting bracket",
+          "item_code": "Custom mounting bracket",
+          "quantity": 8,
+          "unit": "ea",
+          "unit_price": 420.5,
+          "price_per": null,
+          "line_total": 3364,
+          "evidence": "Custom mounting bracket         8           420.50            3,364.00"
+        },
+        {
+          "description": "Servo controller SC-9",
+          "item_code": "SC-9",
+          "quantity": 2,
+          "unit": "ea",
+          "unit_price": 3890,
+          "price_per": null,
+          "line_total": 7780,
+          "evidence": "Servo controller SC-9            2         3,890.00            7,780.00"
+        },
+        {
+          "description": "Cable harness, custom",
+          "item_code": "Cable harness, custom",
+          "quantity": 1,
+          "unit": "ea",
+          "unit_price": 1150,
+          "price_per": null,
+          "line_total": 1150,
+          "evidence": "Cable harness, custom           1         1,150.00            1,150.00"
+        }
+      ],
+      "net_total": {
+        "value": 17294,
+        "evidence": "Subtotal:    17,294.00\n                                                VAT (0%, intra-EU): 0.00"
+      },
+      "vat_amount": {
+        "value": 0,
+        "evidence": "VAT (0%, intra-EU): 0.00"
+      },
+      "gross_total": {
+        "value": null,
+        "evidence": null
+      },
+      "total_unlabelled": {
+        "value": null,
+        "evidence": null
+      },
+      "requested_delivery": {
+        "text": "end of June at the latest",
+        "iso": "2026-06-30",
+        "evidence": "Note: this is for the new prototype rig, so we need it by end of June at the latest."
+      },
+      "quote_valid_until": {
+        "text": "30 days",
+        "iso": "2026-06-05",
+        "evidence": "Validity: 30 days."
+      },
+      "quote_number": {
+        "value": null,
+        "evidence": null
+      },
+      "referenced_requests": [],
+      "notes_for_clerk": [
+        {
+          "note": "I think we can probably negotiate the price down by 5-8% based on past orders - worth a try before placing the PO.",
+          "evidence": "Note: this is for the new prototype rig, so we need it by end of June at the latest.\nI think we can probably negotiate the price down by 5-8% based on past orders - worth a try before placing the PO."
+        }
+      ]
+    },
+    "unverified": [
+      {
+        "field": "requested_delivery.iso",
+        "reason": "value_not_in_quote"
+      },
+      {
+        "field": "quote_valid_until.iso",
+        "reason": "value_not_in_quote"
+      },
+      {
+        "field": "line_items[1].unit",
+        "reason": "value_not_in_quote"
+      },
+      {
+        "field": "line_items[2].unit",
+        "reason": "value_not_in_quote"
+      },
+      {
+        "field": "line_items[3].unit",
+        "reason": "value_not_in_quote"
+      }
+    ],
+    "attempts": 1,
+    "rawOutput": "{\n  \"requester_name\": {\n    \"value\": \"Lukas Frei\",\n    \"evidence\": \"From: Lukas Frei <lukas.frei@customer.com>\"\n  },\n  \"requester_email\": {\n    \"value\": \"lukas.frei@customer.com\",\n    \"evidence\": \"From: Lukas Frei <lukas.frei@customer.com>\"\n  },\n  \"supplier_name\": {\n    \"value\": \"Nordic Tools AS\",\n    \"evidence\": \"Best regards,\\nErik Hansen\\nNordic Tools AS\"\n  },\n  \"supplier_vat_id\": {\n    \"value\": \"NO998877665\",\n    \"evidence\": \"VAT: NO998877665\"\n  },\n  \"cost_center_code\": {\n    \"value\": \"CC-2001\",\n    \"evidence\": \"Budget is in CC-2001.\"\n  },\n  \"cost_center_name\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"currency\": {\n    \"value\": \"EUR\",\n    \"evidence\": \"Unit price (EUR)\"\n  },\n  \"line_items\": [\n    {\n      \"description\": \"Linear actuator LA-200\",\n      \"item_code\": \"LA-200\",\n      \"quantity\": 4,\n      \"unit\": \"ea\",\n      \"unit_price\": 1250.0,\n      \"price_per\": null,\n      \"line_total\": 5000.0\n    ,\n    \"evidence\": \"Linear actuator LA-200          4         1,250.00            5,000.00\"\n    },\n    {\n      \"description\": \"Custom mounting bracket\",\n      \"item_code\": \"Custom mounting bracket\",\n      \"quantity\": 8,\n      \"unit\": \"ea\",\n      \"unit_price\": 420.5,\n      \"price_per\": null,\n      \"line_total\": 3364.0\n    ,\n    \"evidence\": \"Custom mounting bracket         8           420.50            3,364.00\"\n    },\n    {\n      \"description\": \"Servo controller SC-9\",\n      \"item_code\": \"SC-9\",\n      \"quantity\": 2,\n      \"unit\": \"ea\",\n      \"unit_price\": 3890.0,\n      \"price_per\": null,\n      \"line_total\": 7780.0\n    ,\n    \"evidence\": \"Servo controller SC-9            2         3,890.00            7,780.00\"\n    },\n    {\n      \"description\": \"Cable harness, custom\",\n      \"item_code\": \"Cable harness, custom\",\n      \"quantity\": 1,\n      \"unit\": \"ea\",\n      \"unit_price\": 1150.0,\n      \"price_per\": null,\n      \"line_total\": 1150.0\n    ,\n    \"evidence\": \"Cable harness, custom           1         1,150.00            1,150.00\"\n    }\n  ],\n  \"net_total\": {\n    \"value\": 17294.0,\n    \"evidence\": \"Subtotal:    17,294.00\\n                                                VAT (0%, intra-EU): 0.00\"\n  },\n  \"vat_amount\": {\n    \"value\": 0.0,\n    \"evidence\": \"VAT (0%, intra-EU): 0.00\"\n  },\n  \"gross_total\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"total_unlabelled\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"requested_delivery\": {\n    \"text\": \"end of June at the latest\",\n    \"iso\": \"2026-06-30\"\n  ,\n    \"evidence\": \"Note: this is for the new prototype rig, so we need it by end of June at the latest.\"\n  },\n  \"quote_valid_until\": {\n    \"text\": \"30 days\",\n    \"iso\": \"2026-06-05\"\n  ,\n    \"evidence\": \"Validity: 30 days.\"\n  },\n  \"quote_number\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"referenced_requests\": [],\n  \"notes_for_clerk\": [\n    {\n      \"note\": \"I think we can probably negotiate the price down by 5-8% based on past orders - worth a try before placing the PO.\"\n    ,\n    \"evidence\": \"Note: this is for the new prototype rig, so we need it by end of June at the latest.\\nI think we can probably negotiate the price down by 5-8% based on past orders - worth a try before placing the PO.\"\n    }\n  ]\n}"
+  }
+}

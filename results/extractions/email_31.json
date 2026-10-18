@@ -1,0 +1,125 @@
+{
+  "file": "email_31.eml",
+  "model": "ollama:qwen2.5:7b",
+  "seconds": 53.453,
+  "outcome": {
+    "ok": true,
+    "extraction": {
+      "requester_name": {
+        "value": "Sophie Dubois",
+        "evidence": "From: Sophie Dubois <sophie.dubois@customer.com>"
+      },
+      "requester_email": {
+        "value": "sophie.dubois@customer.com",
+        "evidence": "From: Sophie Dubois <sophie.dubois@customer.com>"
+      },
+      "supplier_name": {
+        "value": "Nordic Tools AS",
+        "evidence": "Nordic Tools AS\nStorgata 44\n0184 Oslo, Norway"
+      },
+      "supplier_vat_id": {
+        "value": "NO998877665",
+        "evidence": "VAT: NO998877665"
+      },
+      "cost_center_code": {
+        "value": "CC-2001",
+        "evidence": "Cost center CC-2001."
+      },
+      "cost_center_name": {
+        "value": null,
+        "evidence": null
+      },
+      "currency": {
+        "value": "EUR",
+        "evidence": "# Description Qty Unit Unit price (EUR) Line total (EUR)"
+      },
+      "line_items": [
+        {
+          "description": "Linear actuator LA-300, long stroke",
+          "item_code": "LA-300",
+          "quantity": 4,
+          "unit": "pcs",
+          "unit_price": 1480,
+          "price_per": null,
+          "line_total": 5920,
+          "evidence": "# Description Qty Unit Unit price (EUR) Line total (EUR)\n1 Linear actuator LA-300, long stroke\nItem code LA-300 4 pcs 1,480.00 5,920.00"
+        },
+        {
+          "description": "Rotary table RT-120, servo driven",
+          "item_code": "RT-120",
+          "quantity": 2,
+          "unit": "pcs",
+          "unit_price": 3250,
+          "price_per": null,
+          "line_total": 6500,
+          "evidence": "# Description Qty Unit Unit price (EUR) Line total (EUR)\n2 Rotary table RT-120, servo driven\nItem code RT-120 2 pcs 3,250.00 6,500.00"
+        },
+        {
+          "description": "Load cell LC-5kN with amplifier",
+          "item_code": "LC-5KN",
+          "quantity": 6,
+          "unit": "pcs",
+          "unit_price": 690,
+          "price_per": null,
+          "line_total": 4140,
+          "evidence": "# Description Qty Unit Unit price (EUR) Line total (EUR)\n3 Load cell LC-5kN with amplifier\nItem code LC-5KN 6 pcs 690.00 4,140.00"
+        },
+        {
+          "description": "Control cabinet, prewired",
+          "item_code": "CAB-PRE",
+          "quantity": 1,
+          "unit": "pcs",
+          "unit_price": 2890,
+          "price_per": null,
+          "line_total": 2890,
+          "evidence": "# Description Qty Unit Unit price (EUR) Line total (EUR)\n4 Control cabinet, prewired\nItem code CAB-PRE 1 pcs 2,890.00 2,890.00"
+        }
+      ],
+      "net_total": {
+        "value": 19450,
+        "evidence": "Subtotal: 19,450.00 EUR"
+      },
+      "vat_amount": {
+        "value": 0,
+        "evidence": "VAT (0%, intra-EU supply): 0.00 EUR"
+      },
+      "gross_total": {
+        "value": null,
+        "evidence": null
+      },
+      "total_unlabelled": {
+        "value": null,
+        "evidence": null
+      },
+      "requested_delivery": {
+        "text": "6-8 weeks ex works Oslo",
+        "iso": null,
+        "evidence": "Delivery: 6-8 weeks ex works Oslo"
+      },
+      "quote_valid_until": {
+        "text": "30 days from date of issue",
+        "iso": "2026-05-14",
+        "evidence": "Validity: 30 days from date of issue\nDate: 01.04.2026"
+      },
+      "quote_number": {
+        "value": "NT-2026-0311",
+        "evidence": "Quote no.: NT-2026-0311"
+      },
+      "referenced_requests": [],
+      "notes_for_clerk": [
+        {
+          "note": "Please order the components for the second test rig per the attached Nordic Tools quote.",
+          "evidence": "Hi Procurement,\n\nPlease order the components for the second test rig per the attached Nordic Tools quote. Cost center CC-2001."
+        }
+      ]
+    },
+    "unverified": [
+      {
+        "field": "quote_valid_until.iso",
+        "reason": "value_not_in_quote"
+      }
+    ],
+    "attempts": 1,
+    "rawOutput": "{\n  \"requester_name\": {\n    \"value\": \"Sophie Dubois\",\n    \"evidence\": \"From: Sophie Dubois <sophie.dubois@customer.com>\"\n  },\n  \"requester_email\": {\n    \"value\": \"sophie.dubois@customer.com\",\n    \"evidence\": \"From: Sophie Dubois <sophie.dubois@customer.com>\"\n  },\n  \"supplier_name\": {\n    \"value\": \"Nordic Tools AS\",\n    \"evidence\": \"Nordic Tools AS\\nStorgata 44\\n0184 Oslo, Norway\"\n  },\n  \"supplier_vat_id\": {\n    \"value\": \"NO998877665\",\n    \"evidence\": \"VAT: NO998877665\"\n  },\n  \"cost_center_code\": {\n    \"value\": \"CC-2001\",\n    \"evidence\": \"Cost center CC-2001.\"\n  },\n  \"cost_center_name\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"currency\": {\n    \"value\": \"EUR\",\n    \"evidence\": \"# Description Qty Unit Unit price (EUR) Line total (EUR)\"\n  },\n  \"line_items\": [\n    {\n      \"description\": \"Linear actuator LA-300, long stroke\",\n      \"item_code\": \"LA-300\",\n      \"quantity\": 4,\n      \"unit\": \"pcs\",\n      \"unit_price\": 1480.0,\n      \"price_per\": null,\n      \"line_total\": 5920.0\n    ,\n    \"evidence\": \"# Description Qty Unit Unit price (EUR) Line total (EUR)\\n1 Linear actuator LA-300, long stroke\\nItem code LA-300 4 pcs 1,480.00 5,920.00\"\n    },\n    {\n      \"description\": \"Rotary table RT-120, servo driven\",\n      \"item_code\": \"RT-120\",\n      \"quantity\": 2,\n      \"unit\": \"pcs\",\n      \"unit_price\": 3250.0,\n      \"price_per\": null,\n      \"line_total\": 6500.0\n    ,\n    \"evidence\": \"# Description Qty Unit Unit price (EUR) Line total (EUR)\\n2 Rotary table RT-120, servo driven\\nItem code RT-120 2 pcs 3,250.00 6,500.00\"\n    },\n    {\n      \"description\": \"Load cell LC-5kN with amplifier\",\n      \"item_code\": \"LC-5KN\",\n      \"quantity\": 6,\n      \"unit\": \"pcs\",\n      \"unit_price\": 690.0,\n      \"price_per\": null,\n      \"line_total\": 4140.0\n    ,\n    \"evidence\": \"# Description Qty Unit Unit price (EUR) Line total (EUR)\\n3 Load cell LC-5kN with amplifier\\nItem code LC-5KN 6 pcs 690.00 4,140.00\"\n    },\n    {\n      \"description\": \"Control cabinet, prewired\",\n      \"item_code\": \"CAB-PRE\",\n      \"quantity\": 1,\n      \"unit\": \"pcs\",\n      \"unit_price\": 2890.0,\n      \"price_per\": null,\n      \"line_total\": 2890.0\n    ,\n    \"evidence\": \"# Description Qty Unit Unit price (EUR) Line total (EUR)\\n4 Control cabinet, prewired\\nItem code CAB-PRE 1 pcs 2,890.00 2,890.00\"\n    }\n  ],\n  \"net_total\": {\n    \"value\": 19450.0,\n    \"evidence\": \"Subtotal: 19,450.00 EUR\"\n  },\n  \"vat_amount\": {\n    \"value\": 0.0,\n    \"evidence\": \"VAT (0%, intra-EU supply): 0.00 EUR\"\n  },\n  \"gross_total\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"total_unlabelled\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"requested_delivery\": {\n    \"text\": \"6-8 weeks ex works Oslo\",\n    \"iso\": null\n  ,\n    \"evidence\": \"Delivery: 6-8 weeks ex works Oslo\"\n  },\n  \"quote_valid_until\": {\n    \"text\": \"30 days from date of issue\",\n    \"iso\": \"2026-05-14\"\n  ,\n    \"evidence\": \"Validity: 30 days from date of issue\\nDate: 01.04.2026\"\n  },\n  \"quote_number\": {\n    \"value\": \"NT-2026-0311\",\n    \"evidence\": \"Quote no.: NT-2026-0311\"\n  },\n  \"referenced_requests\": [],\n  \"notes_for_clerk\": [\n    {\n      \"note\": \"Please order the components for the second test rig per the attached Nordic Tools quote.\"\n    ,\n    \"evidence\": \"Hi Procurement,\\n\\nPlease order the components for the second test rig per the attached Nordic Tools quote. Cost center CC-2001.\"\n  }\n  ]\n}"
+  }
+}

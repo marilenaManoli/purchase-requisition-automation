@@ -1,0 +1,119 @@
+{
+  "file": "email_06.eml",
+  "model": "ollama:qwen2.5:7b",
+  "seconds": 35.602,
+  "outcome": {
+    "ok": true,
+    "extraction": {
+      "requester_name": {
+        "value": "Miriam Frick",
+        "evidence": "From: Miriam Frick <miriam.frick@customer.com>"
+      },
+      "requester_email": {
+        "value": "miriam.frick@customer.com",
+        "evidence": "From: Miriam Frick <miriam.frick@customer.com>"
+      },
+      "supplier_name": {
+        "value": "Global Fastener Supply",
+        "evidence": "quoted me the following over the phone:"
+      },
+      "supplier_vat_id": {
+        "value": null,
+        "evidence": null
+      },
+      "cost_center_code": {
+        "value": "CC-1003",
+        "evidence": "Cost center CC-1003."
+      },
+      "cost_center_name": {
+        "value": null,
+        "evidence": null
+      },
+      "currency": {
+        "value": "USD",
+        "evidence": "- 20,000 pcs hex bolt M8x40, A2 stainless, at USD 0.21 each"
+      },
+      "line_items": [
+        {
+          "description": "hex bolt M8x40, A2 stainless",
+          "item_code": null,
+          "quantity": 20000,
+          "unit": "pcs",
+          "unit_price": 0.21,
+          "price_per": null,
+          "line_total": null,
+          "evidence": "- 20,000 pcs hex bolt M8x40, A2 stainless, at USD 0.21 each"
+        },
+        {
+          "description": "washer M8, A2 stainless",
+          "item_code": null,
+          "quantity": 20000,
+          "unit": "pcs",
+          "unit_price": 0.06,
+          "price_per": null,
+          "line_total": null,
+          "evidence": "- 20,000 pcs washer M8, A2 stainless, at USD 0.06 each"
+        },
+        {
+          "description": "nut M8, A2 stainless",
+          "item_code": null,
+          "quantity": 12000,
+          "unit": "pcs",
+          "unit_price": 0.25,
+          "price_per": null,
+          "line_total": null,
+          "evidence": "- 12,000 pcs nut M8, A2 stainless, at USD 0.25 each"
+        }
+      ],
+      "net_total": {
+        "value": 8400,
+        "evidence": "That comes to USD 8,400.00 total."
+      },
+      "vat_amount": {
+        "value": null,
+        "evidence": null
+      },
+      "gross_total": {
+        "value": null,
+        "evidence": null
+      },
+      "total_unlabelled": {
+        "value": null,
+        "evidence": null
+      },
+      "requested_delivery": {
+        "text": "ordered this week",
+        "iso": "2026-05-14",
+        "evidence": "We are down to about two weeks of stock, so ideally ordered this week."
+      },
+      "quote_valid_until": {
+        "text": null,
+        "iso": null,
+        "evidence": null
+      },
+      "quote_number": {
+        "value": null,
+        "evidence": null
+      },
+      "referenced_requests": [],
+      "notes_for_clerk": [
+        {
+          "note": "Production Line B is down to about two weeks of stock.",
+          "evidence": "We are down to about two weeks of stock, so ideally ordered this week."
+        }
+      ]
+    },
+    "unverified": [
+      {
+        "field": "supplier_name",
+        "reason": "value_not_in_quote"
+      },
+      {
+        "field": "requested_delivery.iso",
+        "reason": "value_not_in_quote"
+      }
+    ],
+    "attempts": 1,
+    "rawOutput": "{\n  \"requester_name\": {\n    \"value\": \"Miriam Frick\",\n    \"evidence\": \"From: Miriam Frick <miriam.frick@customer.com>\"\n  },\n  \"requester_email\": {\n    \"value\": \"miriam.frick@customer.com\",\n    \"evidence\": \"From: Miriam Frick <miriam.frick@customer.com>\"\n  },\n  \"supplier_name\": {\n    \"value\": \"Global Fastener Supply\",\n    \"evidence\": \"quoted me the following over the phone:\"\n  },\n  \"supplier_vat_id\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"cost_center_code\": {\n    \"value\": \"CC-1003\",\n    \"evidence\": \"Cost center CC-1003.\"\n  },\n  \"cost_center_name\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"currency\": {\n    \"value\": \"USD\",\n    \"evidence\": \"- 20,000 pcs hex bolt M8x40, A2 stainless, at USD 0.21 each\"\n  },\n  \"line_items\": [\n    {\n      \"description\": \"hex bolt M8x40, A2 stainless\",\n      \"item_code\": null,\n      \"quantity\": 20000,\n      \"unit\": \"pcs\",\n      \"unit_price\": 0.21,\n      \"price_per\": null,\n      \"line_total\": null\n    ,\n    \"evidence\": \"- 20,000 pcs hex bolt M8x40, A2 stainless, at USD 0.21 each\"\n    },\n    {\n      \"description\": \"washer M8, A2 stainless\",\n      \"item_code\": null,\n      \"quantity\": 20000,\n      \"unit\": \"pcs\",\n      \"unit_price\": 0.06,\n      \"price_per\": null,\n      \"line_total\": null\n    ,\n    \"evidence\": \"- 20,000 pcs washer M8, A2 stainless, at USD 0.06 each\"\n    },\n    {\n      \"description\": \"nut M8, A2 stainless\",\n      \"item_code\": null,\n      \"quantity\": 12000,\n      \"unit\": \"pcs\",\n      \"unit_price\": 0.25,\n      \"price_per\": null,\n      \"line_total\": null\n    ,\n    \"evidence\": \"- 12,000 pcs nut M8, A2 stainless, at USD 0.25 each\"\n    }\n  ],\n  \"net_total\": {\n    \"value\": 8400,\n    \"evidence\": \"That comes to USD 8,400.00 total.\"\n  },\n  \"vat_amount\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"gross_total\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"total_unlabelled\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"requested_delivery\": {\n    \"text\": \"ordered this week\",\n    \"iso\": \"2026-05-14\"\n  ,\n  \"evidence\": \"We are down to about two weeks of stock, so ideally ordered this week.\"\n  },\n  \"quote_valid_until\": {\n    \"text\": null,\n    \"iso\": null\n  ,\n  \"evidence\": null\n  },\n  \"quote_number\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"referenced_requests\": [],\n  \"notes_for_clerk\": [\n    {\n      \"note\": \"Production Line B is down to about two weeks of stock.\"\n    ,\n    \"evidence\": \"We are down to about two weeks of stock, so ideally ordered this week.\"\n  }\n  ]\n}"
+  }
+}

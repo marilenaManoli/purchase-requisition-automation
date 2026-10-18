@@ -1,0 +1,105 @@
+{
+  "file": "email_05.eml",
+  "model": "ollama:qwen2.5:7b",
+  "seconds": 44.842,
+  "outcome": {
+    "ok": true,
+    "extraction": {
+      "requester_name": {
+        "value": "Sophie Dubois",
+        "evidence": "From: Sophie Dubois <sophie.dubois@customer.com>"
+      },
+      "requester_email": {
+        "value": "sophie.dubois@customer.com",
+        "evidence": "From: Sophie Dubois <sophie.dubois@customer.com>"
+      },
+      "supplier_name": {
+        "value": "SwissElectro AG",
+        "evidence": "SwissElectro AG\nBahnhofstrasse 88\n8001 Zürich, Switzerland"
+      },
+      "supplier_vat_id": {
+        "value": "CHE-101.234.567 MWST",
+        "evidence": "UID: CHE-101.234.567 MWST"
+      },
+      "cost_center_code": {
+        "value": "CC-2002",
+        "evidence": "Kostenstelle CC-2002."
+      },
+      "cost_center_name": {
+        "value": null,
+        "evidence": null
+      },
+      "currency": {
+        "value": "CHF",
+        "evidence": "Total (CHF)"
+      },
+      "line_items": [
+        {
+          "description": "Steuerungsmodul Typ SCX-220, vorkonfiguriert",
+          "item_code": null,
+          "quantity": 1,
+          "unit": "Stk",
+          "unit_price": 7450,
+          "price_per": null,
+          "line_total": 7450,
+          "evidence": "# Beschreibung Menge Einheit Einzelpreis (CHF) Total (CHF)\n1 Steuerungsmodul Typ SCX-220, vorkonfiguriert 1 Stk 7,450.00 7,450.00"
+        },
+        {
+          "description": "Bedienpanel BP-10, 10\" Touch",
+          "item_code": null,
+          "quantity": 2,
+          "unit": "Stk",
+          "unit_price": 1125,
+          "price_per": null,
+          "line_total": 2250,
+          "evidence": "# Beschreibung Menge Einheit Einzelpreis (CHF) Total (CHF)\n2 Bedienpanel BP-10, 10\" Touch 2 Stk 1,125.00 2,250.00"
+        }
+      ],
+      "net_total": {
+        "value": 9700,
+        "evidence": "Zwischensumme: 9,700.00 CHF"
+      },
+      "vat_amount": {
+        "value": 785.7,
+        "evidence": "MwSt 8.1%: 785.70 CHF"
+      },
+      "gross_total": {
+        "value": 10485.7,
+        "evidence": "Total inkl. MwSt: 10,485.70 CHF"
+      },
+      "total_unlabelled": {
+        "value": null,
+        "evidence": null
+      },
+      "requested_delivery": {
+        "text": "Mitte Juni",
+        "iso": "2026-06-15",
+        "evidence": "benoetigt bis Mitte Juni fuer den Aufbau von Pruefstand 2."
+      },
+      "quote_valid_until": {
+        "text": "Gültig bis: 06.06.2026",
+        "iso": "2026-06-06",
+        "evidence": "Gültig bis: 06.06.2026"
+      },
+      "quote_number": {
+        "value": "SE-26-2401",
+        "evidence": "Offert-Nr.: SE-26-2401"
+      },
+      "referenced_requests": [],
+      "notes_for_clerk": [
+        {
+          "note": "Bitte bei Bestellung die Offert-Nr. SE-26-2401 angeben.",
+          "evidence": "Bitte bei Bestellung die Offert-Nr. SE-26-2401 angeben."
+        }
+      ]
+    },
+    "unverified": [
+      {
+        "field": "requested_delivery.iso",
+        "reason": "value_not_in_quote"
+      }
+    ],
+    "attempts": 1,
+    "rawOutput": "{\n  \"requester_name\": {\n    \"value\": \"Sophie Dubois\",\n    \"evidence\": \"From: Sophie Dubois <sophie.dubois@customer.com>\"\n  },\n  \"requester_email\": {\n    \"value\": \"sophie.dubois@customer.com\",\n    \"evidence\": \"From: Sophie Dubois <sophie.dubois@customer.com>\"\n  },\n  \"supplier_name\": {\n    \"value\": \"SwissElectro AG\",\n    \"evidence\": \"SwissElectro AG\\nBahnhofstrasse 88\\n8001 Zürich, Switzerland\"\n  },\n  \"supplier_vat_id\": {\n    \"value\": \"CHE-101.234.567 MWST\",\n    \"evidence\": \"UID: CHE-101.234.567 MWST\"\n  },\n  \"cost_center_code\": {\n    \"value\": \"CC-2002\",\n    \"evidence\": \"Kostenstelle CC-2002.\"\n  },\n  \"cost_center_name\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"currency\": {\n    \"value\": \"CHF\",\n    \"evidence\": \"Total (CHF)\"\n  },\n  \"line_items\": [\n    {\n      \"description\": \"Steuerungsmodul Typ SCX-220, vorkonfiguriert\",\n      \"item_code\": null,\n      \"quantity\": 1,\n      \"unit\": \"Stk\",\n      \"unit_price\": 7450.0,\n      \"price_per\": null,\n      \"line_total\": 7450.0\n    ,\n    \"evidence\": \"# Beschreibung Menge Einheit Einzelpreis (CHF) Total (CHF)\\n1 Steuerungsmodul Typ SCX-220, vorkonfiguriert 1 Stk 7,450.00 7,450.00\"\n    },\n    {\n      \"description\": \"Bedienpanel BP-10, 10\\\" Touch\",\n      \"item_code\": null,\n      \"quantity\": 2,\n      \"unit\": \"Stk\",\n      \"unit_price\": 1125.0,\n      \"price_per\": null,\n      \"line_total\": 2250.0\n    ,\n    \"evidence\": \"# Beschreibung Menge Einheit Einzelpreis (CHF) Total (CHF)\\n2 Bedienpanel BP-10, 10\\\" Touch 2 Stk 1,125.00 2,250.00\"\n    }\n  ],\n  \"net_total\": {\n    \"value\": 9700.0,\n    \"evidence\": \"Zwischensumme: 9,700.00 CHF\"\n  },\n  \"vat_amount\": {\n    \"value\": 785.7,\n    \"evidence\": \"MwSt 8.1%: 785.70 CHF\"\n  },\n  \"gross_total\": {\n    \"value\": 10485.7,\n    \"evidence\": \"Total inkl. MwSt: 10,485.70 CHF\"\n  },\n  \"total_unlabelled\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"requested_delivery\": {\n    \"text\": \"Mitte Juni\",\n    \"iso\": \"2026-06-15\"\n  ,\n    \"evidence\": \"benoetigt bis Mitte Juni fuer den Aufbau von Pruefstand 2.\"\n  },\n  \"quote_valid_until\": {\n    \"text\": \"Gültig bis: 06.06.2026\",\n    \"iso\": \"2026-06-06\"\n  ,\n    \"evidence\": \"Gültig bis: 06.06.2026\"\n  },\n  \"quote_number\": {\n    \"value\": \"SE-26-2401\",\n    \"evidence\": \"Offert-Nr.: SE-26-2401\"\n  },\n  \"referenced_requests\": [],\n  \"notes_for_clerk\": [\n    {\n      \"note\": \"Bitte bei Bestellung die Offert-Nr. SE-26-2401 angeben.\",\n      \"evidence\": \"Bitte bei Bestellung die Offert-Nr. SE-26-2401 angeben.\"\n    }\n  ]\n}"
+  }
+}

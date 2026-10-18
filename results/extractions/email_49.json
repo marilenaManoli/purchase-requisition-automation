@@ -1,0 +1,125 @@
+{
+  "file": "email_49.eml",
+  "model": "ollama:qwen2.5:7b",
+  "seconds": 62.478,
+  "outcome": {
+    "ok": true,
+    "extraction": {
+      "requester_name": {
+        "value": "Ruedi Zimmermann",
+        "evidence": "From: Ruedi Zimmermann <ruedi.zimmermann@customer.com>"
+      },
+      "requester_email": {
+        "value": "ruedi.zimmermann@customer.com",
+        "evidence": "From: Ruedi Zimmermann <ruedi.zimmermann@customer.com>"
+      },
+      "supplier_name": {
+        "value": "Feinmechanik Tanner GmbH",
+        "evidence": "OFFERTE\nOffert-Nr.: FT-26-0912\ndatum: 14.05.2026\nGültig bis: 13.06.2026\nKunde:\nCustomer AG Metrology"
+      },
+      "supplier_vat_id": {
+        "value": "CHE-606.789.012 MWST",
+        "evidence": "UID: CHE-606.789.012 MWST"
+      },
+      "cost_center_code": {
+        "value": "CC-4002",
+        "evidence": "Kostenstelle:            CC-4002"
+      },
+      "cost_center_name": {
+        "value": null,
+        "evidence": null
+      },
+      "currency": {
+        "value": "CHF",
+        "evidence": "Total: 19,080.00 CHF\nZwischensumme: 19,080.00 CHF"
+      },
+      "line_items": [
+        {
+          "description": "Messuhr-Set 0-10 mm mit Stativ",
+          "item_code": "MU-SET-10",
+          "quantity": 6,
+          "unit": "Set",
+          "unit_price": 890,
+          "price_per": null,
+          "line_total": 5340,
+          "evidence": "# Beschreibung Menge Einheit Einzelpreis (CHF) Total (CHF)\n1 Messuhr-Set 0-10 mm mit Stativ Art.-Nr. MU-SET-10 6 Set 890.00 5,340.00"
+        },
+        {
+          "description": "Bügelmessschraube 0-25 mm, digital",
+          "item_code": "BMS-25-D",
+          "quantity": 10,
+          "unit": "Stk",
+          "unit_price": 620,
+          "price_per": null,
+          "line_total": 6200,
+          "evidence": "# Beschreibung Menge Einheit Einzelpreis (CHF) Total (CHF)\n2 Bügelmessschraube 0-25 mm, digital Art.-Nr. BMS-25-D 10 Stk 620.00 6,200.00"
+        },
+        {
+          "description": "Endmasssatz 47-teilig, Güte 1",
+          "item_code": "EM-47-G1",
+          "quantity": 1,
+          "unit": "Satz",
+          "unit_price": 4360,
+          "price_per": null,
+          "line_total": 4360,
+          "evidence": "# Beschreibung Menge Einheit Einzelpreis (CHF) Total (CHF)\n3 Endmasssatz 47-teilig, Güte 1 Art.-Nr. EM-47-G1 1 Satz 4,360.00 4,360.00"
+        },
+        {
+          "description": "Kalibrierung und Einmessung vor Ort",
+          "item_code": "KAL-VO",
+          "quantity": 1,
+          "unit": "Pos",
+          "unit_price": 3180,
+          "price_per": null,
+          "line_total": 3180,
+          "evidence": "# Beschreibung Menge Einheit Einzelpreis (CHF) Total (CHF)\n4 Kalibrierung und Einmessung vor Ort Art.-Nr. KAL-VO 1 Pos 3,180.00 3,180.00"
+        }
+      ],
+      "net_total": {
+        "value": 19080,
+        "evidence": "Zwischensumme: 19,080.00 CHF"
+      },
+      "vat_amount": {
+        "value": null,
+        "evidence": null
+      },
+      "gross_total": {
+        "value": 19080,
+        "evidence": "Total: 19,080.00 CHF"
+      },
+      "total_unlabelled": {
+        "value": null,
+        "evidence": null
+      },
+      "requested_delivery": {
+        "text": "bis 30.06.2026",
+        "iso": "2026-06-30",
+        "evidence": "Gewuenschte Lieferung:   bis 30.06.2026"
+      },
+      "quote_valid_until": {
+        "text": "13.06.2026",
+        "iso": "2026-06-13",
+        "evidence": "Gültig bis: 13.06.2026"
+      },
+      "quote_number": {
+        "value": "FT-26-0912",
+        "evidence": "Offert-Nr.: FT-26-0912"
+      },
+      "referenced_requests": [],
+      "notes_for_clerk": [
+        {
+          "note": "Die Kalibrierung vor Ort ist in der Offerte enthalten, das ist uns wichtig.",
+          "evidence": "Die Kalibrierung vor Ort ist in der Offerte enthalten, das ist uns wichtig."
+        }
+      ]
+    },
+    "unverified": [
+      {
+        "field": "supplier_name",
+        "reason": "value_not_in_quote"
+      }
+    ],
+    "attempts": 1,
+    "rawOutput": "{\n  \"requester_name\": {\n    \"value\": \"Ruedi Zimmermann\",\n    \"evidence\": \"From: Ruedi Zimmermann <ruedi.zimmermann@customer.com>\"\n  },\n  \"requester_email\": {\n    \"value\": \"ruedi.zimmermann@customer.com\",\n    \"evidence\": \"From: Ruedi Zimmermann <ruedi.zimmermann@customer.com>\"\n  },\n  \"supplier_name\": {\n    \"value\": \"Feinmechanik Tanner GmbH\",\n    \"evidence\": \"OFFERTE\\nOffert-Nr.: FT-26-0912\\ndatum: 14.05.2026\\nGültig bis: 13.06.2026\\nKunde:\\nCustomer AG Metrology\"\n  },\n  \"supplier_vat_id\": {\n    \"value\": \"CHE-606.789.012 MWST\",\n    \"evidence\": \"UID: CHE-606.789.012 MWST\"\n  },\n  \"cost_center_code\": {\n    \"value\": \"CC-4002\",\n    \"evidence\": \"Kostenstelle:            CC-4002\"\n  },\n  \"cost_center_name\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"currency\": {\n    \"value\": \"CHF\",\n    \"evidence\": \"Total: 19,080.00 CHF\\nZwischensumme: 19,080.00 CHF\"\n  },\n  \"line_items\": [\n    {\n      \"description\": \"Messuhr-Set 0-10 mm mit Stativ\",\n      \"item_code\": \"MU-SET-10\",\n      \"quantity\": 6,\n      \"unit\": \"Set\",\n      \"unit_price\": 890.00,\n      \"price_per\": null,\n      \"line_total\": 5340.00\n    ,\n    \"evidence\": \"# Beschreibung Menge Einheit Einzelpreis (CHF) Total (CHF)\\n1 Messuhr-Set 0-10 mm mit Stativ Art.-Nr. MU-SET-10 6 Set 890.00 5,340.00\"\n    },\n    {\n      \"description\": \"Bügelmessschraube 0-25 mm, digital\",\n      \"item_code\": \"BMS-25-D\",\n      \"quantity\": 10,\n      \"unit\": \"Stk\",\n      \"unit_price\": 620.00,\n      \"price_per\": null,\n      \"line_total\": 6200.00\n    ,\n    \"evidence\": \"# Beschreibung Menge Einheit Einzelpreis (CHF) Total (CHF)\\n2 Bügelmessschraube 0-25 mm, digital Art.-Nr. BMS-25-D 10 Stk 620.00 6,200.00\"\n    },\n    {\n      \"description\": \"Endmasssatz 47-teilig, Güte 1\",\n      \"item_code\": \"EM-47-G1\",\n      \"quantity\": 1,\n      \"unit\": \"Satz\",\n      \"unit_price\": 4360.00,\n      \"price_per\": null,\n      \"line_total\": 4360.00\n    ,\n    \"evidence\": \"# Beschreibung Menge Einheit Einzelpreis (CHF) Total (CHF)\\n3 Endmasssatz 47-teilig, Güte 1 Art.-Nr. EM-47-G1 1 Satz 4,360.00 4,360.00\"\n    },\n    {\n      \"description\": \"Kalibrierung und Einmessung vor Ort\",\n      \"item_code\": \"KAL-VO\",\n      \"quantity\": 1,\n      \"unit\": \"Pos\",\n      \"unit_price\": 3180.00,\n      \"price_per\": null,\n      \"line_total\": 3180.00\n    ,\n    \"evidence\": \"# Beschreibung Menge Einheit Einzelpreis (CHF) Total (CHF)\\n4 Kalibrierung und Einmessung vor Ort Art.-Nr. KAL-VO 1 Pos 3,180.00 3,180.00\"\n    }\n  ],\n  \"net_total\": {\n    \"value\": 19080.00,\n    \"evidence\": \"Zwischensumme: 19,080.00 CHF\"\n  },\n  \"vat_amount\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"gross_total\": {\n    \"value\": 19080.00,\n    \"evidence\": \"Total: 19,080.00 CHF\"\n  },\n  \"total_unlabelled\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"requested_delivery\": {\n    \"text\": \"bis 30.06.2026\",\n    \"iso\": \"2026-06-30\"\n  ,\n    \"evidence\": \"Gewuenschte Lieferung:   bis 30.06.2026\"\n  },\n  \"quote_valid_until\": {\n    \"text\": \"13.06.2026\",\n    \"iso\": \"2026-06-13\"\n  ,\n    \"evidence\": \"Gültig bis: 13.06.2026\"\n  },\n  \"quote_number\": {\n    \"value\": \"FT-26-0912\",\n    \"evidence\": \"Offert-Nr.: FT-26-0912\"\n  },\n  \"referenced_requests\": [],\n  \"notes_for_clerk\": [\n    {\n      \"note\": \"Die Kalibrierung vor Ort ist in der Offerte enthalten, das ist uns wichtig.\",\n      \"evidence\": \"Die Kalibrierung vor Ort ist in der Offerte enthalten, das ist uns wichtig.\"\n    }\n  ]\n}"
+  }
+}

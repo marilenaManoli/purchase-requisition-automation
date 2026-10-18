@@ -1,0 +1,120 @@
+{
+  "file": "email_48.eml",
+  "model": "ollama:qwen2.5:7b",
+  "seconds": 47.788,
+  "outcome": {
+    "ok": true,
+    "extraction": {
+      "requester_name": {
+        "value": "Miriam Frick",
+        "evidence": "From: Miriam Frick <miriam.frick@customer.com>"
+      },
+      "requester_email": {
+        "value": "miriam.frick@customer.com",
+        "evidence": "From: Miriam Frick <miriam.frick@customer.com>"
+      },
+      "supplier_name": {
+        "value": "Kabelwerk Rheintal",
+        "evidence": "All from Kabelwerk Rheintal, cost center CC-1002."
+      },
+      "supplier_vat_id": {
+        "value": null,
+        "evidence": null
+      },
+      "cost_center_code": {
+        "value": "CC-1002",
+        "evidence": "All from Kabelwerk Rheintal, cost center CC-1002."
+      },
+      "cost_center_name": {
+        "value": null,
+        "evidence": null
+      },
+      "currency": {
+        "value": "EUR",
+        "evidence": "Unit price EUR"
+      },
+      "line_items": [
+        {
+          "description": "Control cable LiYCY 4x1.0",
+          "item_code": "LIYCY-4X10",
+          "quantity": 900,
+          "unit": "m",
+          "unit_price": 3.1,
+          "price_per": null,
+          "line_total": 2790,
+          "evidence": "Article\tDescription\tQty\tUnit\tUnit price EUR\tLine total EUR\nLIYCY-4X10\tControl cable LiYCY 4x1.0\t900\tm\t3.10\t2790.00"
+        },
+        {
+          "description": "Control cable LiYCY 7x0.5",
+          "item_code": "LIYCY-7X05",
+          "quantity": 500,
+          "unit": "m",
+          "unit_price": 4.4,
+          "price_per": null,
+          "line_total": 2200,
+          "evidence": "Article\tDescription\tQty\tUnit\tUnit price EUR\tLine total EUR\nLIYCY-7X05\tControl cable LiYCY 7x0.5\t500\tm\t4.40\t2200.00"
+        },
+        {
+          "description": "Cable carrier CK-25, assembled",
+          "item_code": "CK-25-A",
+          "quantity": 120,
+          "unit": "m",
+          "unit_price": 12,
+          "price_per": null,
+          "line_total": 1440,
+          "evidence": "Article\tDescription\tQty\tUnit\tUnit price EUR\tLine total EUR\nCK-25-A\tCable carrier CK-25, assembled\t120\tm\t12.00\t1440.00"
+        },
+        {
+          "description": "Cable gland M20, brass",
+          "item_code": "GLAND-M20",
+          "quantity": 400,
+          "unit": "pcs",
+          "unit_price": 2.55,
+          "price_per": null,
+          "line_total": 1020,
+          "evidence": "Article\tDescription\tQty\tUnit\tUnit price EUR\tLine total EUR\nGLAND-M20\tCable gland M20, brass\t400\tpcs\t2.55\t1020.00"
+        }
+      ],
+      "net_total": {
+        "value": 7450,
+        "evidence": "Total\t7450.00"
+      },
+      "vat_amount": {
+        "value": null,
+        "evidence": null
+      },
+      "gross_total": {
+        "value": null,
+        "evidence": null
+      },
+      "total_unlabelled": {
+        "value": null,
+        "evidence": null
+      },
+      "requested_delivery": {
+        "text": "Delivery by 2026-06-05 please.",
+        "iso": "2026-06-05",
+        "evidence": "Delivery by 2026-06-05 please."
+      },
+      "quote_valid_until": {
+        "text": null,
+        "iso": null,
+        "evidence": null
+      },
+      "quote_number": {
+        "value": null,
+        "evidence": null
+      },
+      "referenced_requests": [],
+      "notes_for_clerk": [
+        {
+          "note": "Pasting straight out of our stock sheet, sorry about the formatting.",
+          "evidence": "Hi Procurement,\nPasting straight out of our stock sheet, sorry about the formatting. All from Kabelwerk Rheintal, cost center CC-1002."
+        }
+      ]
+    },
+    "unverified": [],
+    "attempts": 1,
+    "rawOutput": "{\n  \"requester_name\": {\n    \"value\": \"Miriam Frick\",\n    \"evidence\": \"From: Miriam Frick <miriam.frick@customer.com>\"\n  },\n  \"requester_email\": {\n    \"value\": \"miriam.frick@customer.com\",\n    \"evidence\": \"From: Miriam Frick <miriam.frick@customer.com>\"\n  },\n  \"supplier_name\": {\n    \"value\": \"Kabelwerk Rheintal\",\n    \"evidence\": \"All from Kabelwerk Rheintal, cost center CC-1002.\"\n  },\n  \"supplier_vat_id\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"cost_center_code\": {\n    \"value\": \"CC-1002\",\n    \"evidence\": \"All from Kabelwerk Rheintal, cost center CC-1002.\"\n  },\n  \"cost_center_name\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"currency\": {\n    \"value\": \"EUR\",\n    \"evidence\": \"Unit price EUR\"\n  },\n  \"line_items\": [\n    {\n      \"description\": \"Control cable LiYCY 4x1.0\",\n      \"item_code\": \"LIYCY-4X10\",\n      \"quantity\": 900,\n      \"unit\": \"m\",\n      \"unit_price\": 3.1,\n      \"price_per\": null,\n      \"line_total\": 2790\n    ,\n    \"evidence\": \"Article\\tDescription\\tQty\\tUnit\\tUnit price EUR\\tLine total EUR\\nLIYCY-4X10\\tControl cable LiYCY 4x1.0\\t900\\tm\\t3.10\\t2790.00\"\n    },\n    {\n      \"description\": \"Control cable LiYCY 7x0.5\",\n      \"item_code\": \"LIYCY-7X05\",\n      \"quantity\": 500,\n      \"unit\": \"m\",\n      \"unit_price\": 4.4,\n      \"price_per\": null,\n      \"line_total\": 2200\n    ,\n      \"evidence\": \"Article\\tDescription\\tQty\\tUnit\\tUnit price EUR\\tLine total EUR\\nLIYCY-7X05\\tControl cable LiYCY 7x0.5\\t500\\tm\\t4.40\\t2200.00\"\n    },\n    {\n      \"description\": \"Cable carrier CK-25, assembled\",\n      \"item_code\": \"CK-25-A\",\n      \"quantity\": 120,\n      \"unit\": \"m\",\n      \"unit_price\": 12,\n      \"price_per\": null,\n      \"line_total\": 1440\n    ,\n      \"evidence\": \"Article\\tDescription\\tQty\\tUnit\\tUnit price EUR\\tLine total EUR\\nCK-25-A\\tCable carrier CK-25, assembled\\t120\\tm\\t12.00\\t1440.00\"\n    },\n    {\n      \"description\": \"Cable gland M20, brass\",\n      \"item_code\": \"GLAND-M20\",\n      \"quantity\": 400,\n      \"unit\": \"pcs\",\n      \"unit_price\": 2.55,\n      \"price_per\": null,\n      \"line_total\": 1020\n    ,\n      \"evidence\": \"Article\\tDescription\\tQty\\tUnit\\tUnit price EUR\\tLine total EUR\\nGLAND-M20\\tCable gland M20, brass\\t400\\tpcs\\t2.55\\t1020.00\"\n    }\n  ],\n  \"net_total\": {\n    \"value\": 7450,\n    \"evidence\": \"Total\\t7450.00\"\n  },\n  \"vat_amount\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"gross_total\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"total_unlabelled\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"requested_delivery\": {\n    \"text\": \"Delivery by 2026-06-05 please.\",\n    \"iso\": \"2026-06-05\"\n  ,\n    \"evidence\": \"Delivery by 2026-06-05 please.\"\n  },\n  \"quote_valid_until\": {\n    \"text\": null,\n    \"iso\": null\n  ,\n    \"evidence\": null\n  },\n  \"quote_number\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"referenced_requests\": [],\n  \"notes_for_clerk\": [\n    {\n      \"note\": \"Pasting straight out of our stock sheet, sorry about the formatting.\"\n    ,\n      \"evidence\": \"Hi Procurement,\\nPasting straight out of our stock sheet, sorry about the formatting. All from Kabelwerk Rheintal, cost center CC-1002.\"\n    }\n  ]\n}"
+  }
+}

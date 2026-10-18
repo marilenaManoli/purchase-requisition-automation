@@ -1,0 +1,110 @@
+{
+  "file": "email_36.eml",
+  "model": "ollama:qwen2.5:7b",
+  "seconds": 45.521,
+  "outcome": {
+    "ok": true,
+    "extraction": {
+      "requester_name": {
+        "value": "Miriam Frick",
+        "evidence": "From: Miriam Frick <miriam.frick@customer.com>"
+      },
+      "requester_email": {
+        "value": "miriam.frick@customer.com",
+        "evidence": "From: Miriam Frick <miriam.frick@customer.com>"
+      },
+      "supplier_name": {
+        "value": "Global Fastener Supply Inc.",
+        "evidence": "Global Fastener Supply Inc.\n1420 Industrial Parkway\nCleveland, OH 44135, United States"
+      },
+      "supplier_vat_id": {
+        "value": "US-EIN-841234567",
+        "evidence": "VAT: US-EIN-841234567"
+      },
+      "cost_center_code": {
+        "value": "CC-1002",
+        "evidence": "Cost center CC-1002."
+      },
+      "cost_center_name": {
+        "value": null,
+        "evidence": null
+      },
+      "currency": {
+        "value": "USD",
+        "evidence": "Unit price (USD)"
+      },
+      "line_items": [
+        {
+          "description": "Socket head cap screw M6x25, A2",
+          "item_code": "SHCS-M6X25",
+          "quantity": 25000,
+          "unit": "pcs",
+          "unit_price": 0.28,
+          "price_per": null,
+          "line_total": 7000,
+          "evidence": "# Description Qty Unit Unit price (USD) Line total (USD)\n1 Socket head cap screw M6x25, A2\nItem code SHCS-M6X25 25000 pcs 0.28 7,000.00"
+        },
+        {
+          "description": "Spring washer M6, A2",
+          "item_code": "SW-M6",
+          "quantity": 30000,
+          "unit": "pcs",
+          "unit_price": 0.07,
+          "price_per": null,
+          "line_total": 2100,
+          "evidence": "# Description Qty Unit Unit price (USD) Line total (USD)\n2 Spring washer M6, A2\nItem code SW-M6 30000 pcs 0.07 2,100.00"
+        },
+        {
+          "description": "Freight and export packing, air",
+          "item_code": "FREIGHT-AIR",
+          "quantity": 1,
+          "unit": "lot",
+          "unit_price": null,
+          "price_per": null,
+          "line_total": 640,
+          "evidence": "# Description Qty Unit Unit price (USD) Line total (USD)\n3 Freight and export packing, air\nItem code FREIGHT-AIR 1 lot 640.00 640.00"
+        }
+      ],
+      "net_total": {
+        "value": 9740,
+        "evidence": "Subtotal: 9,740.00 USD"
+      },
+      "vat_amount": {
+        "value": 0,
+        "evidence": "VAT (0%, export): 0.00 USD"
+      },
+      "gross_total": {
+        "value": null,
+        "evidence": null
+      },
+      "total_unlabelled": {
+        "value": null,
+        "evidence": null
+      },
+      "requested_delivery": {
+        "text": "2 weeks air freight from Cleveland",
+        "iso": null,
+        "evidence": "Delivery: 2 weeks air freight from Cleveland"
+      },
+      "quote_valid_until": {
+        "text": "13.06.2026",
+        "iso": "2026-06-13",
+        "evidence": "Valid until: 13.06.2026"
+      },
+      "quote_number": {
+        "value": "GFS-26-7741",
+        "evidence": "Quote no.: GFS-26-7741"
+      },
+      "referenced_requests": [],
+      "notes_for_clerk": [
+        {
+          "note": "Freight line - they quote air freight separately because we asked for two weeks instead of six.",
+          "evidence": "Note the freight line - they quote air freight separately because we asked for two weeks instead of six."
+        }
+      ]
+    },
+    "unverified": [],
+    "attempts": 1,
+    "rawOutput": "{\n  \"requester_name\": {\n    \"value\": \"Miriam Frick\",\n    \"evidence\": \"From: Miriam Frick <miriam.frick@customer.com>\"\n  },\n  \"requester_email\": {\n    \"value\": \"miriam.frick@customer.com\",\n    \"evidence\": \"From: Miriam Frick <miriam.frick@customer.com>\"\n  },\n  \"supplier_name\": {\n    \"value\": \"Global Fastener Supply Inc.\",\n    \"evidence\": \"Global Fastener Supply Inc.\\n1420 Industrial Parkway\\nCleveland, OH 44135, United States\"\n  },\n  \"supplier_vat_id\": {\n    \"value\": \"US-EIN-841234567\",\n    \"evidence\": \"VAT: US-EIN-841234567\"\n  },\n  \"cost_center_code\": {\n    \"value\": \"CC-1002\",\n    \"evidence\": \"Cost center CC-1002.\"\n  },\n  \"cost_center_name\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"currency\": {\n    \"value\": \"USD\",\n    \"evidence\": \"Unit price (USD)\"\n  },\n  \"line_items\": [\n    {\n      \"description\": \"Socket head cap screw M6x25, A2\",\n      \"item_code\": \"SHCS-M6X25\",\n      \"quantity\": 25000,\n      \"unit\": \"pcs\",\n      \"unit_price\": 0.28,\n      \"price_per\": null,\n      \"line_total\": 7000\n    ,\n    \"evidence\": \"# Description Qty Unit Unit price (USD) Line total (USD)\\n1 Socket head cap screw M6x25, A2\\nItem code SHCS-M6X25 25000 pcs 0.28 7,000.00\"\n    },\n    {\n      \"description\": \"Spring washer M6, A2\",\n      \"item_code\": \"SW-M6\",\n      \"quantity\": 30000,\n      \"unit\": \"pcs\",\n      \"unit_price\": 0.07,\n      \"price_per\": null,\n      \"line_total\": 2100\n    ,\n      \"evidence\": \"# Description Qty Unit Unit price (USD) Line total (USD)\\n2 Spring washer M6, A2\\nItem code SW-M6 30000 pcs 0.07 2,100.00\"\n    },\n    {\n      \"description\": \"Freight and export packing, air\",\n      \"item_code\": \"FREIGHT-AIR\",\n      \"quantity\": 1,\n      \"unit\": \"lot\",\n      \"unit_price\": null,\n      \"price_per\": null,\n      \"line_total\": 640\n    ,\n      \"evidence\": \"# Description Qty Unit Unit price (USD) Line total (USD)\\n3 Freight and export packing, air\\nItem code FREIGHT-AIR 1 lot 640.00 640.00\"\n    }\n  ],\n  \"net_total\": {\n    \"value\": 9740,\n    \"evidence\": \"Subtotal: 9,740.00 USD\"\n  },\n  \"vat_amount\": {\n    \"value\": 0,\n    \"evidence\": \"VAT (0%, export): 0.00 USD\"\n  },\n  \"gross_total\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"total_unlabelled\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"requested_delivery\": {\n    \"text\": \"2 weeks air freight from Cleveland\",\n    \"iso\": null\n  ,\n    \"evidence\": \"Delivery: 2 weeks air freight from Cleveland\"\n  },\n  \"quote_valid_until\": {\n    \"text\": \"13.06.2026\",\n    \"iso\": \"2026-06-13\"\n  ,\n    \"evidence\": \"Valid until: 13.06.2026\"\n  },\n  \"quote_number\": {\n    \"value\": \"GFS-26-7741\",\n    \"evidence\": \"Quote no.: GFS-26-7741\"\n  },\n  \"referenced_requests\": [],\n  \"notes_for_clerk\": [\n    {\n      \"note\": \"Freight line - they quote air freight separately because we asked for two weeks instead of six.\"\n    ,\n      \"evidence\": \"Note the freight line - they quote air freight separately because we asked for two weeks instead of six.\"\n    }\n  ]\n}"
+  }
+}

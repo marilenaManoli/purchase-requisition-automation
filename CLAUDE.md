@@ -5,10 +5,8 @@ take-home challenge. The full brief is in `data/CHALLENGE_BRIEF.md`. **Read it
 before doing anything else**, and treat it as the source of truth when this
 file and the brief disagree.
 
-Deadline: submit by Wednesday 21 October 2026 (repo link + 5–10 min video).
-Final interview: Thursday 22 October, 09:30, where the reviewers will feed the
-running system an email it has never seen and ask why every part is built the
-way it is.
+In the final interview the reviewers feed the running system an email it has
+never seen and ask why every part is built the way it is.
 
 ## The one rule
 
@@ -66,16 +64,18 @@ TypeScript.
 
 ```
 data/            challenge files (emails/, quotes/, master_data.json, mock_po_api.py, CHALLENGE_BRIEF.md)
-src/db/          schema.sql, seed.ts, queries (typed helpers)
-src/ingest/      parseEmail.ts, pdfText.ts → SourceDocument
-src/extract/     schema.ts (zod), prompt.ts, llm.ts (LlmClient + OllamaClient), extract.ts
-src/checks/      supplier.ts, costCenter.ts, amounts.ts, fx.ts, issues.ts
+results/         recorded model answers of the reference run (replayed by run-all --saved, load-saved)
+src/config.ts    settings from env, validated, with defaults
+src/db/          schema.sql, seed.ts, masterData.ts (zod), queries.ts (typed reference data)
+src/ingest/      parseEmail.ts, pdfText.ts, sourceDocument.ts → SourceDocument
+src/extract/     schema.ts (zod), prompt.ts, llm.ts (LlmClient + OllamaClient), extract.ts, evidence.ts
+src/checks/      trust, supplier, costCenter, requester, amounts, money, fx, dates, overrides, issues, runChecks
 src/approval/    chain.ts (pure function — the most tested file)
-src/workflow/    states.ts, transitions.ts, duplicates.ts, audit.ts
-src/erp/         poClient.ts
-src/web/         server.ts, routes/, views/*.ejs
-scripts/         runAll.ts (process all sample emails, print an outcome table)
-tests/           one test file per module; trap emails as fixtures
+src/workflow/    states, transitions, audit, processEmail, approvals, duplicates, clerk, edits, ordering
+src/erp/         poClient.ts (ErpClient + HTTP client for the mock ERP)
+src/web/         app.ts (routes), server.ts, views.ts, forms.ts, workflowDiagram.ts, views/*.ejs
+scripts/         runAll.ts + expectedOutcomes.ts, extractAll.ts, loadSaved.ts, ingestSummary.ts
+tests/           one test file per area; fixtures.ts (sample extractions, FakeLlm, FakeErp)
 ```
 
 ### Extraction schema (sketch — refine in step 3)
@@ -203,6 +203,8 @@ Use these as fixtures and expected outcomes:
 6. A requester's `default_cost_center` may be shown as a suggestion when the email states none; never applied automatically.
 7. A total without a VAT label is treated as net, with a "VAT status not stated" warning; net/gross is read from the evidence label by code.
 8. A line with a quantity but no unit gets unit "pcs" with a "unit assumed" warning; a stated unit always wins.
+9. The delivery date is the only value that can be set after approval; any other correction means pull back and re-approval from step 1.
+10. Duplicates are suggested by simple rules (same sender within 30 days + same subject or same supplier and amount) and linked, never merged.
 
 ## Engineering standards
 

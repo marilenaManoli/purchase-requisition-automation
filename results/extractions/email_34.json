@@ -1,0 +1,119 @@
+{
+  "file": "email_34.eml",
+  "model": "ollama:qwen2.5:7b",
+  "seconds": 46.306,
+  "outcome": {
+    "ok": true,
+    "extraction": {
+      "requester_name": {
+        "value": "Ruedi Zimmermann",
+        "evidence": "From: Ruedi Zimmermann <ruedi.zimmermann@customer.com>"
+      },
+      "requester_email": {
+        "value": "ruedi.zimmermann@customer.com",
+        "evidence": "From: Ruedi Zimmermann <ruedi.zimmermann@customer.com>"
+      },
+      "supplier_name": {
+        "value": "IndustrieChemie Basel AG",
+        "evidence": "IndustrieChemie Basel AG\nChemiepark 3\n4057 Basel, Switzerland"
+      },
+      "supplier_vat_id": {
+        "value": "CHE-707.890.123 MWST",
+        "evidence": "VAT: CHE-707.890.123 MWST"
+      },
+      "cost_center_code": {
+        "value": "CC-4001",
+        "evidence": "Cost center CC-4001."
+      },
+      "cost_center_name": {
+        "value": null,
+        "evidence": null
+      },
+      "currency": {
+        "value": "CHF",
+        "evidence": "Unit price (CHF)"
+      },
+      "line_items": [
+        {
+          "description": "Isopropanol 99.9%, 25 L canister",
+          "item_code": "IPA-999-25",
+          "quantity": null,
+          "unit": null,
+          "unit_price": 12,
+          "price_per": null,
+          "line_total": 2400,
+          "evidence": "# Description Qty Unit Unit price (CHF) Line total (CHF)\n1 Isopropanol 99.9%, 25 L canister\nItem code IPA-999-25 200 L 12.00 2,400.00"
+        },
+        {
+          "description": "Flux paste FP-3, no-clean",
+          "item_code": "FP-3",
+          "quantity": 500,
+          "unit": "kg",
+          "unit_price": 8,
+          "price_per": null,
+          "line_total": 4000,
+          "evidence": "# Description Qty Unit Unit price (CHF) Line total (CHF)\n2 Flux paste FP-3, no-clean\nItem code FP-3 500 kg 8.00 4,000.00"
+        },
+        {
+          "description": "Safety data sheet binder, printed set",
+          "item_code": "SDS-BND",
+          "quantity": null,
+          "unit": null,
+          "unit_price": null,
+          "price_per": null,
+          "line_total": 0,
+          "evidence": "# Description Qty Unit Unit price (CHF) Line total (CHF)\n3 Safety data sheet binder, printed set\nItem code SDS-BND 1 set"
+        }
+      ],
+      "net_total": {
+        "value": 6400,
+        "evidence": "Subtotal: 6,400.00 CHFg"
+      },
+      "vat_amount": {
+        "value": null,
+        "evidence": null
+      },
+      "gross_total": {
+        "value": null,
+        "evidence": null
+      },
+      "total_unlabelled": {
+        "value": null,
+        "evidence": null
+      },
+      "requested_delivery": {
+        "text": "1 week ex works Basel",
+        "iso": null,
+        "evidence": "Delivery: 1 week ex works Basel"
+      },
+      "quote_valid_until": {
+        "text": "Valid until: 11.06.2026",
+        "iso": "2026-06-11",
+        "evidence": "Valid until: 11.06.2026"
+      },
+      "quote_number": {
+        "value": "ICB-26-0551",
+        "evidence": "Quote no.: ICB-26-0551"
+      },
+      "referenced_requests": [],
+      "notes_for_clerk": [
+        {
+          "note": "The SDS binder on line 3 is free of charge with the first order of the year, which is why it has no price.",
+          "evidence": "# Description Qty Unit Unit price (CHF) Line total (CHF)\n3 Safety data sheet binder, printed set\nItem code SDS-BND 1 set"
+        }
+      ]
+    },
+    "unverified": [
+      {
+        "field": "net_total",
+        "reason": "quote_not_in_source"
+      },
+      {
+        "field": "line_items[2].line_total",
+        "reason": "value_not_in_quote"
+      }
+    ],
+    "attempts": 1,
+    "rawOutput": "{\n  \"requester_name\": {\n    \"value\": \"Ruedi Zimmermann\",\n    \"evidence\": \"From: Ruedi Zimmermann <ruedi.zimmermann@customer.com>\"\n  },\n  \"requester_email\": {\n    \"value\": \"ruedi.zimmermann@customer.com\",\n    \"evidence\": \"From: Ruedi Zimmermann <ruedi.zimmermann@customer.com>\"\n  },\n  \"supplier_name\": {\n    \"value\": \"IndustrieChemie Basel AG\",\n    \"evidence\": \"IndustrieChemie Basel AG\\nChemiepark 3\\n4057 Basel, Switzerland\"\n  },\n  \"supplier_vat_id\": {\n    \"value\": \"CHE-707.890.123 MWST\",\n    \"evidence\": \"VAT: CHE-707.890.123 MWST\"\n  },\n  \"cost_center_code\": {\n    \"value\": \"CC-4001\",\n    \"evidence\": \"Cost center CC-4001.\"\n  },\n  \"cost_center_name\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"currency\": {\n    \"value\": \"CHF\",\n    \"evidence\": \"Unit price (CHF)\"\n  },\n  \"line_items\": [\n    {\n      \"description\": \"Isopropanol 99.9%, 25 L canister\",\n      \"item_code\": \"IPA-999-25\",\n      \"quantity\": null,\n      \"unit\": null,\n      \"unit_price\": 12.00,\n      \"price_per\": null,\n      \"line_total\": 2400.00\n    ,\n    \"evidence\": \"# Description Qty Unit Unit price (CHF) Line total (CHF)\\n1 Isopropanol 99.9%, 25 L canister\\nItem code IPA-999-25 200 L 12.00 2,400.00\"\n    },\n    {\n      \"description\": \"Flux paste FP-3, no-clean\",\n      \"item_code\": \"FP-3\",\n      \"quantity\": 500,\n      \"unit\": \"kg\",\n      \"unit_price\": 8.00,\n      \"price_per\": null,\n      \"line_total\": 4000.00\n    ,\n    \"evidence\": \"# Description Qty Unit Unit price (CHF) Line total (CHF)\\n2 Flux paste FP-3, no-clean\\nItem code FP-3 500 kg 8.00 4,000.00\"\n    },\n    {\n      \"description\": \"Safety data sheet binder, printed set\",\n      \"item_code\": \"SDS-BND\",\n      \"quantity\": null,\n      \"unit\": null,\n      \"unit_price\": null,\n      \"price_per\": null,\n      \"line_total\": 0.00\n    ,\n    \"evidence\": \"# Description Qty Unit Unit price (CHF) Line total (CHF)\\n3 Safety data sheet binder, printed set\\nItem code SDS-BND 1 set\"\n    }\n  ],\n  \"net_total\": {\n    \"value\": 6400.00,\n    \"evidence\": \"Subtotal: 6,400.00 CHFg\"\n  },\n  \"vat_amount\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"gross_total\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"total_unlabelled\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"requested_delivery\": {\n    \"text\": \"1 week ex works Basel\",\n    \"iso\": null\n  ,\n    \"evidence\": \"Delivery: 1 week ex works Basel\"\n  },\n  \"quote_valid_until\": {\n    \"text\": \"Valid until: 11.06.2026\",\n    \"iso\": \"2026-06-11\"\n  ,\n    \"evidence\": \"Valid until: 11.06.2026\"\n  },\n  \"quote_number\": {\n    \"value\": \"ICB-26-0551\",\n    \"evidence\": \"Quote no.: ICB-26-0551\"\n  },\n  \"referenced_requests\": [],\n  \"notes_for_clerk\": [\n    {\n      \"note\": \"The SDS binder on line 3 is free of charge with the first order of the year, which is why it has no price.\"\n    ,\n    \"evidence\": \"# Description Qty Unit Unit price (CHF) Line total (CHF)\\n3 Safety data sheet binder, printed set\\nItem code SDS-BND 1 set\"\n  }\n  ]\n}"
+  }
+}

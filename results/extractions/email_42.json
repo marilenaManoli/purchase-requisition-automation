@@ -1,0 +1,113 @@
+{
+  "file": "email_42.eml",
+  "model": "ollama:qwen2.5:7b",
+  "seconds": 30.548,
+  "outcome": {
+    "ok": true,
+    "extraction": {
+      "requester_name": {
+        "value": "Ahmed Nasser",
+        "evidence": "From: Ahmed Nasser <ahmed.nasser@customer.com>"
+      },
+      "requester_email": {
+        "value": "ahmed.nasser@customer.com",
+        "evidence": "From: Ahmed Nasser <ahmed.nasser@customer.com>"
+      },
+      "supplier_name": {
+        "value": null,
+        "evidence": null
+      },
+      "supplier_vat_id": {
+        "value": null,
+        "evidence": null
+      },
+      "cost_center_code": {
+        "value": "CC-1005",
+        "evidence": "Cost center CC-1005."
+      },
+      "cost_center_name": {
+        "value": null,
+        "evidence": null
+      },
+      "currency": {
+        "value": "CHF",
+        "evidence": "12 monthly collections at CHF 1,150.00 per month"
+      },
+      "line_items": [
+        {
+          "description": "monthly collections",
+          "item_code": null,
+          "quantity": 12,
+          "unit": "month",
+          "unit_price": 1150,
+          "price_per": null,
+          "line_total": 13800,
+          "evidence": "12 monthly collections at CHF 1,150.00 per month"
+        },
+        {
+          "description": "route setup fee",
+          "item_code": null,
+          "quantity": 1,
+          "unit": "time",
+          "unit_price": 200,
+          "price_per": null,
+          "line_total": 200,
+          "evidence": "1 one-off route setup fee of CHF 200.00"
+        }
+      ],
+      "net_total": {
+        "value": 13800,
+        "evidence": "Total commitment CHF 14,000.00 for the year."
+      },
+      "vat_amount": {
+        "value": null,
+        "evidence": null
+      },
+      "gross_total": {
+        "value": 14000,
+        "evidence": "Total commitment CHF 14,000.00 for the year."
+      },
+      "total_unlabelled": {
+        "value": null,
+        "evidence": null
+      },
+      "requested_delivery": {
+        "text": "2026-06-01",
+        "iso": "2026-06-01",
+        "evidence": "First collection 2026-06-01."
+      },
+      "quote_valid_until": {
+        "text": null,
+        "iso": null,
+        "evidence": null
+      },
+      "quote_number": {
+        "value": null,
+        "evidence": null
+      },
+      "referenced_requests": [],
+      "notes_for_clerk": [
+        {
+          "note": "We want to renew the transport framework with Alpine Logistics Services for another twelve months.",
+          "evidence": "We want to renew the transport framework with Alpine Logistics Services for another twelve months."
+        }
+      ]
+    },
+    "unverified": [
+      {
+        "field": "net_total",
+        "reason": "value_not_in_quote"
+      },
+      {
+        "field": "line_items[0].line_total",
+        "reason": "value_not_in_quote"
+      },
+      {
+        "field": "line_items[1].unit",
+        "reason": "value_not_in_quote"
+      }
+    ],
+    "attempts": 1,
+    "rawOutput": "{\n  \"requester_name\": {\n    \"value\": \"Ahmed Nasser\",\n    \"evidence\": \"From: Ahmed Nasser <ahmed.nasser@customer.com>\"\n  },\n  \"requester_email\": {\n    \"value\": \"ahmed.nasser@customer.com\",\n    \"evidence\": \"From: Ahmed Nasser <ahmed.nasser@customer.com>\"\n  },\n  \"supplier_name\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"supplier_vat_id\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"cost_center_code\": {\n    \"value\": \"CC-1005\",\n    \"evidence\": \"Cost center CC-1005.\"\n  },\n  \"cost_center_name\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"currency\": {\n    \"value\": \"CHF\",\n    \"evidence\": \"12 monthly collections at CHF 1,150.00 per month\"\n  },\n  \"line_items\": [\n    {\n      \"description\": \"monthly collections\",\n      \"item_code\": null,\n      \"quantity\": 12,\n      \"unit\": \"month\",\n      \"unit_price\": 1150,\n      \"price_per\": null,\n      \"line_total\": 13800\n    ,\n    \"evidence\": \"12 monthly collections at CHF 1,150.00 per month\"\n    },\n    {\n      \"description\": \"route setup fee\",\n      \"item_code\": null,\n      \"quantity\": 1,\n      \"unit\": \"time\",\n      \"unit_price\": 200,\n      \"price_per\": null,\n      \"line_total\": 200\n    ,\n    \"evidence\": \"1 one-off route setup fee of CHF 200.00\"\n    }\n  ],\n  \"net_total\": {\n    \"value\": 13800,\n    \"evidence\": \"Total commitment CHF 14,000.00 for the year.\"\n  },\n  \"vat_amount\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"gross_total\": {\n    \"value\": 14000,\n    \"evidence\": \"Total commitment CHF 14,000.00 for the year.\"\n  },\n  \"total_unlabelled\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"requested_delivery\": {\n    \"text\": \"2026-06-01\",\n    \"iso\": \"2026-06-01\"\n  ,\n    \"evidence\": \"First collection 2026-06-01.\"\n  },\n  \"quote_valid_until\": {\n    \"text\": null,\n    \"iso\": null\n  ,\n    \"evidence\": null\n  },\n  \"quote_number\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"referenced_requests\": [],\n  \"notes_for_clerk\": [\n    {\n      \"note\": \"We want to renew the transport framework with Alpine Logistics Services for another twelve months.\"\n    ,\n    \"evidence\": \"We want to renew the transport framework with Alpine Logistics Services for another twelve months.\"\n  }\n  ]\n}"
+  }
+}

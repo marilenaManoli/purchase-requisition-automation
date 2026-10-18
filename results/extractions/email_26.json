@@ -1,0 +1,115 @@
+{
+  "file": "email_26.eml",
+  "model": "ollama:qwen2.5:7b",
+  "seconds": 39.635,
+  "outcome": {
+    "ok": true,
+    "extraction": {
+      "requester_name": {
+        "value": "Ahmed Nasser",
+        "evidence": "From: Ahmed Nasser <ahmed.nasser@customer.com>"
+      },
+      "requester_email": {
+        "value": "ahmed.nasser@customer.com",
+        "evidence": "From: Ahmed Nasser <ahmed.nasser@customer.com>"
+      },
+      "supplier_name": {
+        "value": "Verpackung Schneider",
+        "evidence": "- 800 m corrugated wrap, 1200 mm wide, at EUR 1.05 per m\n- 60 rolls stretch film, 23 micron, at EUR 12.50 per roll\n- 85 kg silica gel desiccant at EUR 6.00 per kg"
+      },
+      "supplier_vat_id": {
+        "value": null,
+        "evidence": null
+      },
+      "cost_center_code": {
+        "value": "CC-1005",
+        "evidence": "Cost center CC-1005."
+      },
+      "cost_center_name": {
+        "value": null,
+        "evidence": null
+      },
+      "currency": {
+        "value": "EUR",
+        "evidence": "- 800 m corrugated wrap, 1200 mm wide, at EUR 1.05 per m\n- 60 rolls stretch film, 23 micron, at EUR 12.50 per roll\n- 85 kg silica gel desiccant at EUR 6.00 per kg"
+      },
+      "line_items": [
+        {
+          "description": "corrugated wrap",
+          "item_code": null,
+          "quantity": 800,
+          "unit": "m",
+          "unit_price": 1.05,
+          "price_per": null,
+          "line_total": null,
+          "evidence": "- 800 m corrugated wrap, 1200 mm wide, at EUR 1.05 per m"
+        },
+        {
+          "description": "stretch film",
+          "item_code": null,
+          "quantity": 60,
+          "unit": "roll",
+          "unit_price": 12.5,
+          "price_per": null,
+          "line_total": null,
+          "evidence": "- 60 rolls stretch film, 23 micron, at EUR 12.50 per roll"
+        },
+        {
+          "description": "silica gel desiccant",
+          "item_code": null,
+          "quantity": 85,
+          "unit": "kg",
+          "unit_price": 6,
+          "price_per": null,
+          "line_total": null,
+          "evidence": "- 85 kg silica gel desiccant at EUR 6.00 per kg"
+        }
+      ],
+      "net_total": {
+        "value": 2100,
+        "evidence": "Total EUR 2,100.00."
+      },
+      "vat_amount": {
+        "value": null,
+        "evidence": null
+      },
+      "gross_total": {
+        "value": null,
+        "evidence": null
+      },
+      "total_unlabelled": {
+        "value": null,
+        "evidence": null
+      },
+      "requested_delivery": {
+        "text": "Delivery by 2026-05-29 would be ideal",
+        "iso": "2026-05-29",
+        "evidence": "Delivery by 2026-05-29 would be ideal."
+      },
+      "quote_valid_until": {
+        "text": null,
+        "iso": null,
+        "evidence": null
+      },
+      "quote_number": {
+        "value": null,
+        "evidence": null
+      },
+      "referenced_requests": [],
+      "notes_for_clerk": [
+        {
+          "note": "We are running low on packaging consumables.",
+          "evidence": "We are running low on packaging consumables."
+        }
+      ]
+    },
+    "unverified": [
+      {
+        "field": "supplier_name",
+        "reason": "value_not_in_quote"
+      }
+    ],
+    "attempts": 1,
+    "rawOutput": "{\n  \"requester_name\": {\n    \"value\": \"Ahmed Nasser\",\n    \"evidence\": \"From: Ahmed Nasser <ahmed.nasser@customer.com>\"\n  },\n  \"requester_email\": {\n    \"value\": \"ahmed.nasser@customer.com\",\n    \"evidence\": \"From: Ahmed Nasser <ahmed.nasser@customer.com>\"\n  },\n  \"supplier_name\": {\n    \"value\": \"Verpackung Schneider\",\n    \"evidence\": \"- 800 m corrugated wrap, 1200 mm wide, at EUR 1.05 per m\\n- 60 rolls stretch film, 23 micron, at EUR 12.50 per roll\\n- 85 kg silica gel desiccant at EUR 6.00 per kg\"\n  },\n  \"supplier_vat_id\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"cost_center_code\": {\n    \"value\": \"CC-1005\",\n    \"evidence\": \"Cost center CC-1005.\"\n  },\n  \"cost_center_name\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"currency\": {\n    \"value\": \"EUR\",\n    \"evidence\": \"- 800 m corrugated wrap, 1200 mm wide, at EUR 1.05 per m\\n- 60 rolls stretch film, 23 micron, at EUR 12.50 per roll\\n- 85 kg silica gel desiccant at EUR 6.00 per kg\"\n  },\n  \"line_items\": [\n    {\n      \"description\": \"corrugated wrap\",\n      \"item_code\": null,\n      \"quantity\": 800,\n      \"unit\": \"m\",\n      \"unit_price\": 1.05,\n      \"price_per\": null,\n      \"line_total\": null\n    ,\n    \"evidence\": \"- 800 m corrugated wrap, 1200 mm wide, at EUR 1.05 per m\"\n    },\n    {\n      \"description\": \"stretch film\",\n      \"item_code\": null,\n      \"quantity\": 60,\n      \"unit\": \"roll\",\n      \"unit_price\": 12.5,\n      \"price_per\": null,\n      \"line_total\": null\n    ,\n    \"evidence\": \"- 60 rolls stretch film, 23 micron, at EUR 12.50 per roll\"\n    },\n    {\n      \"description\": \"silica gel desiccant\",\n      \"item_code\": null,\n      \"quantity\": 85,\n      \"unit\": \"kg\",\n      \"unit_price\": 6,\n      \"price_per\": null,\n      \"line_total\": null\n    ,\n    \"evidence\": \"- 85 kg silica gel desiccant at EUR 6.00 per kg\"\n    }\n  ],\n  \"net_total\": {\n    \"value\": 2100,\n    \"evidence\": \"Total EUR 2,100.00.\"\n  },\n  \"vat_amount\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"gross_total\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"total_unlabelled\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"requested_delivery\": {\n    \"text\": \"Delivery by 2026-05-29 would be ideal\",\n    \"iso\": \"2026-05-29\"\n  ,\n  \"evidence\": \"Delivery by 2026-05-29 would be ideal.\"\n  },\n  \"quote_valid_until\": {\n    \"text\": null,\n    \"iso\": null\n  ,\n    \"evidence\": null\n  },\n  \"quote_number\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"referenced_requests\": [],\n  \"notes_for_clerk\": [\n    {\n      \"note\": \"We are running low on packaging consumables.\"\n    ,\n    \"evidence\": \"We are running low on packaging consumables.\"\n  }\n  ]\n}"
+  }
+}

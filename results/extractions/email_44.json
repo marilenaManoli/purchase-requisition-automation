@@ -1,0 +1,99 @@
+{
+  "file": "email_44.eml",
+  "model": "ollama:qwen2.5:7b",
+  "seconds": 30.542,
+  "outcome": {
+    "ok": true,
+    "extraction": {
+      "requester_name": {
+        "value": "Anna Widmer",
+        "evidence": "From: Anna Widmer <anna.widmer@customer.com>"
+      },
+      "requester_email": {
+        "value": "anna.widmer@customer.com",
+        "evidence": "From: Anna Widmer <anna.widmer@customer.com>"
+      },
+      "supplier_name": {
+        "value": "Sensorik Nord GmbH",
+        "evidence": "Sensorik Nord GmbH\nNordkai 8\n24937 Flensburg, Germany"
+      },
+      "supplier_vat_id": {
+        "value": null,
+        "evidence": null
+      },
+      "cost_center_code": {
+        "value": "CC-2002",
+        "evidence": "Kostenstelle CC-2002."
+      },
+      "cost_center_name": {
+        "value": null,
+        "evidence": null
+      },
+      "currency": {
+        "value": null,
+        "evidence": null
+      },
+      "line_items": [
+        {
+          "description": "Induktive Näherungsschalter Baureihe IN-M12",
+          "item_code": null,
+          "quantity": 20,
+          "unit": "Stk",
+          "unit_price": null,
+          "price_per": null,
+          "line_total": null,
+          "evidence": "# Beschreibung Menge Einheit\n1 Induktive Näherungsschalter Baureihe IN-M12 20 Stk"
+        }
+      ],
+      "net_total": {
+        "value": null,
+        "evidence": null
+      },
+      "vat_amount": {
+        "value": null,
+        "evidence": null
+      },
+      "gross_total": {
+        "value": null,
+        "evidence": null
+      },
+      "total_unlabelled": {
+        "value": null,
+        "evidence": null
+      },
+      "requested_delivery": {
+        "text": null,
+        "iso": null,
+        "evidence": null
+      },
+      "quote_valid_until": {
+        "text": null,
+        "iso": null,
+        "evidence": null
+      },
+      "quote_number": {
+        "value": null,
+        "evidence": null
+      },
+      "referenced_requests": [],
+      "notes_for_clerk": [
+        {
+          "note": "anbei das Datenblatt der Naeherungsschalter, die wir brauchen. Baureihe IN-M12 von Sensorik Nord.",
+          "evidence": "anbei das Datenblatt der Naeherungsschalter, die wir brauchen. Baureihe IN-M12 von Sensorik Nord."
+        },
+        {
+          "note": "Ein Angebot habe ich noch nicht, das Datenblatt sollte fuer die Spezifikation reichen.",
+          "evidence": "Ein Angebot habe ich noch nicht, das Datenblatt sollte fuer die Spezifikation reichen."
+        }
+      ]
+    },
+    "unverified": [
+      {
+        "field": "line_items[0]",
+        "reason": "quote_not_in_source"
+      }
+    ],
+    "attempts": 1,
+    "rawOutput": "{\n  \"requester_name\": {\n    \"value\": \"Anna Widmer\",\n    \"evidence\": \"From: Anna Widmer <anna.widmer@customer.com>\"\n  },\n  \"requester_email\": {\n    \"value\": \"anna.widmer@customer.com\",\n    \"evidence\": \"From: Anna Widmer <anna.widmer@customer.com>\"\n  },\n  \"supplier_name\": {\n    \"value\": \"Sensorik Nord GmbH\",\n    \"evidence\": \"Sensorik Nord GmbH\\nNordkai 8\\n24937 Flensburg, Germany\"\n  },\n  \"supplier_vat_id\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"cost_center_code\": {\n    \"value\": \"CC-2002\",\n    \"evidence\": \"Kostenstelle CC-2002.\"\n  },\n  \"cost_center_name\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"currency\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"line_items\": [\n    {\n      \"description\": \"Induktive Näherungsschalter Baureihe IN-M12\",\n      \"item_code\": null,\n      \"quantity\": 20,\n      \"unit\": \"Stk\",\n      \"unit_price\": null,\n      \"price_per\": null,\n      \"line_total\": null\n    ,\n    \"evidence\": \"# Beschreibung Menge Einheit\\n1 Induktive Näherungsschalter Baureihe IN-M12 20 Stk\"\n  }\n  ],\n  \"net_total\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"vat_amount\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"gross_total\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"total_unlabelled\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"requested_delivery\": {\n    \"text\": null,\n    \"iso\": null\n  ,\n  \"evidence\": null\n  },\n  \"quote_valid_until\": {\n    \"text\": null,\n    \"iso\": null\n  ,\n  \"evidence\": null\n  },\n  \"quote_number\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"referenced_requests\": [],\n  \"notes_for_clerk\": [\n    {\n      \"note\": \"anbei das Datenblatt der Naeherungsschalter, die wir brauchen. Baureihe IN-M12 von Sensorik Nord.\",\n      \"evidence\": \"anbei das Datenblatt der Naeherungsschalter, die wir brauchen. Baureihe IN-M12 von Sensorik Nord.\"\n    },\n    {\n      \"note\": \"Ein Angebot habe ich noch nicht, das Datenblatt sollte fuer die Spezifikation reichen.\",\n      \"evidence\": \"Ein Angebot habe ich noch nicht, das Datenblatt sollte fuer die Spezifikation reichen.\"\n    }\n  ]\n}"
+  }
+}

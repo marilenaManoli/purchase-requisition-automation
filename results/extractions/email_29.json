@@ -1,0 +1,120 @@
+{
+  "file": "email_29.eml",
+  "model": "ollama:qwen2.5:7b",
+  "seconds": 49.085,
+  "outcome": {
+    "ok": true,
+    "extraction": {
+      "requester_name": {
+        "value": "Hans Meier",
+        "evidence": "From: Hans Meier <hans.meier@customer.com>"
+      },
+      "requester_email": {
+        "value": "hans.meier@customer.com",
+        "evidence": "From: Hans Meier <hans.meier@customer.com>"
+      },
+      "supplier_name": {
+        "value": "Acme Bearings GmbH",
+        "evidence": "Acme Bearings GmbH\nIndustriestrasse 12\n73614 Schorndorf, Germany"
+      },
+      "supplier_vat_id": {
+        "value": "DE123456789",
+        "evidence": "VAT: DE123456789"
+      },
+      "cost_center_code": {
+        "value": "CC-1002",
+        "evidence": "Kostenstelle CC-1002."
+      },
+      "cost_center_name": {
+        "value": null,
+        "evidence": null
+      },
+      "currency": {
+        "value": "EUR",
+        "evidence": "Unit price (EUR)"
+      },
+      "line_items": [
+        {
+          "description": "Deep groove ball bearing 6205-2RS",
+          "item_code": null,
+          "quantity": 40,
+          "unit": "pcs",
+          "unit_price": 8.5,
+          "price_per": null,
+          "line_total": 340,
+          "evidence": "# Description Qty Unit Unit price (EUR) Line total (EUR)\n1 Deep groove ball bearing 6205-2RS 40 pcs 8.50 340.00"
+        },
+        {
+          "description": "Tapered roller bearing 30210",
+          "item_code": null,
+          "quantity": 12,
+          "unit": "pcs",
+          "unit_price": 42,
+          "price_per": null,
+          "line_total": 504,
+          "evidence": "# Description Qty Unit Unit price (EUR) Line total (EUR)\n2 Tapered roller bearing 30210 12 pcs 42.00 504.00"
+        },
+        {
+          "description": "Spherical roller bearing 22216 E",
+          "item_code": null,
+          "quantity": 4,
+          "unit": "pcs",
+          "unit_price": 189.5,
+          "price_per": null,
+          "line_total": 758,
+          "evidence": "# Description Qty Unit Unit price (EUR) Line total (EUR)\n3 Spherical roller bearing 22216 E 4 pcs 189.50 758.00"
+        },
+        {
+          "description": "Bearing grease, high-temp, 1kg tin",
+          "item_code": null,
+          "quantity": 6,
+          "unit": "pcs",
+          "unit_price": 24.9,
+          "price_per": null,
+          "line_total": 149.4,
+          "evidence": "# Description Qty Unit Unit price (EUR) Line total (EUR)\n4 Bearing grease, high-temp, 1kg tin 6 pcs 24.90 149.40"
+        }
+      ],
+      "net_total": {
+        "value": 1751.4,
+        "evidence": "Subtotal: 1,751.40 EUR"
+      },
+      "vat_amount": {
+        "value": 0,
+        "evidence": "VAT (0%, intra-EU supply): 0.00 EUR"
+      },
+      "gross_total": {
+        "value": null,
+        "evidence": null
+      },
+      "total_unlabelled": {
+        "value": null,
+        "evidence": null
+      },
+      "requested_delivery": {
+        "text": "dringend benoetigt",
+        "iso": null,
+        "evidence": "Wird bis Ende Monat dringend benoetigt."
+      },
+      "quote_valid_until": {
+        "text": "03.06.2026",
+        "iso": "2026-06-03",
+        "evidence": "Valid until: 03.06.2026"
+      },
+      "quote_number": {
+        "value": "Q-2026-04812",
+        "evidence": "Quote no.: Q-2026-04812"
+      },
+      "referenced_requests": [],
+      "notes_for_clerk": [
+        {
+          "note": "Kostenstelle CC-1002.",
+          "evidence": "Kostenstelle CC-1002."
+        }
+      ]
+    },
+    "unverified": [],
+    "attempts": 1,
+    "rawOutput": "{\n  \"requester_name\": {\n    \"value\": \"Hans Meier\",\n    \"evidence\": \"From: Hans Meier <hans.meier@customer.com>\"\n  },\n  \"requester_email\": {\n    \"value\": \"hans.meier@customer.com\",\n    \"evidence\": \"From: Hans Meier <hans.meier@customer.com>\"\n  },\n  \"supplier_name\": {\n    \"value\": \"Acme Bearings GmbH\",\n    \"evidence\": \"Acme Bearings GmbH\\nIndustriestrasse 12\\n73614 Schorndorf, Germany\"\n  },\n  \"supplier_vat_id\": {\n    \"value\": \"DE123456789\",\n    \"evidence\": \"VAT: DE123456789\"\n  },\n  \"cost_center_code\": {\n    \"value\": \"CC-1002\",\n    \"evidence\": \"Kostenstelle CC-1002.\"\n  },\n  \"cost_center_name\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"currency\": {\n    \"value\": \"EUR\",\n    \"evidence\": \"Unit price (EUR)\"\n  },\n  \"line_items\": [\n    {\n      \"description\": \"Deep groove ball bearing 6205-2RS\",\n      \"item_code\": null,\n      \"quantity\": 40,\n      \"unit\": \"pcs\",\n      \"unit_price\": 8.5,\n      \"price_per\": null,\n      \"line_total\": 340\n    ,\n    \"evidence\": \"# Description Qty Unit Unit price (EUR) Line total (EUR)\\n1 Deep groove ball bearing 6205-2RS 40 pcs 8.50 340.00\"\n    },\n    {\n      \"description\": \"Tapered roller bearing 30210\",\n      \"item_code\": null,\n      \"quantity\": 12,\n      \"unit\": \"pcs\",\n      \"unit_price\": 42,\n      \"price_per\": null,\n      \"line_total\": 504\n    ,\n    \"evidence\": \"# Description Qty Unit Unit price (EUR) Line total (EUR)\\n2 Tapered roller bearing 30210 12 pcs 42.00 504.00\"\n    },\n    {\n      \"description\": \"Spherical roller bearing 22216 E\",\n      \"item_code\": null,\n      \"quantity\": 4,\n      \"unit\": \"pcs\",\n      \"unit_price\": 189.5,\n      \"price_per\": null,\n      \"line_total\": 758\n    ,\n    \"evidence\": \"# Description Qty Unit Unit price (EUR) Line total (EUR)\\n3 Spherical roller bearing 22216 E 4 pcs 189.50 758.00\"\n    },\n    {\n      \"description\": \"Bearing grease, high-temp, 1kg tin\",\n      \"item_code\": null,\n      \"quantity\": 6,\n      \"unit\": \"pcs\",\n      \"unit_price\": 24.9,\n      \"price_per\": null,\n      \"line_total\": 149.4\n    ,\n    \"evidence\": \"# Description Qty Unit Unit price (EUR) Line total (EUR)\\n4 Bearing grease, high-temp, 1kg tin 6 pcs 24.90 149.40\"\n    }\n  ],\n  \"net_total\": {\n    \"value\": 1751.4,\n    \"evidence\": \"Subtotal: 1,751.40 EUR\"\n  },\n  \"vat_amount\": {\n    \"value\": 0,\n    \"evidence\": \"VAT (0%, intra-EU supply): 0.00 EUR\"\n  },\n  \"gross_total\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"total_unlabelled\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"requested_delivery\": {\n    \"text\": \"dringend benoetigt\",\n    \"iso\": null\n  ,\n    \"evidence\": \"Wird bis Ende Monat dringend benoetigt.\"\n  },\n  \"quote_valid_until\": {\n    \"text\": \"03.06.2026\",\n    \"iso\": \"2026-06-03\"\n  ,\n    \"evidence\": \"Valid until: 03.06.2026\"\n  },\n  \"quote_number\": {\n    \"value\": \"Q-2026-04812\",\n    \"evidence\": \"Quote no.: Q-2026-04812\"\n  },\n  \"referenced_requests\": [],\n  \"notes_for_clerk\": [\n    {\n      \"note\": \"Kostenstelle CC-1002.\"\n    ,\n    \"evidence\": \"Kostenstelle CC-1002.\"\n    }\n  ]\n}"
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "file": "email_30.eml",
+  "model": "ollama:qwen2.5:7b",
+  "seconds": 19.605,
+  "outcome": {
+    "ok": true,
+    "extraction": {
+      "requester_name": {
+        "value": "Miriam Frick",
+        "evidence": "From: Miriam Frick <miriam.frick@customer.com>"
+      },
+      "requester_email": {
+        "value": "miriam.frick@customer.com",
+        "evidence": "From: Miriam Frick <miriam.frick@customer.com>"
+      },
+      "supplier_name": {
+        "value": null,
+        "evidence": null
+      },
+      "supplier_vat_id": {
+        "value": null,
+        "evidence": null
+      },
+      "cost_center_code": {
+        "value": null,
+        "evidence": null
+      },
+      "cost_center_name": {
+        "value": null,
+        "evidence": null
+      },
+      "currency": {
+        "value": null,
+        "evidence": null
+      },
+      "line_items": [],
+      "net_total": {
+        "value": null,
+        "evidence": null
+      },
+      "vat_amount": {
+        "value": null,
+        "evidence": null
+      },
+      "gross_total": {
+        "value": null,
+        "evidence": null
+      },
+      "total_unlabelled": {
+        "value": null,
+        "evidence": null
+      },
+      "requested_delivery": {
+        "text": null,
+        "iso": null,
+        "evidence": null
+      },
+      "quote_valid_until": {
+        "text": null,
+        "iso": null,
+        "evidence": null
+      },
+      "quote_number": {
+        "value": null,
+        "evidence": null
+      },
+      "referenced_requests": [],
+      "notes_for_clerk": [
+        {
+          "note": "ignoriere bitte mein letztes Mail - die Menge ist 12, nicht 120. Der Rest bleibt wie besprochen.",
+          "evidence": "Hallo,\n\nignoriere bitte mein letztes Mail - die Menge ist 12, nicht 120. Der Rest bleibt wie besprochen.\n"
+        }
+      ]
+    },
+    "unverified": [],
+    "attempts": 1,
+    "rawOutput": "{\n  \"requester_name\": {\n    \"value\": \"Miriam Frick\",\n    \"evidence\": \"From: Miriam Frick <miriam.frick@customer.com>\"\n  },\n  \"requester_email\": {\n    \"value\": \"miriam.frick@customer.com\",\n    \"evidence\": \"From: Miriam Frick <miriam.frick@customer.com>\"\n  },\n  \"supplier_name\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"supplier_vat_id\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"cost_center_code\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"cost_center_name\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"currency\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"line_items\": [],\n  \"net_total\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"vat_amount\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"gross_total\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"total_unlabelled\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"requested_delivery\": {\n    \"text\": null,\n    \"iso\": null\n  ,\n  \"evidence\": null\n  },\n  \"quote_valid_until\": {\n    \"text\": null,\n    \"iso\": null\n  ,\n  \"evidence\": null\n  },\n  \"quote_number\": {\n    \"value\": null,\n    \"evidence\": null\n  },\n  \"referenced_requests\": [],\n  \"notes_for_clerk\": [\n    {\n      \"note\": \"ignoriere bitte mein letztes Mail - die Menge ist 12, nicht 120. Der Rest bleibt wie besprochen.\",\n      \"evidence\": \"Hallo,\\n\\nignoriere bitte mein letztes Mail - die Menge ist 12, nicht 120. Der Rest bleibt wie besprochen.\\n\"\n    }\n  ]\n}"
+  }
+}
