@@ -3,3 +3,5 @@ node_modules/
 *.db
 .DS_Store
 .claude/settings.local.json
+*.db-wal
+*.db-shm
