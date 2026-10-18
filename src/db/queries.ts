@@ -32,11 +32,28 @@ export interface EmployeeRow {
   default_cost_center: string | null;
 }
 
+export interface DepartmentRow {
+  code: string;
+  name: string;
+  head_employee_id: string;
+}
+
+export type ApproverRole = "cost_center_owner" | "department_head" | "finance" | "cfo" | "ceo";
+
+export interface ApprovalBand {
+  band: number; // 1..5, ascending by amount
+  fromChf: number; // for display only
+  toChf: number | null; // null = no upper limit
+  roles: ApproverRole[]; // in approval order
+}
+
 export interface ReferenceData {
   suppliers: SupplierRow[];
   costCenters: CostCenterRow[];
+  departments: DepartmentRow[];
   employees: EmployeeRow[];
   fxRatesToChf: Map<string, number>;
+  approvalBands: ApprovalBand[];
 }
 
 export function loadReferenceData(db: Db): ReferenceData {
@@ -44,7 +61,22 @@ export function loadReferenceData(db: Db): ReferenceData {
   return {
     suppliers: db.prepare(`SELECT id, name, vat_id, default_currency, status FROM suppliers ORDER BY id`).all() as SupplierRow[],
     costCenters: db.prepare(`SELECT code, name, owner_employee_id, department_code FROM cost_centers ORDER BY code`).all() as CostCenterRow[],
+    departments: db.prepare(`SELECT code, name, head_employee_id FROM departments ORDER BY code`).all() as DepartmentRow[],
     employees: db.prepare(`SELECT id, name, email, role, deputy_for, default_cost_center FROM employees ORDER BY id`).all() as EmployeeRow[],
     fxRatesToChf: new Map(fxRows.map((r) => [r.currency, r.rate_to_chf])),
+    approvalBands: loadApprovalBands(db),
   };
+}
+
+function loadApprovalBands(db: Db): ApprovalBand[] {
+  const bands = db.prepare(`SELECT band, from_chf, to_chf FROM approval_bands ORDER BY band`).all() as
+    { band: number; from_chf: number; to_chf: number | null }[];
+  const roles = db.prepare(`SELECT band, role FROM approval_band_roles ORDER BY band, position`).all() as
+    { band: number; role: ApproverRole }[];
+  return bands.map((b) => ({
+    band: b.band,
+    fromChf: b.from_chf,
+    toChf: b.to_chf,
+    roles: roles.filter((r) => r.band === b.band).map((r) => r.role),
+  }));
 }

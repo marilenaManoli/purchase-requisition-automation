@@ -32,7 +32,11 @@ export type IssueCode =
   | "QUOTE_EXPIRED"
   | "ATTACHMENT_MISSING"
   | "EXTRACTION_FAILED"
-  | "NO_READABLE_CONTENT";
+  | "NO_READABLE_CONTENT"
+  | "APPROVER_NOT_FOUND"
+  | "APPROVER_AMBIGUOUS"
+  | "SELF_APPROVAL_REASSIGNED"
+  | "APPROVER_NEEDED";
 
 export interface Issue {
   code: IssueCode;
