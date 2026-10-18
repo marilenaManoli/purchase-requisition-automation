@@ -38,7 +38,9 @@ Rules:
    even when the offer itself was written by someone else lower in the thread.
    requester_name and requester_email use the "From:" line as evidence.
 7. The supplier is the company selling the goods. The buyer ("Customer AG", "Kunde") is
-   never the supplier. Copy the supplier name as written in the evidence.
+   never the supplier. Copy the supplier name as written in the evidence. In short emails
+   the supplier is often named only in a sentence of the body ("bei <Name> bestellen",
+   "order from <Name>", "<Name> soll uns ... liefern"): that sentence is the evidence.
 8. cost_center_code only if a code (letters, hyphen, digits) is written. If only a name or
    place is given, leave the code null and put the name in cost_center_name.
 9. requested_delivery is when the requester wants the goods; a supplier's lead time
