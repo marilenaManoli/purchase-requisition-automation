@@ -2,8 +2,10 @@ import type { Extraction } from "./schema.ts";
 
 // ---------------------------------------------------------------------------
 // The evidence check: a value from the model is only trusted when
-//   (a) its evidence quote really appears in the source text, and
-//   (b) the value can be read from that quote.
+//   (a) every line of its evidence quote really appears in the source text, and
+//   (b) the value can be read from ONE contiguous passage of that quote.
+// (b) tolerates extra real lines the model likes to include (a table header
+// above the row) but still catches values stitched from different places.
 // Anything failing either test is reported as unverified. It is never
 // silently dropped or corrected: the clerk sees the value and the reason.
 // ---------------------------------------------------------------------------
@@ -98,24 +100,59 @@ function dateInQuote(iso: string, quote: string): boolean {
   return q.includes(y) && names.some((name) => new RegExp(`\\b${day}\\.? ${name}\\b|\\b${name} ${day}\\b`).test(q));
 }
 
+/**
+ * Splits a quote into the source passages it is made of. Consecutive lines of
+ * the quote that also stand together in the source form one passage; lines that
+ * are in the source but not next to each other (a table header above row 3) are
+ * separate passages. Returns null if any line is not in the source at all.
+ */
+export function passagesOf(evidence: string, normalisedSource: string): string[] | null {
+  const lines = evidence.split("\n").map(normaliseForMatch).filter((l) => l !== "");
+  const [first, ...rest] = lines; // array destructuring: first element, then the remainder
+  if (first === undefined || !normalisedSource.includes(first)) return null;
+
+  const passages: string[] = [];
+  let current = first;
+  for (const line of rest) {
+    if (!normalisedSource.includes(line)) return null;
+    const joined = `${current} ${line}`; // the source is normalised, so a newline is one space
+    if (normalisedSource.includes(joined)) {
+      current = joined;
+    } else {
+      passages.push(current);
+      current = line;
+    }
+  }
+  passages.push(current);
+  return passages;
+}
+
 /** Checks every extracted value against the exact source text the model saw. */
 export function findUnverifiedValues(x: Extraction, sourceText: string): UnverifiedValue[] {
   const source = normaliseForMatch(sourceText);
   const problems: UnverifiedValue[] = [];
 
-  // One evidence quote supporting one or more values. `valueChecks` are the
-  // individual "can this value be read from the quote?" tests, by field name.
-  function check(field: string, evidence: string | null, hasValue: boolean, valueChecks: Record<string, boolean>) {
+  // One evidence quote supporting one or more values. `valueTests` say, per
+  // field name, whether a value can be read from a given passage. All of them
+  // must pass in the SAME passage, so values can't be stitched together from
+  // different places in the document.
+  type ValueTests = Record<string, (passage: string) => boolean>;
+  function check(field: string, evidence: string | null, hasValue: boolean, valueTests: ValueTests) {
     if (!hasValue) return; // nothing claimed, nothing to verify
     if (evidence === null || evidence.trim() === "") {
       problems.push({ field, reason: "missing_evidence" });
-    } else if (!source.includes(normaliseForMatch(evidence))) {
-      problems.push({ field, reason: "quote_not_in_source" });
-    } else {
-      for (const [name, ok] of Object.entries(valueChecks)) {
-        if (!ok) problems.push({ field: name, reason: "value_not_in_quote" });
-      }
+      return;
     }
+    const passages = passagesOf(evidence, source);
+    if (passages === null) {
+      problems.push({ field, reason: "quote_not_in_source" });
+      return;
+    }
+    const tests = Object.entries(valueTests);
+    // Report against the passage that supports the most values.
+    const failuresPerPassage = passages.map((p) => tests.filter(([, test]) => !test(p)).map(([name]) => name));
+    const fewest = failuresPerPassage.reduce((a, b) => (b.length < a.length ? b : a));
+    for (const name of fewest) problems.push({ field: name, reason: "value_not_in_quote" });
   }
 
   // Simple text fields: the value must appear in its own quote.
@@ -125,49 +162,45 @@ export function findUnverifiedValues(x: Extraction, sourceText: string): Unverif
   ] as const; // `as const` makes this a tuple of exact string literals, so x[f] is typed
   for (const f of textFields) {
     const { value, evidence } = x[f];
-    check(f, evidence, value !== null, { [f]: value !== null && evidence !== null && textInQuote(value, evidence) });
+    if (value !== null) check(f, evidence, true, { [f]: (p) => textInQuote(value, p) });
   }
 
   {
     const { value, evidence } = x.currency;
-    check("currency", evidence, value !== null, {
-      currency: value !== null && evidence !== null && currencyInQuote(value, evidence),
-    });
+    if (value !== null) check("currency", evidence, true, { currency: (p) => currencyInQuote(value, p) });
   }
 
   for (const f of ["net_total", "vat_amount", "gross_total", "total_unlabelled"] as const) {
     const { value, evidence } = x[f];
-    check(f, evidence, value !== null, { [f]: value !== null && evidence !== null && numberInQuote(value, evidence) });
+    if (value !== null) check(f, evidence, true, { [f]: (p) => numberInQuote(value, p) });
   }
 
   for (const f of ["requested_delivery", "quote_valid_until"] as const) {
     const { text, iso, evidence } = x[f];
     check(f, evidence, text !== null || iso !== null, {
-      [`${f}.text`]: text === null || (evidence !== null && textInQuote(text, evidence)),
-      [`${f}.iso`]: iso === null || (evidence !== null && dateInQuote(iso, evidence)),
+      [`${f}.text`]: (p) => text === null || textInQuote(text, p),
+      [`${f}.iso`]: (p) => iso === null || dateInQuote(iso, p),
     });
   }
 
   x.line_items.forEach((item, i) => {
-    const p = `line_items[${i}]`;
-    const q = item.evidence;
-    const num = (v: number | null) => v === null || numberInQuote(v, q);
-    const txt = (v: string | null) => v === null || textInQuote(v, q);
-    check(p, q, true, {
-      [`${p}.description`]: txt(item.description),
-      [`${p}.item_code`]: txt(item.item_code),
-      [`${p}.unit`]: txt(item.unit),
-      [`${p}.quantity`]: num(item.quantity),
-      [`${p}.unit_price`]: num(item.unit_price),
-      [`${p}.price_per`]: item.price_per === null || item.price_per === 1 || num(item.price_per),
-      [`${p}.line_total`]: num(item.line_total),
+    const f = `line_items[${i}]`;
+    const num = (v: number | null) => (p: string) => v === null || numberInQuote(v, p);
+    const txt = (v: string | null) => (p: string) => v === null || textInQuote(v, p);
+    check(f, item.evidence, true, {
+      [`${f}.description`]: txt(item.description),
+      [`${f}.item_code`]: txt(item.item_code),
+      [`${f}.unit`]: txt(item.unit),
+      [`${f}.quantity`]: num(item.quantity),
+      [`${f}.unit_price`]: num(item.unit_price),
+      [`${f}.price_per`]: item.price_per === 1 ? () => true : num(item.price_per),
+      [`${f}.line_total`]: num(item.line_total),
     });
   });
 
   x.referenced_requests.forEach((r, i) => {
-    check(`referenced_requests[${i}]`, r.evidence, true, {
-      [`referenced_requests[${i}]`]: textInQuote(r.value, r.evidence),
-    });
+    const f = `referenced_requests[${i}]`;
+    check(f, r.evidence, true, { [f]: (p) => textInQuote(r.value, p) });
   });
 
   // Notes are the model's own summary, so only their quote is checked.

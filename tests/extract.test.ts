@@ -150,6 +150,30 @@ describe("findUnverifiedValues", () => {
     expect(findUnverifiedValues(x, source25)).toEqual([{ field: "line_items[0].line_total", reason: "value_not_in_quote" }]);
   });
 
+  it("tolerates a table header in front of a row (seen in real model output)", () => {
+    const x = email25();
+    x.line_items[0]!.evidence =
+      "# Beschreibung Menge Einheit Einzelpreis\n1 Kunststoffclip KC-8, schwarz\nArt.-Nr. KC-8-SW 15000 Stk 21.00 / 100 3,150.00";
+    expect(findUnverifiedValues(x, source25)).toEqual([]);
+  });
+
+  it("flags values stitched together from different places in the document", () => {
+    const x = email25();
+    // A real description line plus a real number line from elsewhere (the totals block).
+    x.line_items[0]!.evidence = "1 Kunststoffclip KC-8, schwarz\nTotal: 3,150.00 EUR";
+    x.line_items[0]!.quantity = 3150;
+    x.line_items[0]!.unit_price = null;
+    x.line_items[0]!.price_per = null;
+    x.line_items[0]!.item_code = null;
+    x.line_items[0]!.unit = null;
+    x.line_items[0]!.line_total = null;
+    // Each line exists in the source, but no single passage holds description AND quantity,
+    // so one of the two is reported (whichever passage is checked as the best match).
+    const problems = findUnverifiedValues(x, source25);
+    expect(problems).toHaveLength(1);
+    expect(problems[0]?.reason).toBe("value_not_in_quote");
+  });
+
   it("flags a value without any evidence", () => {
     const x = email25();
     x.supplier_vat_id = { value: "DE667788990", evidence: null };

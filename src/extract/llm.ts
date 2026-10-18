@@ -25,7 +25,7 @@ export class OllamaClient implements LlmClient {
   private readonly model: string;
   private readonly timeoutMs: number;
 
-  constructor(baseUrl: string, model: string, timeoutMs = 180_000) {
+  constructor(baseUrl: string, model: string, timeoutMs = 300_000) {
     this.baseUrl = baseUrl.replace(/\/$/, "");
     this.model = model;
     this.timeoutMs = timeoutMs;
