@@ -2,30 +2,10 @@ import { readFileSync } from "node:fs";
 import { beforeAll, describe, expect, it } from "vitest";
 import { findUnverifiedValues, numbersIn } from "../src/extract/evidence.ts";
 import { extractRequisition, parseModelOutput } from "../src/extract/extract.ts";
-import type { ChatMessage, LlmClient } from "../src/extract/llm.ts";
 import { extractionJsonSchema } from "../src/extract/schema.ts";
 import { parseEmail } from "../src/ingest/parseEmail.ts";
 import { renderSourceText, type SourceDocument } from "../src/ingest/sourceDocument.ts";
-import { email25 } from "./fixtures.ts";
-
-/** Replays scripted answers and records every call, so tests never need Ollama. */
-class FakeLlm implements LlmClient {
-  readonly name = "fake";
-  calls: ChatMessage[][] = [];
-  private answers: (string | Error)[];
-
-  constructor(...answers: (string | Error)[]) {
-    this.answers = answers;
-  }
-
-  async chat(messages: ChatMessage[]): Promise<string> {
-    this.calls.push(structuredClone(messages));
-    const next = this.answers.shift();
-    if (next === undefined) throw new Error("FakeLlm: no answer left");
-    if (next instanceof Error) throw next;
-    return next;
-  }
-}
+import { email25, FakeLlm } from "./fixtures.ts";
 
 let doc25: SourceDocument;
 let source25: string;

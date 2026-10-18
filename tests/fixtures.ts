@@ -1,3 +1,4 @@
+import type { ChatMessage, LlmClient } from "../src/extract/llm.ts";
 import type { Extraction } from "../src/extract/schema.ts";
 
 // Shared test data.
@@ -36,4 +37,23 @@ export function email25(): Extraction {
     referenced_requests: [],
     notes_for_clerk: [],
   };
+}
+
+/** Replays scripted answers and records every call, so tests never need Ollama. */
+export class FakeLlm implements LlmClient {
+  readonly name = "fake";
+  calls: ChatMessage[][] = [];
+  private answers: (string | Error)[];
+
+  constructor(...answers: (string | Error)[]) {
+    this.answers = answers;
+  }
+
+  async chat(messages: ChatMessage[]): Promise<string> {
+    this.calls.push(structuredClone(messages));
+    const next = this.answers.shift();
+    if (next === undefined) throw new Error("FakeLlm: no answer left");
+    if (next instanceof Error) throw next;
+    return next;
+  }
 }
