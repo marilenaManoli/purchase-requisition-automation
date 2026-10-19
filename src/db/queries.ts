@@ -54,6 +54,7 @@ export interface ReferenceData {
   employees: EmployeeRow[];
   fxRatesToChf: Map<string, number>;
   approvalBands: ApprovalBand[];
+  glAccounts: { code: string; name: string }[];
 }
 
 export function loadReferenceData(db: Db): ReferenceData {
@@ -65,6 +66,7 @@ export function loadReferenceData(db: Db): ReferenceData {
     employees: db.prepare(`SELECT id, name, email, role, deputy_for, default_cost_center FROM employees ORDER BY id`).all() as EmployeeRow[],
     fxRatesToChf: new Map(fxRows.map((r) => [r.currency, r.rate_to_chf])),
     approvalBands: loadApprovalBands(db),
+    glAccounts: db.prepare(`SELECT code, name FROM gl_accounts ORDER BY code`).all() as { code: string; name: string }[],
   };
 }
 

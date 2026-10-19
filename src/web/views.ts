@@ -67,7 +67,7 @@ export function inboxRows(db: Db, ref: ReferenceData, filter: { state?: string; 
 
 // --- Detail page -----------------------------------------------------------
 
-export type FieldStatus = "verified" | "unverified" | "clerk" | "not established";
+export type FieldStatus = "verified" | "unverified" | "clerk" | "suggested" | "not established";
 
 export interface FieldRow {
   label: string;
@@ -138,6 +138,8 @@ export interface Detail {
   erpWarnings: string[];
   requesterId: string | null;
   supplierEstablished: boolean;
+  glSuggested: string | null;
+  glConfirmed: string | null;
   supplierClaim: { name: string | null; vatId: string | null };
   /** For needs_review: the chain a submit would build; a null approver must be assigned. */
   proposedChain: { position: number; roles: string; approverId: string | null; approver: string }[] | null;
@@ -195,6 +197,18 @@ export function requisitionDetail(db: Db, ref: ReferenceData, id: number): Detai
     { label: "Requested delivery date", established: str("requested_delivery_date"),
       claim: x ? [x.requested_delivery.text, x.requested_delivery.iso].filter(Boolean).join(" → ") || null : null,
       evidence: x?.requested_delivery.evidence ?? null, status: status(["requested_delivery"], str("requested_delivery_date")) },
+    (() => {
+      // GL account: a code-made suggestion (with its reason) until the clerk confirms one.
+      const confirmed = ref.glAccounts.find((g) => g.code === r.gl_account_code);
+      const suggested = ref.glAccounts.find((g) => g.code === r.gl_account_suggested);
+      return {
+        label: "GL account",
+        established: confirmed ? `${confirmed.code} ${confirmed.name}` : null,
+        claim: suggested ? `suggested: ${suggested.code} ${suggested.name}` : null,
+        evidence: str("gl_suggestion_reason"),
+        status: (confirmed ? "clerk" : suggested ? "suggested" : "not established") as FieldStatus,
+      };
+    })(),
     { label: "Quote valid until", established: null, claim: x?.quote_valid_until.iso ?? x?.quote_valid_until.text ?? null,
       evidence: x?.quote_valid_until.evidence ?? null, status: status(["quote_valid_until"], null) },
     { label: "Quote number", established: null, claim: x?.quote_number.value ?? null, evidence: x?.quote_number.evidence ?? null,
@@ -263,6 +277,8 @@ export function requisitionDetail(db: Db, ref: ReferenceData, id: number): Detai
     erpWarnings: r.erp_warnings_json ? (JSON.parse(r.erp_warnings_json as string) as string[]) : [],
     requesterId: str("requester_employee_id"),
     supplierEstablished: supplier !== undefined,
+    glSuggested: str("gl_account_suggested"),
+    glConfirmed: str("gl_account_code"),
     supplierClaim: { name: x?.supplier_name.value ?? null, vatId: x?.supplier_vat_id.value ?? null },
     proposedChain: r.state === "needs_review" && num("net_total_chf") !== null && str("cost_center_code") !== null
       ? buildChain(num("net_total_chf")!, str("cost_center_code")!, str("requester_employee_id"), ref).steps.map((s) => ({

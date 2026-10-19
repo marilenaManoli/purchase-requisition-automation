@@ -4,6 +4,7 @@ import type { ExtractionOutcome } from "../extract/extract.ts";
 import type { Extraction } from "../extract/schema.ts";
 import type { SourceDocument } from "../ingest/sourceDocument.ts";
 import { checkAmounts, type StatedTotal } from "./amounts.ts";
+import { suggestGlAccount, type GlSuggestion } from "./glAccount.ts";
 import { checkCostCenter, checkSeveralCostCenters } from "./costCenter.ts";
 import { renderSourceText } from "../ingest/sourceDocument.ts";
 import { checkDeliveryDate, checkMissingAttachment, checkQuoteValidity, findValidUntilInText } from "./dates.ts";
@@ -44,6 +45,7 @@ export interface CheckResult {
   fxRate: number | null;
   netTotalChf: number | null; // decides the approval band (step 5)
   requestedDeliveryDate: string | null;
+  glSuggestion: GlSuggestion | null; // a suggestion only; the clerk confirms
   lines: CheckedLine[];
   issues: Issue[];
 }
@@ -179,6 +181,7 @@ export function runChecks(
     fxRate: fx.rate,
     netTotalChf: fx.netChf,
     requestedDeliveryDate: delivery.date,
+    glSuggestion: suggestGlAccount(costCenter.code, lines.map((l) => l.description), ref.glAccounts),
     // Only trusted or clerk-entered values; the raw claim stays in the stored extraction.
     lines: lines.map((l, i) => ({
       description: l.description,

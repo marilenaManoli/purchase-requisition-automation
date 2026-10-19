@@ -7,7 +7,7 @@ import type { LlmClient } from "../extract/llm.ts";
 import { ApprovalError, approve, reject } from "../workflow/approvals.ts";
 import { reopenRejected, resolveIssue, submitForApproval } from "../workflow/clerk.ts";
 import { editRequisition, pullBackForCorrection } from "../workflow/edits.ts";
-import { sendToErp, setDeliveryDate } from "../workflow/ordering.ts";
+import { confirmGlAccount, sendToErp, setDeliveryDate } from "../workflow/ordering.ts";
 import { createSupplierForRequisition } from "../workflow/suppliers.ts";
 import { extractAndRoute, ingestEmail } from "../workflow/processEmail.ts";
 import { STATES } from "../workflow/states.ts";
@@ -177,6 +177,9 @@ export function createApp(deps: AppDeps): express.Express & { extractionsRunning
 
   app.post("/requisitions/:id/delivery-date", clerkOnly, (req, res) =>
     act(req, res, (id, actor) => setDeliveryDate(db, id, actor, field(req, "date")), "Delivery date saved."));
+
+  app.post("/requisitions/:id/gl-account", clerkOnly, (req, res) =>
+    act(req, res, (id, actor) => confirmGlAccount(db, id, actor, field(req, "code"), ref.glAccounts), "GL account confirmed."));
 
   app.post("/requisitions/:id/order", clerkOnly, (req, res) =>
     act(req, res, async (id, actor) => {

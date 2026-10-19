@@ -36,6 +36,23 @@ export function setDeliveryDate(db: Db, id: number, actor: Actor, date: string):
   })();
 }
 
+/**
+ * The clerk confirms a GL account (the suggestion or another one). Like the delivery
+ * date, it may be set after approval: it's the accounting category, and doesn't change
+ * what is bought, from whom or for how much. Only a confirmed account goes to the ERP.
+ */
+export function confirmGlAccount(db: Db, id: number, actor: Actor, code: string, glAccounts: { code: string; name: string }[]): void {
+  const account = glAccounts.find((g) => g.code === code);
+  if (!account) throw new ApprovalError(`GL account ${code} does not exist.`);
+  db.transaction(() => {
+    const state = getState(db, id);
+    if (state === "ordered" || state === "rejected") throw new ApprovalError(`The GL account can't be changed in state ${state}.`);
+    const before = (db.prepare(`SELECT gl_account_code AS c FROM requisitions WHERE id = ?`).get(id) as { c: string | null }).c;
+    db.prepare(`UPDATE requisitions SET gl_account_code = ?, updated_at = ? WHERE id = ?`).run(code, nowIso(), id);
+    writeAudit(db, id, actor, state, state, `Clerk confirmed GL account: ${JSON.stringify(before)} → "${code} ${account.name}"`);
+  })();
+}
+
 /** Builds the ERP request from what is ESTABLISHED in the database (never from the raw extraction). */
 export function buildPurchaseOrder(db: Db, id: number): { order: PurchaseOrderRequest; idempotencyKey: string } {
   const r = db.prepare(

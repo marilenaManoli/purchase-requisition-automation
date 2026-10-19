@@ -88,8 +88,13 @@ Key decisions:
   blocks approval; the clerk can create it with a form pre-filled from the email,
   after checking the values. Duplicates of existing suppliers are refused.
 - **Suggest, never apply.** A cost-centre name ("London office"), the requester's
-  default cost centre, a price of 0 for a free-of-charge line, "my last request":
-  shown as suggestions, applied only by the clerk.
+  default cost centre, a price of 0 for a free-of-charge line, "my last request", a
+  GL account: shown as suggestions, applied only by the clerk.
+- **GL account suggestions** (the brief's extra credit) come from plain rules: keywords
+  in the item descriptions (German compounds included: "Rillenkugel*lager*" → 5300
+  Spare Parts), or a cost-centre default (IT → 7200). Each suggestion shows its reason
+  and support ("19 of 24 items"); with too little support there is none. Only an
+  account the clerk confirms is sent to the ERP.
 - **One table of allowed state changes.** Every change goes through one function
   that checks the table and writes the audit row in the same transaction. The
   workflow diagram in the app is drawn from the same table.
@@ -211,9 +216,9 @@ Where the brief was ambiguous:
 8. **A quantity without a unit means pieces.** "3 office chairs" has no unit, but the
    ERP requires one: the line gets "pcs" and a "unit assumed" warning. A stated unit
    (kg, m, Satz) is always used.
-9. **The delivery date is the only value that can be set after approval.** It doesn't
-   change what is bought, from whom or for how much, and the ERP needs it. Any other
-   correction means pulling the requisition back and approving again from step 1.
+9. **Only the delivery date and the GL account can be set after approval.** Neither
+   changes what is bought, from whom or for how much, which is what approvers approve.
+   Any other correction means pulling the requisition back and approving again from step 1.
 10. **Duplicates** are suggested by simple rules (same sender within 30 days, plus
     the same subject or the same supplier and amount) and linked, never merged; a
     `PR-YYYY-NNNN` number in an email is looked up among our requisitions.
@@ -232,12 +237,11 @@ Deliberately not built; `PRODUCTION.md` says how each would be done:
 - Real ERP connection, real authentication / SSO, notifications.
 - Scanned PDFs / OCR, images, Word, Excel; languages other than German and English.
 - Approver holiday cover, multi-tenancy.
-- GL account suggestions (optional in the brief; the column exists, nothing fills it).
 
 ## Next steps (with another week)
 
-1. **GL account suggestions** from item descriptions, shown as "suggested" and
-   confirmed by the clerk.
+1. **Learn GL accounts from the clerk's confirmations** (supplier and item history)
+   instead of a fixed keyword list.
 2. **A bigger evaluation set** with field-level expected values (not only outcomes),
    and a measured comparison with a larger or hosted model behind `LlmClient`.
 3. **Queue and workers** for extraction, plus email intake from the mailbox

@@ -98,10 +98,11 @@ export function saveEstablishedValues(db: Db, id: number, c: CheckResult, band: 
   db.prepare(
     `UPDATE requisitions SET requester_employee_id = ?, supplier_id = ?, cost_center_code = ?, currency = ?,
        net_total = ?, vat_amount = ?, gross_total = ?, net_total_chf = ?, band = ?, requested_delivery_date = ?,
-       updated_at = ?
+       gl_account_suggested = ?, gl_suggestion_reason = ?, updated_at = ?
      WHERE id = ?`,
   ).run(c.requesterEmployeeId, c.supplierId, c.costCenterCode, c.currency, c.netTotal, c.vatAmount, c.grossTotal,
-    c.netTotalChf, band, c.requestedDeliveryDate, nowIso(), id);
+    c.netTotalChf, band, c.requestedDeliveryDate, c.glSuggestion?.code ?? null, c.glSuggestion?.reason ?? null, nowIso(), id);
+  // gl_account_code (the confirmed account) is never written here: only a clerk sets it.
 
   db.prepare(`DELETE FROM line_items WHERE requisition_id = ?`).run(id);
   const insertLine = db.prepare(

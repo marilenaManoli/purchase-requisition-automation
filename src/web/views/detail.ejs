@@ -49,6 +49,23 @@
   </div>
 <% } %>
 
+
+<% if (isClerk && ["needs_review", "pending_approval", "approved"].includes(r.state)) { %>
+  <div class="card actions">
+    <form method="post" action="/requisitions/<%= r.id %>/gl-account">
+      <h3>GL account <%= r.glConfirmed ? "(confirmed: " + r.glConfirmed + ")" : r.glSuggested ? "(suggested: " + r.glSuggested + ", not confirmed)" : "(no suggestion)" %></h3>
+      <select name="code" required>
+        <option value="">— choose —</option>
+        <% for (const g of ref.glAccounts) { %>
+          <option value="<%= g.code %>" <%= (r.glConfirmed ?? r.glSuggested) === g.code ? "selected" : "" %>><%= g.code %> <%= g.name %></option>
+        <% } %>
+      </select>
+      <button>Confirm</button>
+      <p class="muted small">Optional. A suggestion is never sent to the ERP; only a confirmed account is.</p>
+    </form>
+  </div>
+<% } %>
+
 <% if (isClerk && (r.state === "approved" || r.state === "pending_approval")) { %>
   <div class="card actions">
     <form method="post" action="/requisitions/<%= r.id %>/delivery-date">

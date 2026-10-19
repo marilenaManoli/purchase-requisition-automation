@@ -96,7 +96,9 @@ last published rate.
   against and low OCR confidence raised as an issue; Excel line lists.
 - **More languages**: the prompt has no language branch; mainly the label lists
   (net/gross words, "valid until") would need extending.
-- **GL account suggestions** from item descriptions, always shown as "suggested"
-  and confirmed by the clerk (the database already has the column).
+- **GL account suggestions that learn**: today a fixed keyword list and cost-centre
+  defaults suggest an account and the clerk confirms it. With history, suggest from
+  what clerks confirmed for the same supplier and similar items, and measure how often
+  the suggestion is accepted.
 - **Multi-tenancy**: tenant id on every row, per-tenant master data and approval
   limits.

@@ -201,3 +201,14 @@ describe("creating a supplier through the UI", () => {
     expect(created.page).toContain("Supplier created and set");
   });
 });
+
+describe("GL account in the UI", () => {
+  it("shows the suggestion as 'suggested' and lets the clerk confirm it", async () => {
+    const id = await processEmail(db, raw25, null, new FakeLlm(JSON.stringify(email25())), ref);
+    const page = await (await fetch(`${base}/requisitions/${id}`, { headers: { cookie: "actAs=clerk" } })).text();
+    expect(page).toContain("suggested: 5200 Production Consumables");
+    const done = await post(`/requisitions/${id}/gl-account`, "clerk", { code: "5200" });
+    expect(done.page).toContain("GL account confirmed.");
+    expect(done.page).toContain("<strong>5200 Production Consumables</strong>");
+  });
+});

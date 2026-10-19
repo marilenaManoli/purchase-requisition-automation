@@ -110,6 +110,7 @@ CREATE TABLE requisitions (
   cost_center_code        TEXT REFERENCES cost_centers(code),
   gl_account_code         TEXT REFERENCES gl_accounts(code),  -- confirmed by the clerk
   gl_account_suggested    TEXT REFERENCES gl_accounts(code),  -- suggestion only
+  gl_suggestion_reason    TEXT,                        -- why it was suggested
   currency                TEXT REFERENCES fx_rates(currency),
   net_total               REAL,                        -- original currency, excl. VAT
   vat_amount              REAL,
