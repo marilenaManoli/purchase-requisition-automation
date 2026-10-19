@@ -173,6 +173,21 @@
 <% if (isClerk && r.state === "needs_review") { %>
 <h2>Clerk review</h2>
 <div class="card actions">
+  <% if (!r.supplierEstablished) { %>
+  <form method="post" action="/requisitions/<%= r.id %>/create-supplier">
+    <h3>Supplier not in the master data? Create it</h3>
+    <p class="muted small">Pre-filled from the email: check every value against the quote first. If the supplier already exists, select it in the form below instead.</p>
+    <table>
+      <tr><td>Name</td><td><input type="text" name="name" value="<%= r.supplierClaim.name ?? "" %>" required></td></tr>
+      <tr><td>VAT ID</td><td><input type="text" name="vatId" value="<%= r.supplierClaim.vatId ?? "" %>" placeholder="empty if none"></td></tr>
+      <tr><td>Country</td><td><input type="text" name="country" placeholder="CH" maxlength="2" required></td></tr>
+      <tr><td>Currency</td><td><select name="currency"><% for (const cur of ref.fxRatesToChf.keys()) { %><option value="<%= cur %>"><%= cur %></option><% } %></select></td></tr>
+      <tr><td>Payment terms (days)</td><td><input type="text" name="paymentTermsDays" value="30" inputmode="numeric" required></td></tr>
+    </table>
+    <p><button>Create supplier and use it</button></p>
+  </form>
+  <% } %>
+
   <form method="post" action="/requisitions/<%= r.id %>/edit">
     <h3>Enter or correct values</h3>
     <p class="muted small">Empty fields keep their current value. Your values replace the model's, are recorded in the history, and all checks run again.</p>

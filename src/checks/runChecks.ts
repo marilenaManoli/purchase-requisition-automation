@@ -4,7 +4,7 @@ import type { ExtractionOutcome } from "../extract/extract.ts";
 import type { Extraction } from "../extract/schema.ts";
 import type { SourceDocument } from "../ingest/sourceDocument.ts";
 import { checkAmounts, type StatedTotal } from "./amounts.ts";
-import { checkCostCenter } from "./costCenter.ts";
+import { checkCostCenter, checkSeveralCostCenters } from "./costCenter.ts";
 import { renderSourceText } from "../ingest/sourceDocument.ts";
 import { checkDeliveryDate, checkMissingAttachment, checkQuoteValidity, findValidUntilInText } from "./dates.ts";
 import { convertToChf } from "./fx.ts";
@@ -150,6 +150,7 @@ export function runChecks(
     ...requester.issues,
     ...supplier.issues,
     ...costCenter.issues,
+    ...(ov.costCenterCode === undefined ? checkSeveralCostCenters(sourceText) : []), // a clerk's choice settles it
     ...(figuresEdited
       ? [issue("TOTALS_RECALCULATED", "warning", null,
           "Line figures were changed by the clerk; the total is recalculated from the lines and the document's totals are not used.")]

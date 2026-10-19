@@ -125,8 +125,12 @@ export function matchSupplierInText(text: string, modelClaim: string | null, sup
   if (found.length !== 1) return null;
   const [only] = found as [SupplierRow];
   if (modelClaim !== null) {
-    const claimed = suppliersByName(modelClaim, suppliers);
-    if (claimed.length > 0 && !claimed.some((s) => s.id === only.id)) return null; // contradicts the model: clerk decides
+    // The model named a supplier (even if unverified): the one found in the text must be
+    // that same company ("Sensorik Nord" ⊂ "sensorik nord gmbh"), not a different one,
+    // known or unknown. Otherwise it's a conflict for the clerk.
+    const claim = normaliseCompanyName(modelClaim);
+    const found = normaliseCompanyName(only.name);
+    if (!(claim === found || found.includes(claim) || claim.includes(found))) return null;
   }
   return withStatusCheck(only, "name", [
     issue("SUPPLIER_FOUND_IN_TEXT", "warning", "supplier_name",

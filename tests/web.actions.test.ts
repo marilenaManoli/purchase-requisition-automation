@@ -183,3 +183,21 @@ describe("ordering through the UI", () => {
     expect((await post(`/requisitions/${id}/order`, "EMP-501")).status).toBe(403);
   });
 });
+
+describe("creating a supplier through the UI", () => {
+  it("shows the form for an unknown supplier and is a clerk action only", async () => {
+    const x = email25();
+    x.supplier_name = { value: "Stahlhandel Wyss AG", evidence: null };
+    x.supplier_vat_id = { value: null, evidence: null };
+    const id = await processEmail(db, raw25, null, new FakeLlm(JSON.stringify(x)), ref);
+
+    const page = await (await fetch(`${base}/requisitions/${id}`, { headers: { cookie: "actAs=clerk" } })).text();
+    expect(page).toContain(`action="/requisitions/${id}/create-supplier"`);
+    expect(page).toContain('value="Stahlhandel Wyss AG"'); // pre-filled, for the clerk to check
+
+    const form = { name: "Stahlhandel Wyss AG", vatId: "", country: "CH", currency: "CHF", paymentTermsDays: "30" };
+    expect((await post(`/requisitions/${id}/create-supplier`, "EMP-103", form)).status).toBe(403);
+    const created = await post(`/requisitions/${id}/create-supplier`, "clerk", form);
+    expect(created.page).toContain("Supplier created and set");
+  });
+});

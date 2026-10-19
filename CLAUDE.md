@@ -205,6 +205,7 @@ Use these as fixtures and expected outcomes:
 8. A line with a quantity but no unit gets unit "pcs" with a "unit assumed" warning; a stated unit always wins.
 9. The delivery date is the only value that can be set after approval; any other correction means pull back and re-approval from step 1.
 10. Duplicates are suggested by simple rules (same sender within 30 days + same subject or same supplier and amount) and linked, never merged.
+11. An email naming more than one cost centre goes to review (SEVERAL_COST_CENTERS); the clerk decides how to split it.
 
 ## Engineering standards
 

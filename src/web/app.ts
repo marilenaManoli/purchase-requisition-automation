@@ -8,6 +8,7 @@ import { ApprovalError, approve, reject } from "../workflow/approvals.ts";
 import { reopenRejected, resolveIssue, submitForApproval } from "../workflow/clerk.ts";
 import { editRequisition, pullBackForCorrection } from "../workflow/edits.ts";
 import { sendToErp, setDeliveryDate } from "../workflow/ordering.ts";
+import { createSupplierForRequisition } from "../workflow/suppliers.ts";
 import { extractAndRoute, ingestEmail } from "../workflow/processEmail.ts";
 import { STATES } from "../workflow/states.ts";
 import { InvalidTransitionError } from "../workflow/transitions.ts";
@@ -152,6 +153,11 @@ export function createApp(deps: AppDeps): express.Express & { extractionsRunning
 
   app.post("/requisitions/:id/edit", clerkOnly, (req, res) =>
     act(req, res, (id, actor) => editRequisition(db, id, actor, parseEditForm(req.body), ref), "Saved; all checks were run again."));
+
+  app.post("/requisitions/:id/create-supplier", clerkOnly, (req, res) =>
+    act(req, res, async (id, actor) => {
+      await createSupplierForRequisition(db, id, actor, req.body, ref);
+    }, "Supplier created and set; all checks were run again."));
 
   app.post("/requisitions/:id/issues/:issueId/resolve", clerkOnly, (req, res) =>
     act(req, res, (id, actor) => {

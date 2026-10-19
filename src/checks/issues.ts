@@ -46,6 +46,7 @@ export type IssueCode =
   | "UNIT_ASSUMED"
   | "SUPPLIER_FOUND_IN_TEXT"
   | "APPROXIMATE_VALUE"
+  | "SEVERAL_COST_CENTERS"
   | "ERP_REJECTED"
   | "ERP_WARNING";
 

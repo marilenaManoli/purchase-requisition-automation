@@ -61,6 +61,22 @@ export function checkCostCenter(
   };
 }
 
+// Cost-centre codes as the master data writes them. Deliberately narrow: the looser
+// LOOKS_LIKE_A_CODE would also match item codes like "SK-12" or "PR-2026".
+const COST_CENTER_IN_TEXT = /\bCC[- ]?(\d{4})\b/gi;
+
+/**
+ * An email naming two cost centres ("half on CC-3001, half on CC-5001") can't become
+ * one requisition with one cost centre without someone deciding how to split it.
+ * Found in the rehearsal: without this check the first code was used for everything.
+ */
+export function checkSeveralCostCenters(text: string): Issue[] {
+  const codes = [...new Set([...text.matchAll(COST_CENTER_IN_TEXT)].map((m) => `CC-${m[1]}`))];
+  if (codes.length <= 1) return [];
+  return [issue("SEVERAL_COST_CENTERS", "blocks_approval", "cost_center_code",
+    `The email names several cost centres (${codes.join(", ")}). A requisition has one cost centre: the clerk decides (e.g. split it into separate requisitions).`)];
+}
+
 /** "London office" → CC-3002 "Office London": every word of the hint appears in the name. */
 function costCentersMatchingName(hint: string, costCenters: CostCenterRow[]): string[] {
   const words = (s: string) => s.toLowerCase().split(/[^a-z0-9äöü]+/).filter((w) => w.length > 0);

@@ -371,3 +371,15 @@ describe("approximate values (found in the rehearsal)", () => {
     expect(fixed.issues.some((i) => i.code === "APPROXIMATE_VALUE")).toBe(false);
   });
 });
+
+describe("text scan vs an unknown supplier claim (found while testing supplier creation)", () => {
+  it("doesn't replace a supplier the model named, even an unknown one, with a different company from the text", async () => {
+    const db = openDb(":memory:");
+    applySchema(db);
+    seedMasterData(db, parseMasterData(JSON.parse(readFileSync("data/master_data.json", "utf8"))));
+    const ref = loadReferenceData(db);
+    const { matchSupplierInText } = await import("../src/checks/supplier.ts");
+    expect(matchSupplierInText("Offer from TechnoPlast Kunststoffe GmbH", "Stahlhandel Wyss AG", ref.suppliers)).toBeNull();
+    expect(matchSupplierInText("from Sensorik Nord for the test bench", "Sensorik Nord", ref.suppliers)?.supplierId).toBe("SUP-015");
+  });
+});

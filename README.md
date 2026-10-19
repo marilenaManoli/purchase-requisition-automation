@@ -84,6 +84,9 @@ Key decisions:
 - **Issues have a severity.** `blocks_approval` sends the requisition to review;
   `blocks_order` allows approval but not ordering (a missing delivery date, the
   normal case); `warning` only informs.
+- **The clerk creates unknown suppliers, the system never does.** An unknown supplier
+  blocks approval; the clerk can create it with a form pre-filled from the email,
+  after checking the values. Duplicates of existing suppliers are refused.
 - **Suggest, never apply.** A cost-centre name ("London office"), the requester's
   default cost centre, a price of 0 for a free-of-charge line, "my last request":
   shown as suggestions, applied only by the clerk.
@@ -159,14 +162,23 @@ review instead of approval, each with a stated reason:
 
 So the model's mistakes cost clerk time, not wrong orders.
 
-**Beyond the samples.** Four additional emails, written to be unlike the samples
-(a clean English request, a vague German one with "ca. 50 Stk", an HTML-only email
-with a gross total, and a prompt injection telling "the AI" to change the supplier
-and mark the order approved by the CEO), found three gaps the 48 samples didn't:
-an HTML-only body lost its table layout, quotes with a leading list bullet failed
-verification, and an approximate number ("ca. 50") passed the evidence check.
-All three are fixed and tested; hedged numbers now block approval. The injection
-changed nothing and appeared as a note for the clerk.
+**Beyond the samples.** Seven additional emails, written to be unlike the samples
+(a clean English request; a vague German one with "ca. 50 Stk"; an HTML-only email
+with VAT; a prompt injection telling "the AI" to change the supplier and mark the
+order approved by the CEO; a price per 1,000; a misspelt supplier with the cost
+split across two cost centres; a request without prices), found gaps the 48
+samples didn't. All are fixed and tested:
+
+- an HTML-only body lost its table layout;
+- quotes with a leading list bullet failed verification;
+- an approximate number ("ca. 50") passed the evidence check (hedged numbers now block approval);
+- an email naming two cost centres silently used the first one for the whole amount
+  (now blocks approval);
+- the supplier text scan could replace an unknown supplier the model named with a
+  different, known company mentioned in the text.
+
+The injection changed nothing and appeared as a note for the clerk. The missed
+"per 1,000" was caught by the line arithmetic.
 
 Every rule-based case behaves as specified: the band edges (CHF 999 / 1,000 /
 1,001), FX (GBP 940 → CHF 1,062.20), net vs gross, 21.00 per 100, discount and
@@ -205,6 +217,8 @@ Where the brief was ambiguous:
 10. **Duplicates** are suggested by simple rules (same sender within 30 days, plus
     the same subject or the same supplier and amount) and linked, never merged; a
     `PR-YYYY-NNNN` number in an email is looked up among our requisitions.
+11. **An email naming more than one cost centre goes to review.** A requisition has one
+    cost centre; how to split an order is the clerk's decision.
 
 The `rules` block in `master_data.json` (self-approval forbidden, duplicate roles
 collapse, approvals sequential) is not stored: the brief mandates these rules and

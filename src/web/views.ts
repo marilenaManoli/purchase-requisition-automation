@@ -137,6 +137,8 @@ export interface Detail {
   poNumber: string | null;
   erpWarnings: string[];
   requesterId: string | null;
+  supplierEstablished: boolean;
+  supplierClaim: { name: string | null; vatId: string | null };
   /** For needs_review: the chain a submit would build; a null approver must be assigned. */
   proposedChain: { position: number; roles: string; approverId: string | null; approver: string }[] | null;
 }
@@ -260,6 +262,8 @@ export function requisitionDetail(db: Db, ref: ReferenceData, id: number): Detai
     poNumber: str("erp_po_number"),
     erpWarnings: r.erp_warnings_json ? (JSON.parse(r.erp_warnings_json as string) as string[]) : [],
     requesterId: str("requester_employee_id"),
+    supplierEstablished: supplier !== undefined,
+    supplierClaim: { name: x?.supplier_name.value ?? null, vatId: x?.supplier_vat_id.value ?? null },
     proposedChain: r.state === "needs_review" && num("net_total_chf") !== null && str("cost_center_code") !== null
       ? buildChain(num("net_total_chf")!, str("cost_center_code")!, str("requester_employee_id"), ref).steps.map((s) => ({
           position: s.position,
