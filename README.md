@@ -10,6 +10,9 @@ and nothing is approved automatically.** Anything that can't be established from
 the document or the master data is left empty with the reason recorded, and a
 person decides.
 
+## Video Demo Link
+https://youtu.be/ez_a_wsY5co
+
 ## Setup
 
 Requirements: Node.js ≥ 22.9 (developed on 25), Python 3 (for the mock ERP) and
